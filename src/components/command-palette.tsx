@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import {
+  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -60,8 +61,9 @@ export function CommandPalette() {
       showCloseButton={false}
       className="max-w-[600px] border-brand-accent/20 bg-background/60 backdrop-blur-2xl shadow-[0_0_50px_-12px_rgba(255,207,168,0.2)]"
     >
-      <div className="relative group">
-        <CommandInput 
+      <Command className="**:[[cmdk-group]]:px-0 **:[[cmdk-input-wrapper]]:px-0">
+        <div className="relative group">
+          <CommandInput 
           placeholder="What are you looking for?" 
           className="h-14 border-none focus:ring-0 text-lg placeholder:text-muted-foreground/50"
         />
@@ -163,6 +165,7 @@ export function CommandPalette() {
         </div>
         <span>Vesper Shell v1.5.0</span>
       </div>
+      </Command>
     </CommandDialog>
   );
 }

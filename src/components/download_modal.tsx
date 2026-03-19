@@ -1,186 +1,266 @@
+"use client";
+
 import React, { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  IconDownload,
+  IconBrandWindows,
+  IconBrandApple,
+  IconBrandDebian,
+  IconBrandRedhat,
+  IconBrandUbuntu,
+} from "@tabler/icons-react";
+import { cn } from "@/lib/utils";
 
 interface GitHubAsset {
-    name: string;
-    browser_download_url: string;
+  name: string;
+  browser_download_url: string;
 }
 
 interface GitHubRelease {
-    assets: GitHubAsset[];
+  assets: GitHubAsset[];
 }
 
 interface DownloadModalProps {
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
-const WindowsIcon = (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 mr-2 text-blue-500 dark:text-blue-500"
-        viewBox="0 0 640 640"
-        fill="currentColor"
-    >
-        {/*!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.*/}
-        <path d="M96 157.7L279.6 132.4L279.6 309.8L96 309.8L96 157.7zM96 482.3L279.6 507.6L279.6 332.4L96 332.4L96 482.3zM299.8 510.3L544 544L544 332.4L299.8 332.4L299.8 510.3zM299.8 129.7L299.8 309.8L544 309.8L544 96L299.8 129.7z" />
-    </svg>
-);
-
-const MacIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="w-7 h-7 mr-2">
-        <path 
-            d="M447.1 332.7C446.9 296 463.5 268.3 497.1 247.9C478.3 221 449.9 206.2 412.4 203.3C376.9 200.5 338.1 224 323.9 224C308.9 224 274.5 204.3 247.5 204.3C191.7 205.2 132.4 248.8 132.4 337.5C132.4 363.7 137.2 390.8 146.8 418.7C159.6 455.4 205.8 545.4 254 543.9C279.2 543.3 297 526 329.8 526C361.6 526 378.1 543.9 406.2 543.9C454.8 543.2 496.6 461.4 508.8 424.6C443.6 393.9 447.1 334.6 447.1 332.7zM390.5 168.5C417.8 136.1 415.3 106.6 414.5 96C390.4 97.4 362.5 112.4 346.6 130.9C329.1 150.7 318.8 175.2 321 202.8C347.1 204.8 370.9 191.4 390.5 168.5z" 
-            fill="#fff"
-        />
-    </svg>
-);
-
-// const UbuntuIcon = (
-//     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" viewBox="0 0 32 32">
-//         {/* Multi-color Ubuntu logo (official color: #E95420 and #77216F, etc.) */}
-//         <circle cx="16" cy="16" r="16" fill="#E95420"/>
-//         <circle cx="25.7" cy="7.5" r="2.1" fill="#FFF"/>
-//         <circle cx="27" cy="17.4" r="1.4" fill="#77216F"/>
-//         <circle cx="7.1" cy="24.5" r="2.1" fill="#FFF"/>
-//         <path fill="#FFF" d="M21.31 11.45a6.52 6.52 0 0 0-5.53-2.92v2.15c1.45.06 2.8.64 3.8 1.66zm2.23 4.77c.46.98.72 2.08.72 3.23h-2.11c0-.81-.17-1.57-.47-2.27zM11.45 10.69A6.52 6.52 0 0 0 8.53 16c0 2.43 1.33 4.56 3.33 5.69l1.08-1.85A4.68 4.68 0 0 1 10.7 16c0-.8.19-1.56.53-2.21zm4.33-3.5V5.03c-4.29.37-7.69 3.97-7.69 8.29h2.11c0-2.97 2.09-5.46 5.58-6.13zm7.83 9.37H29c-.37 4.3-3.97 7.7-8.29 7.7v-2.12c2.97 0 5.47-2.08 6.13-5.58zm-3.3 6.43c-1.03.47-2.13.73-3.27.73v2.11c1.28 0 2.5-.25 3.62-.7zm-4.77-2.22a4.7 4.7 0 0 1-1.65-3.8H7.06c.36 2.21 1.51 4.14 3.12 5.53zm5.26-9.09a4.7 4.7 0 0 1 3.8 1.65l1.51-1.5c-1.5-1.31-3.42-2.15-5.43-2.15v2.11c.78 0 1.53.18 2.12.49zm4.77 2.21a6.52 6.52 0 0 1 2.92 5.53h-2.15c-.06-1.45-.65-2.79-1.66-3.8zm-6.42-3.3c-4.3.37-7.7 3.97-7.7 8.3h2.13c0-2.99 2.09-5.47 5.58-6.13zm9.39 7.82h2.1c-.37-4.29-3.97-7.69-8.29-7.69v2.11c2.99 0 5.48 2.08 6.14 5.58zm-4.79 7.69c-4.3-.37-7.7-3.96-7.7-8.28h2.11c0 2.98 2.08 5.47 5.58 6.14zm-3.3-6.42a4.7 4.7 0 0 1-3.8-1.66l-1.5 1.51c1.51 1.5 3.43 2.14 5.43 2.14v-2.11c-.77 0-1.52-.18-2.12-.49zm-4.77-2.22A6.52 6.52 0 0 1 8.53 16h2.15c.06-1.45.65-2.8 1.66-3.8z"/>
-//     </svg>
-// );
-
-const RedHatIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" viewBox="0 0 640 640">
-        {/* Red Hat logo shape, color: #EE0000 */}
-        <path d="M405.5 349.6C439.2 349.6 487.8 342.7 487.8 302.6C488 295.9 488.7 300.8 466.9 206.4C462.3 187.3 458.2 178.6 424.6 161.8C398.5 148.5 341.7 126.4 324.9 126.4C309.2 126.4 304.7 146.6 286 146.6C268 146.6 254.7 131.5 237.9 131.5C221.8 131.5 211.2 142.5 203.1 165.1C175.6 242.7 176.8 239.4 177 243.4C177 268.2 274.6 349.5 405.5 349.5zM493 318.8C497.7 340.8 497.7 343.1 497.7 346C497.7 383.7 455.4 404.6 399.7 404.6C274 404.7 163.8 331 163.8 282.3C163.8 275.5 165.2 268.8 167.9 262.6C122.7 264.9 64.1 272.9 64.1 324.6C64.1 409.3 264.7 513.6 423.6 513.6C545.4 513.6 576.1 458.5 576.1 415C576.1 380.8 546.5 342 493.2 318.8z"
-            fill="#EE0000"
-        />
-    </svg>
-);
-
-// AppImage (Universal Linux) uses the original Linux icon as before
-const LinuxIcon = (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2 text-foreground" viewBox="0 0 640 640">
-        {/* Icon by FontAwesome: !Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. */}
-        <path d="M316.9 187.3C317.9 187.8 318.7 189 319.9 189C321 189 322.7 188.6 322.8 187.5C323 186.1 320.9 185.2 319.6 184.6C317.9 183.9 315.7 183.6 314.1 184.5C313.7 184.7 313.3 185.2 313.5 185.6C313.8 186.9 315.8 186.7 316.9 187.3zM295 189C296.2 189 297 187.8 298 187.3C299.1 186.7 301.1 186.9 301.5 185.7C301.7 185.3 301.3 184.8 300.9 184.6C299.3 183.7 297.1 184 295.4 184.7C294.1 185.3 292 186.2 292.2 187.6C292.3 188.6 294 189.1 295 189zM516 467.8C512.4 463.8 510.7 456.2 508.8 448.1C507 440 504.9 431.3 498.3 425.7C497 424.6 495.7 423.6 494.3 422.8C493 422 491.6 421.3 490.2 420.8C499.4 393.5 495.8 366.3 486.5 341.7C475.1 311.6 455.2 285.3 440 267.3C422.9 245.8 406.3 225.4 406.6 195.3C407.1 149.4 411.7 64.1 330.8 64C228.4 63.8 254 167.4 252.9 199.2C251.2 222.6 246.5 241 230.4 263.9C211.5 286.4 184.9 322.7 172.3 360.6C166.3 378.5 163.5 396.7 166.1 413.9C159.6 419.7 154.7 428.6 149.5 434.1C145.3 438.4 139.2 440 132.5 442.4C125.8 444.8 118.5 448.4 114 456.9C111.9 460.8 111.2 465 111.2 469.3C111.2 473.2 111.8 477.2 112.4 481.1C113.6 489.2 114.9 496.8 113.2 501.9C108 516.3 107.3 526.3 111 533.6C114.8 540.9 122.4 544.1 131.1 545.9C148.4 549.5 171.9 548.6 190.4 558.4C210.2 568.8 230.3 572.5 246.3 568.8C257.9 566.2 267.4 559.2 272.2 548.6C284.7 548.5 298.5 543.2 320.5 542C335.4 540.8 354.1 547.3 375.6 546.1C376.2 548.4 377 550.7 378.1 552.8L378.1 552.9C386.4 569.6 401.9 577.2 418.4 575.9C435 574.6 452.5 564.9 466.7 548C480.3 531.6 502.7 524.8 517.6 515.8C525 511.3 531 505.7 531.5 497.5C531.9 489.3 527.1 480.2 516 467.8zM319.8 151.3C329.6 129.1 354 129.5 363.8 150.9C370.3 165.1 367.4 181.8 359.5 191.3C357.9 190.5 353.6 188.7 346.9 186.4C348 185.2 350 183.7 350.8 181.8C355.6 170 350.6 154.8 341.7 154.5C334.4 154 327.8 165.3 329.9 177.5C325.8 175.5 320.5 174 316.9 173.1C315.9 166.2 316.6 158.5 319.8 151.3zM279.1 139.8C289.2 139.8 299.9 154 298.2 173.3C294.7 174.3 291.1 175.8 288 177.9C289.2 169 284.7 157.8 278.4 158.3C270 159 268.6 179.5 276.6 186.4C277.6 187.2 278.5 186.2 270.7 191.9C255.1 177.3 260.2 139.8 279.1 139.8zM265.5 200.5C271.7 195.9 279.1 190.5 279.6 190C284.3 185.6 293.1 175.8 307.5 175.8C314.6 175.8 323.1 178.1 333.4 184.7C339.7 188.8 344.7 189.1 356 194C364.4 197.5 369.7 203.7 366.5 212.2C363.9 219.3 355.5 226.6 343.8 230.3C332.7 233.9 324 246.3 305.6 245.2C301.7 245 298.6 244.2 296 243.1C288 239.6 283.8 232.7 276 228.1C267.4 223.3 262.8 217.7 261.3 212.8C259.9 207.9 261.3 203.8 265.5 200.5zM268.8 534.5C266.1 569.6 224.9 568.9 193.5 552.5C163.6 536.7 124.9 546 117 530.6C114.6 525.9 114.6 517.9 119.6 504.2L119.6 504C122 496.4 120.2 488 119 480.1C117.8 472.3 117.2 465.1 119.9 460.1C123.4 453.4 128.4 451 134.7 448.8C145 445.1 146.5 445.4 154.3 438.9C159.8 433.2 163.8 426 168.6 420.9C173.7 415.4 178.6 412.8 186.3 414C194.4 415.2 201.4 420.8 208.2 430L227.8 465.6C237.3 485.5 270.9 514 268.8 534.5zM267.4 508.6C263.3 502 257.8 495 253 489C260.1 489 267.2 486.8 269.7 480.1C272 473.9 269.7 465.2 262.3 455.2C248.8 437 224 422.7 224 422.7C210.5 414.3 202.9 404 199.4 392.8C195.9 381.6 196.4 369.5 199.1 357.6C204.3 334.7 217.7 312.4 226.3 298.4C228.6 296.7 227.1 301.6 217.6 319.2C209.1 335.3 193.2 372.5 215 401.6C215.6 380.9 220.5 359.8 228.8 340.1C240.8 312.7 266.1 265.2 268.1 227.4C269.2 228.2 272.7 230.6 274.3 231.5C278.9 234.2 282.4 238.2 286.9 241.8C299.3 251.8 315.4 251 329.3 243C335.5 239.5 340.5 235.5 345.2 234C355.1 230.9 363 225.4 367.5 219C375.2 249.4 393.2 293.3 404.7 314.7C410.8 326.1 423 350.2 428.3 379.3C431.6 379.2 435.3 379.7 439.2 380.7C453 345 427.5 306.5 415.9 295.8C411.2 291.2 411 289.2 413.3 289.3C425.9 300.5 442.5 323 448.5 348.3C451.3 359.9 451.8 372 448.9 384C465.3 390.8 484.8 401.9 479.6 418.8C477.4 418.7 476.4 418.8 475.4 418.8C478.6 408.7 471.5 401.2 452.6 392.7C433 384.1 416.6 384.1 414.3 405.2C402.2 409.4 396 419.9 392.9 432.5C390.1 443.7 389.3 457.2 388.5 472.4C388 480.1 384.9 490.4 381.7 501.4C349.6 524.3 305 534.3 267.4 508.6zM524.8 497.1C523.9 513.9 483.6 517 461.6 543.6C448.4 559.3 432.2 568 418 569.1C403.8 570.2 391.5 564.3 384.3 549.8C379.6 538.7 381.9 526.7 385.4 513.5C389.1 499.3 394.6 484.7 395.3 472.9C396.1 457.7 397 444.4 399.5 434.2C402.1 423.9 406.1 417 413.2 413.1C413.5 412.9 413.9 412.8 414.2 412.6C415 425.8 421.5 439.2 433 442.1C445.6 445.4 463.7 434.6 471.4 425.8C480.4 425.5 487.1 424.9 494 430.9C503.9 439.4 501.1 461.2 511.1 472.5C521.7 484.1 525.1 492 524.8 497.1zM269.4 212.7C271.4 214.6 274.1 217.2 277.4 219.8C284 225 293.2 230.4 304.7 230.4C316.3 230.4 327.2 224.5 336.5 219.6C341.4 217 347.4 212.6 351.3 209.2C355.2 205.8 357.2 202.9 354.4 202.6C351.6 202.3 351.8 205.2 348.4 207.7C344 210.9 338.7 215.1 334.5 217.5C327.1 221.7 315 227.7 304.6 227.7C294.2 227.7 285.9 222.9 279.7 218C276.6 215.5 274 213 272 211.1C270.5 209.7 270.1 206.5 267.7 206.2C266.3 206.1 265.9 209.9 269.4 212.7z" />
-    </svg>
-);
+// Platform icons - consistent 5x5 size with brand colors
+const PlatformIcons = {
+  windows: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#0078D4]/10 text-[#0078D4] dark:bg-[#0078D4]/20">
+      <IconBrandWindows className="size-5" stroke={1.5} />
+    </div>
+  ),
+  mac: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-foreground/5 text-foreground dark:bg-foreground/10">
+      <IconBrandApple className="size-5" stroke={1.5} />
+    </div>
+  ),
+  deb: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#A80030]/10 text-[#A80030] dark:bg-[#A80030]/20">
+      <IconBrandDebian className="size-5" stroke={1.5} />
+    </div>
+  ),
+  rpm: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#EE0000]/10 text-[#EE0000] dark:bg-[#EE0000]/20">
+      <IconBrandRedhat className="size-5" stroke={1.5} />
+    </div>
+  ),
+  appimage: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#E95420]/10 text-[#E95420] dark:bg-[#E95420]/20">
+      <IconBrandUbuntu className="size-5" stroke={1.5} />
+    </div>
+  ),
+};
 
 const platforms = [
-    {
-        label: "Windows (.exe)",
-        match: (name: string) => name.endsWith(".exe"),
-        fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
-        icon: WindowsIcon,
-    },
-    {
-        label: "Mac (.dmg)",
-        match: (name: string) => name.endsWith(".dmg"),
-        fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
-        icon: MacIcon,
-    },
-    // Linux options:
-    {
-        label: "Linux (.deb) Debian / Ubuntu",
-        match: (name: string) => name.toLowerCase().endsWith(".deb"),
-        fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
-        // icon: UbuntuIcon,
-    },
-    {
-        label: "Linux (.rpm) Fedora / RedHat",
-        match: (name: string) => name.toLowerCase().endsWith(".rpm"),
-        fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
-        icon: RedHatIcon,
-    },
-    {
-        label: "Linux (.AppImage) Universal",
-        match: (name: string) => name.toLowerCase().includes("appimage"),
-        fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
-        icon: LinuxIcon,
-    },
+  {
+    label: "Windows",
+    subtitle: ".exe installer",
+    match: (name: string) => name.endsWith(".exe"),
+    fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
+    icon: PlatformIcons.windows,
+    group: "desktop",
+  },
+  {
+    label: "macOS",
+    subtitle: ".dmg disk image",
+    match: (name: string) => name.endsWith(".dmg"),
+    fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
+    icon: PlatformIcons.mac,
+    group: "desktop",
+  },
+  {
+    label: "Debian / Ubuntu",
+    subtitle: ".deb package",
+    match: (name: string) => name.toLowerCase().endsWith(".deb"),
+    fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
+    icon: PlatformIcons.deb,
+    group: "linux",
+  },
+  {
+    label: "Fedora / RHEL",
+    subtitle: ".rpm package",
+    match: (name: string) => name.toLowerCase().endsWith(".rpm"),
+    fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
+    icon: PlatformIcons.rpm,
+    group: "linux",
+  },
+  {
+    label: "Linux (Universal)",
+    subtitle: ".AppImage portable",
+    match: (name: string) => name.toLowerCase().includes("appimage"),
+    fallbackUrl: "https://github.com/IMDevFlare/vesper-client/releases/latest",
+    icon: PlatformIcons.appimage,
+    group: "linux",
+  },
 ];
 
 const DownloadModal: React.FC<DownloadModalProps> = ({ open, onClose }) => {
-    const [downloading, setDownloading] = useState<{ [platform: string]: boolean }>({});
-    const [error, setError] = useState("");
+  const [downloading, setDownloading] = useState<Record<number, boolean>>({});
+  const [error, setError] = useState("");
 
-    const handleDownload = async (platformIdx: number) => {
-        setDownloading((d) => ({ ...d, [platformIdx]: true }));
-        setError("");
-        try {
-            const res = await fetch("https://api.github.com/repos/IMDevFlare/vesper-client/releases/latest");
-            const data = (await res.json()) as GitHubRelease;
-            const platform = platforms[platformIdx];
-            const asset = data.assets?.find(a => platform.match(a.name));
-            if (asset) {
-                window.location.href = asset.browser_download_url;
-            } else {
-                window.open(platform.fallbackUrl, "_blank");
-            }
-        } catch {
-            setError("Failed to fetch download. Opening fallback page.");
-            window.open(platforms[platformIdx].fallbackUrl, "_blank");
-        } finally {
-            setDownloading((d) => ({ ...d, [platformIdx]: false }));
-        }
-    };
+  const handleDownload = async (platformIdx: number) => {
+    setDownloading((d) => ({ ...d, [platformIdx]: true }));
+    setError("");
+    try {
+      const res = await fetch(
+        "https://api.github.com/repos/IMDevFlare/vesper-client/releases/latest"
+      );
+      const data = (await res.json()) as GitHubRelease;
+      const platform = platforms[platformIdx];
+      const asset = data.assets?.find((a) => platform.match(a.name));
+      if (asset) {
+        window.location.href = asset.browser_download_url;
+      } else {
+        window.open(platform.fallbackUrl, "_blank");
+      }
+    } catch {
+      setError("Could not fetch release. Opening GitHub...");
+      window.open(platforms[platformIdx].fallbackUrl, "_blank");
+    } finally {
+      setDownloading((d) => ({ ...d, [platformIdx]: false }));
+    }
+  };
 
-    if (!open) return null;
+  const desktopPlatforms = platforms.filter((p) => p.group === "desktop");
+  const linuxPlatforms = platforms.filter((p) => p.group === "linux");
 
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget) {
-            onClose?.();
-        }
-    };
-
-    return (
-        <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-background/70 backdrop-blur-md"
-            onClick={handleBackdropClick}
-            role="dialog"
-            aria-modal="true"
-        >
-            <div
-                className="bg-card border border-border rounded-2xl shadow-2xl max-w-md w-full p-6 relative"
-                onClick={e => e.stopPropagation()} // Prevent closing when clicking inside dialog
-            >
-                {/* Close btn */}
-                <button
-                    aria-label="Close"
-                    className="absolute top-3 right-3 rounded-full p-2 hover:bg-muted"
-                    onClick={onClose}
-                >
-                    <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M6 18L18 6" />
-                    </svg>
-                </button>
-                <h2 className="text-xl font-mono font-bold text-foreground mb-4 text-center">
-                    Download Vesper Client
-                </h2>
-                <div className="flex flex-col gap-4">
-                    {platforms.map((platform, i) => (
-                        <button
-                            key={platform.label}
-                            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold bg-brand-accent/90 hover:bg-brand-accent transition-colors text-background text-lg disabled:opacity-60 active:scale-[0.99]"
-                            disabled={!!downloading[i]}
-                            onClick={() => handleDownload(i)}
-                        >
-                            {platform.icon}
-                            {downloading[i] ? (
-                                <span className="flex items-center">
-                                    <span className="w-5 h-5 mr-2 border-2 border-background border-t-transparent rounded-full animate-spin"></span>
-                                    Downloading...
-                                </span>
-                            ) : (
-                                platform.label
-                            )}
-                        </button>
-                    ))}
-                </div>
-                {error && <div className="mt-3 text-red-500 text-center text-sm">{error}</div>}
-                <div className="mt-5 text-xs text-muted-foreground text-center">
-                    Having trouble? <a href="https://github.com/IMDevFlare/vesper-launcher/releases/latest" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-accent">See all releases on GitHub</a>
-                </div>
-            </div>
+  return (
+    <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
+      <DialogContent className="max-w-lg gap-0 overflow-hidden p-0 sm:max-w-lg max-h-[90dvh] flex flex-col">
+        <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-semibold tracking-tight">
+              Download Vesper Client
+            </DialogTitle>
+            <DialogDescription>
+              Choose your platform to get the latest release.
+            </DialogDescription>
+          </DialogHeader>
         </div>
-    );
+
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <div className="space-y-6 p-4 sm:p-6">
+            <section className="space-y-2">
+              <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Desktop
+              </h3>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {desktopPlatforms.map((platform, i) => {
+                  const idx = platforms.indexOf(platform);
+                  const isDownloading = !!downloading[idx];
+                  return (
+                    <PlatformTile
+                      key={platform.label}
+                      platform={platform}
+                      isLoading={isDownloading}
+                      onDownload={() => handleDownload(idx)}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+
+            <section className="space-y-2">
+              <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Linux
+              </h3>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {linuxPlatforms.map((platform, i) => {
+                  const idx = platforms.indexOf(platform);
+                  const isDownloading = !!downloading[idx];
+                  return (
+                    <PlatformTile
+                      key={platform.label}
+                      platform={platform}
+                      isLoading={isDownloading}
+                      onDownload={() => handleDownload(idx)}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+          </div>
+        </div>
+
+        {error && (
+          <div className="shrink-0 border-t border-border bg-destructive/5 px-4 py-3 sm:px-6">
+            <p className="text-center text-sm text-destructive">{error}</p>
+          </div>
+        )}
+
+        <div className="shrink-0 border-t border-border px-4 py-4 sm:px-6">
+          <p className="text-center text-xs text-muted-foreground">
+            Having trouble?{" "}
+            <a
+              href="https://github.com/IMDevFlare/vesper-client/releases/latest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
+            >
+              View all releases on GitHub
+            </a>
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
 };
+
+function PlatformTile({
+  platform,
+  isLoading,
+  onDownload,
+}: {
+  platform: (typeof platforms)[0];
+  isLoading: boolean;
+  onDownload: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onDownload}
+      disabled={isLoading}
+      className={cn(
+        "group flex min-w-0 items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-left transition-all",
+        "hover:border-border/80 hover:bg-muted/50 hover:shadow-sm",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "disabled:pointer-events-none disabled:opacity-60",
+        "active:scale-[0.99]"
+      )}
+    >
+      {platform.icon}
+      <div className="min-w-0 flex-1">
+        <span className="block text-sm font-medium text-foreground wrap-break-word">
+          {platform.label}
+        </span>
+        <span className="block text-xs text-muted-foreground">
+          {platform.subtitle}
+        </span>
+      </div>
+      <div className="shrink-0">
+        {isLoading ? (
+          <span className="flex size-8 items-center justify-center">
+            <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          </span>
+        ) : (
+          <span className="flex size-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-brand-accent/20 group-hover:text-brand-accent">
+            <IconDownload className="size-4" stroke={2} />
+          </span>
+        )}
+      </div>
+    </button>
+  );
+}
 
 export default DownloadModal;
