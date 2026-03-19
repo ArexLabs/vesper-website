@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { XIcon } from "lucide-react"
-import { Dialog as DialogPrimitive } from "@base-ui-components/react"
+import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -19,30 +19,29 @@ function DialogTrigger({
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-function DialogBackdrop({
+function DialogPortal({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
+}
+
+function DialogClose({
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+}
+
+function DialogOverlay({
   className,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Backdrop>) {
+}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
   return (
-    <DialogPrimitive.Backdrop
-      data-slot="dialog-backdrop"
+    <DialogPrimitive.Overlay
+      data-slot="dialog-overlay"
       className={cn(
         "fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0",
         className
       )}
-      {...props}
-    />
-  )
-}
-
-function DialogContainer({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Container>) {
-  return (
-    <DialogPrimitive.Container
-      data-slot="dialog-container"
-      className={cn("fixed inset-0 z-50", className)}
       {...props}
     />
   )
@@ -57,8 +56,8 @@ function DialogContent({
   showCloseButton?: boolean
 }) {
   return (
-    <DialogContainer>
-      <DialogBackdrop />
+    <DialogPortal data-slot="dialog-portal">
+      <DialogOverlay />
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
@@ -78,7 +77,7 @@ function DialogContent({
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Content>
-    </DialogContainer>
+    </DialogPortal>
   )
 }
 
@@ -111,8 +110,8 @@ function DialogFooter({
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close render={<Button variant="outline" />}>
-          Close
+        <DialogPrimitive.Close asChild>
+          <Button variant="outline">Close</Button>
         </DialogPrimitive.Close>
       )}
     </div>
@@ -147,12 +146,13 @@ function DialogDescription({
 
 export {
   Dialog,
-  DialogBackdrop,
-  DialogContainer,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogOverlay,
+  DialogPortal,
   DialogTitle,
   DialogTrigger,
 }
