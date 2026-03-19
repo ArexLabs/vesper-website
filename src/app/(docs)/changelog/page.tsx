@@ -6,8 +6,20 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Change log data as a structured JS object instead of markdown
 const changelog = [
+  {
+    version: "1.5.1",
+    date: "2026-03-19",
+    changes: [
+      {
+        type: "Changed",
+        items: [
+          "Upgraded many packages to their latest versions for improved security and performance.",
+          "Upgraded `next` to version 16.2.0.",
+        ],
+      },
+    ],
+  },
   {
     version: "1.5.0",
     date: "2026-03-09",
