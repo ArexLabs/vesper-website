@@ -5,109 +5,116 @@ import { motion } from "framer-motion";
 import {
   CheckCircleIcon,
   ArrowDownTrayIcon,
-  ExclamationTriangleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 
 const INSTALL_SCRIPT = "curl -sSfL https://vesper.devflare.de/install | sh";
-const DEBUG_COPY_ERROR = false;
 
 export function Hero() {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "error">("idle");
 
   async function handleCopy() {
-    if (DEBUG_COPY_ERROR) {
-      setCopyState("error");
-      toast.error("Failed to copy install script to clipboard.");
-      setTimeout(() => setCopyState("idle"), 2500);
-      return;
-    }
-
     try {
       await navigator.clipboard.writeText(INSTALL_SCRIPT);
       setCopyState("copied");
-      toast.success("Copied install script to clipboard!");
+      toast.success("Copied install script!");
       setTimeout(() => setCopyState("idle"), 1800);
     } catch (e) {
       setCopyState("error");
-      toast.error("Failed to copy install script to clipboard.");
+      toast.error("Failed to copy install script.");
       setTimeout(() => setCopyState("idle"), 2500);
     }
   }
 
   return (
-    <section className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[70vh]" id="hero">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-64 bg-brand-accent/5 rounded-full blur-[120px] -z-10" />
+    <section
+      className="relative flex flex-col items-center justify-center max-w-7xl mx-auto min-h-[80vh] py-32 px-6"
+      id="hero"
+    >
+      {/* Decorative glow */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[900px] h-72 bg-brand-accent/10 rounded-full blur-[100px] -z-10" />
 
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted/50 backdrop-blur-sm mb-8"
-        role="alert"
-      >
-        <ExclamationTriangleIcon className="w-4 h-4 text-yellow-500" />
-        <span className="text-xs font-mono font-medium tracking-wide text-yellow-400 uppercase">
-          Install script not working yet
-        </span>
-      </motion.div>
-
+      {/* Title */}
       <motion.h1
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-5xl md:text-7xl font-bold text-center tracking-tight text-foreground max-w-4xl"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="text-5xl md:text-7xl font-bold text-center tracking-tight text-foreground max-w-5xl drop-shadow"
       >
-        Designed for <span className="text-brand-accent italic">Performance</span>
+        Minecraft, <span className="text-brand-accent italic">reimagined.</span>
       </motion.h1>
 
+      {/* Subtitle */}
       <motion.p
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="mt-6 text-lg md:text-xl text-muted-foreground text-center max-w-2xl"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.22 }}
+        className="mt-6 text-xl md:text-2xl text-muted-foreground text-center max-w-2xl"
       >
-        A sleek, highly optimized Minecraft launcher built for power users.
-        Forget bloated UIs. Just raw speed and modularity.
+        <span className="font-semibold text-foreground">Vesper Launcher</span> is a blazingly fast, modern and modular Minecraft launcher designed for
+        performance enthusiasts and power users.
       </motion.p>
 
+      {/* Install script call-to-action */}
       <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="mt-10 flex items-center justify-center gap-4"
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.36 }}
+        className="mt-12 flex items-center justify-center w-full max-w-3xl"
       >
-        <button
-          type="button"
-          onClick={handleCopy}
-          className={`flex items-center gap-3 font-mono relative overflow-hidden transition-all px-6 py-3 text-sm rounded-lg border-2 border-transparent ${copyState === "copied"
-            ? "bg-green-600 border-green-700 text-background"
-            : copyState === "error"
-              ? "bg-destructive border-destructive text-background"
-              : "bg-foreground text-background hover:border-brand-accent/40"
-            }`}
-          aria-label={
-            copyState === "copied"
-              ? "Copied!"
-              : copyState === "error"
-                ? "Copy failed"
-                : "Copy install script"
-          }
-          disabled={copyState === "copied"}
-        >
-          {copyState === "copied" ? (
-            <CheckCircleIcon className="w-5 h-5" />
-          ) : copyState === "error" ? (
-            <XCircleIcon className="w-5 h-5" />
-          ) : (
-            <ArrowDownTrayIcon className="w-5 h-5" />
+        <div className="flex flex-col w-full gap-4">
+          <div className="border border-border rounded-lg bg-card flex items-center px-2 py-2 overflow-auto">
+            <code className="text-[0.97rem] font-mono text-wrap text-foreground px-1 select-all flex-1">
+              {INSTALL_SCRIPT}
+            </code>
+            <button
+              type="button"
+              onClick={handleCopy}
+              className={`ml-2 flex items-center justify-center transition-all rounded-md px-3 py-2 border-2 border-transparent bg-foreground text-background hover:border-brand-accent/40 font-mono text-sm font-semibold active:scale-95 ${
+                copyState === "copied"
+                  ? "bg-green-600 border-green-700"
+                  : copyState === "error"
+                  ? "bg-destructive border-destructive"
+                  : ""
+              }`}
+              aria-label={
+                copyState === "copied"
+                  ? "Copied!"
+                  : copyState === "error"
+                  ? "Copy failed"
+                  : "Copy install script"
+              }
+              disabled={copyState === "copied"}
+            >
+              {copyState === "copied" ? (
+                <CheckCircleIcon className="w-5 h-5" />
+              ) : copyState === "error" ? (
+                <XCircleIcon className="w-5 h-5" />
+              ) : (
+                <ArrowDownTrayIcon className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+          {/* Feedback */}
+          {copyState === "copied" && (
+            <span className="text-green-600 text-xs font-mono ml-2 transition-opacity duration-300">Copied to clipboard!</span>
           )}
-          <span className="relative z-10 font-mono font-semibold">
-            {INSTALL_SCRIPT}
-          </span>
-        </button>
+          {copyState === "error" && (
+            <span className="text-destructive text-xs font-mono ml-2 transition-opacity duration-300">Failed to copy.</span>
+          )}
+        </div>
       </motion.div>
+
+      {/* Tagline */}
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.50 }}
+        className="mt-12 text-sm md:text-base text-muted-foreground text-center max-w-xl"
+      >
+        Fast startup. Modern UI. Built-in mod support. Free & open source.
+      </motion.p>
     </section>
   );
 }

@@ -190,8 +190,8 @@ export default function ChangelogPage() {
                     {entry.changes.map((change) => (
                       <div key={change.type} className="space-y-3">
                         <div className="flex items-center gap-2">
-                          <Badge 
-                            variant="secondary" 
+                          <Badge
+                            variant="secondary"
                             className={typeStyles[change.type] || "bg-muted text-muted-foreground"}
                           >
                             {change.type}

@@ -99,19 +99,18 @@ export function Navigation() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
-                    isActive 
-                      ? "text-brand-accent bg-brand-accent/10" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                  }`}
+                  className={`px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${isActive
+                    ? "text-brand-accent bg-brand-accent/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    }`}
                 >
                   {link.name}
                 </Link>
               );
             })}
-            
+
             <div className="h-4 w-px bg-white/10 mx-4" />
-            
+
             <div className="flex items-center gap-3">
               <button
                 onClick={handleOpenSearch}
@@ -131,7 +130,7 @@ export function Navigation() {
               >
                 Download
               </button>
-              
+
               <a
                 href="https://github.com/IMDevFlare/vesper-website"
                 target="_blank"
@@ -193,11 +192,10 @@ export function Navigation() {
                         <Link
                           href={link.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-colors ${
-                            isActive 
-                              ? "bg-brand-accent/10 text-brand-accent" 
-                              : "text-foreground hover:bg-white/5"
-                          }`}
+                          className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-colors ${isActive
+                            ? "bg-brand-accent/10 text-brand-accent"
+                            : "text-foreground hover:bg-white/5"
+                            }`}
                         >
                           <link.icon className={`size-6 ${isActive ? "text-brand-accent" : "text-brand-accent/60"}`} />
                           <span className="text-lg font-semibold">{link.name}</span>

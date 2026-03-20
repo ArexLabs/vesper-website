@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import { useHotkey } from "@tanstack/react-hotkeys";
 import {
   Command,
   CommandDialog,
@@ -30,23 +31,18 @@ export function CommandPalette() {
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
 
+  useHotkey(
+    "Mod+K",
+    () => {
+      setOpen((prev) => !prev);
+    },
+    { ignoreInputs: false }
+  );
+
   React.useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
-      }
-    };
-
     const handleExternalOpen = () => setOpen(true);
-
-    document.addEventListener("keydown", down);
     window.addEventListener("vesper:open-cmdk", handleExternalOpen);
-
-    return () => {
-      document.removeEventListener("keydown", down);
-      window.removeEventListener("vesper:open-cmdk", handleExternalOpen);
-    };
+    return () => window.removeEventListener("vesper:open-cmdk", handleExternalOpen);
   }, []);
 
   const runCommand = React.useCallback((command: () => void) => {

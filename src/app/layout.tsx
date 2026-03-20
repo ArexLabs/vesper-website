@@ -3,49 +3,35 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { JetBrains_Mono as FontMono, Noto_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { JetBrains_Mono as FontMono, Noto_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { CommandPalette } from "@/components/command-palette";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
-const notoSans = Noto_Sans({subsets:['latin'],variable:'--font-sans'});
-
-const fontSans = localFont({
-  src: [
-    {
-      path: "../../public/fonts/satoshi.woff2",
-      style: "normal",
-      weight: "400",
-    },
-    {
-      path: "../../public/fonts/satoshi-italic.woff2",
-      style: "italic",
-      weight: "400",
-    },
-  ],
-  variable: "--font-v-sans",
-  display: "swap",
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
 });
 
 const fontMono = FontMono({
-  variable: "--font-v-mono",
   subsets: ["latin"],
-  display: "swap",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
   title: {
     default: "Vesper Launcher",
-    template: "%s | Vesper Launcher"
+    template: "%s | Vesper Launcher",
   },
-  description: "Vesper Launcher is a sleek, modern, and high-utility Minecraft client designed for performance, customization, and an enhanced gameplay experience.",
+  description:
+    "Vesper Launcher is a sleek, modern, and high-utility Minecraft client designed for performance, customization, and an enhanced gameplay experience.",
   icons: {
     icon: [
-      { url: "/logo.svg", type: "image/svg+xml" },
-      { url: "/logo.ico", type: "image/x-icon" }
+      { url: "/logo.png", type: "image/png" },
+      { url: "/logo.ico", type: "image/x-icon" },
     ],
   },
   keywords: [
@@ -55,11 +41,9 @@ export const metadata: Metadata = {
     "High-Utility",
     "Modern",
     "Launcher",
-    "Custom Minecraft"
+    "Custom Minecraft",
   ],
-  authors: [
-    { name: "DevFlare", url: "https://devflare.de" },
-  ],
+  authors: [{ name: "DevFlare", url: "https://devflare.de" }],
 };
 
 export default function RootLayout({
@@ -68,7 +52,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={cn("font-sans", notoSans.variable)}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", fontSans.variable)}
+    >
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
@@ -79,7 +67,26 @@ export default function RootLayout({
           <CommandPalette />
           <main>{children}</main>
           <Toaster richColors />
-          <Footer />
+          <Footer
+            aRR
+            aRRText="Not affiliated with Mojang or Microsoft."
+            logo={
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={40}
+                height={40}
+                priority
+              />
+            }
+            year={2025}
+            links={[
+              { label: "Legal Notice", href: "/legal" },
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms & Conditions", href: "/terms" },
+              { label: "Terms of Service", href: "/tos" }
+            ]}
+          />
         </ThemeProvider>
       </body>
     </html>
