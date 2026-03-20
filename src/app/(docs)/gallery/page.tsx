@@ -1,17 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Maximize2, Sparkles } from "lucide-react";
+import { Maximize2, Sparkles, Image as ImageIcon } from "lucide-react";
+
+const PLACEHOLDER_IMAGE = "https://placehold.co/1920x1080";
 
 const galleryItems = [
   {
     id: 1,
     title: "Vesper Dashboard",
     category: "Interface",
-    image: "/gallery/ui-1.png",
+    image: "/gallery/og-image.png",
     className: "md:col-span-2 md:row-span-2",
   },
   {
@@ -45,6 +47,44 @@ const galleryItems = [
     isText: true,
   },
 ];
+
+// GalleryImage component to handle missing image or error loading
+function GalleryImage({ src, alt, ...props }: { src?: string; alt: string; fill?: boolean; className?: string }) {
+  const [imgSrc, setImgSrc] = useState(src || PLACEHOLDER_IMAGE);
+  const [hasError, setHasError] = useState(false);
+
+  if (!imgSrc) {
+    // No image specified at all, show placeholder
+    return (
+      <div className="w-full h-full flex flex-col items-center justify-center bg-muted/10 text-muted-foreground">
+        <ImageIcon size={48} />
+        <span className="mt-2 text-xs">No image available</span>
+      </div>
+    );
+  }
+
+  return !hasError ? (
+    <Image
+      src={imgSrc}
+      alt={alt}
+      fill
+      className={props.className}
+      onError={() => {
+        if (imgSrc !== PLACEHOLDER_IMAGE) {
+          setImgSrc(PLACEHOLDER_IMAGE);
+        } else {
+          setHasError(true);
+        }
+      }}
+      style={props.style}
+    />
+  ) : (
+    <div className="w-full h-full flex flex-col items-center justify-center bg-muted/10 text-muted-foreground">
+      <ImageIcon size={48} />
+      <span className="mt-2 text-xs">No image available</span>
+    </div>
+  );
+}
 
 export default function GalleryPage() {
   return (
@@ -82,30 +122,28 @@ export default function GalleryPage() {
               >
                 {item.isText ? (
                   <div className="h-full w-full flex flex-col justify-end p-8 relative overflow-hidden">
-                     <div className="absolute top-6 left-6">
-                        <Badge variant="outline" className="text-brand-accent border-brand-accent/30 bg-brand-accent/5">
-                            {item.category}
-                        </Badge>
-                     </div>
-                     <div className="space-y-2 mt-auto">
-                        <h2 className="text-2xl font-bold text-brand-accent">{item.title}</h2>
-                        <p className="text-muted-foreground leading-relaxed">{item.content}</p>
-                     </div>
-                     {/* Decorative element */}
-                     <div className="absolute -bottom-4 -right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Sparkles size={120} className="text-brand-accent" />
-                     </div>
+                    <div className="absolute top-6 left-6">
+                      <Badge variant="outline" className="text-brand-accent border-brand-accent/30 bg-brand-accent/5">
+                        {item.category}
+                      </Badge>
+                    </div>
+                    <div className="space-y-2 mt-auto">
+                      <h2 className="text-2xl font-bold text-brand-accent">{item.title}</h2>
+                      <p className="text-muted-foreground leading-relaxed">{item.content}</p>
+                    </div>
+                    {/* Decorative element */}
+                    <div className="absolute -bottom-4 -right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                      <Sparkles size={120} className="text-brand-accent" />
+                    </div>
                   </div>
                 ) : (
                   <>
-                    {item.image && (
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    )}
+                    <GalleryImage
+                      src={item.image}
+                      alt={item.title}
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      fill
+                    />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
                         <div className="space-y-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -130,10 +168,10 @@ export default function GalleryPage() {
               </motion.div>
             ))}
           </div>
-          
+
           <div className="mt-24 text-center">
             <p className="text-muted-foreground">
-                More screens and brand assets coming soon.
+              More screens and brand assets coming soon.
             </p>
           </div>
         </div>

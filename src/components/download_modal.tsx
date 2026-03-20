@@ -137,7 +137,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-lg gap-0 overflow-hidden p-0 sm:max-w-lg max-h-[90dvh] flex flex-col">
+      <DialogContent className="max-w-2xl gap-0 overflow-hidden p-0 sm:max-w-2xl max-h-[90dvh] flex flex-col">
         <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold tracking-tight">
@@ -254,8 +254,8 @@ function PlatformTile({
             <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
           </span>
         ) : (
-          <span className="flex size-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-brand-accent/20 group-hover:text-brand-accent">
-            <IconDownload className="size-4" stroke={2} />
+          <span className="flex w-14 h-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-brand-accent/20 group-hover:text-brand-accent">
+            <IconDownload className="size-5" stroke={2} />
           </span>
         )}
       </div>

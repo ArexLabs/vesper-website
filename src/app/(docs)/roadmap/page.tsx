@@ -1,5 +1,24 @@
 "use client";
 
+const planned = [
+    "Performance optimizations",
+    "Integrate launcher auto-updater",
+    "Create documentation and extend help resources",
+];
+
+const inProgress = [
+    "Release Windows, Linux and macOS clients",
+    "Configurable keyboard shortcuts",
+    "Rich presence in Discord",
+    "Built-in mod installer",
+];
+
+const longTerm = [
+    "Plugin/extension system for client",
+    "Mobile companion app",
+    "Custom authentication and OAuth2 integrations for Website",
+];
+
 export default function Roadmap() {
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-brand-accent/30 selection:text-brand-accent">
@@ -30,17 +49,29 @@ export default function Roadmap() {
                         {/* Planned Features */}
                         <div>
                             <h2 className="text-2xl font-semibold text-brand-accent mb-3">Planned</h2>
-                            <div className="pl-6 py-2 text-muted-foreground text-lg">NaN</div>
+                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
+                                {planned.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
                         </div>
                         {/* In Progress */}
                         <div>
                             <h2 className="text-2xl font-semibold text-brand-accent mb-3">In Progress</h2>
-                            <div className="pl-6 py-2 text-muted-foreground text-lg">NaN</div>
+                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
+                                {inProgress.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
                         </div>
                         {/* Experimental/Long-Term */}
                         <div>
                             <h2 className="text-2xl font-semibold text-brand-accent mb-3">Long-Term & Experiments</h2>
-                            <div className="pl-6 py-2 text-muted-foreground text-lg">NaN</div>
+                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
+                                {longTerm.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                     <div className="mt-14 text-muted-foreground text-center text-sm px-2">

@@ -23,6 +23,7 @@ import {
   ShieldCheck,
   Scale,
   Gavel,
+  X as XIcon,
 } from "lucide-react";
 
 export function CommandPalette() {
@@ -65,7 +66,7 @@ export function CommandPalette() {
     >
       <Command className="flex size-full min-h-0 flex-col overflow-hidden rounded-none bg-transparent **:data-[slot=command-input-wrapper]:p-0 **:data-[slot=command-input-wrapper]:border-0 **:data-[slot=command-input-wrapper]:shadow-none **:[[cmdk-group]]:px-0">
         {/* Header - matches Download Modal */}
-        <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
+        <div className="relative shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
           <h2 className="text-lg font-semibold tracking-tight text-foreground">
             Command Palette
           </h2>
@@ -78,6 +79,16 @@ export function CommandPalette() {
               className="h-10 min-h-10 rounded-lg border border-border bg-muted/30 px-3 text-sm placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
+          {/* X button in upper right, styled similarly to DownloadModal */}
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close"
+            className="absolute right-4 top-4 z-10 inline-flex size-8 items-center justify-center rounded-md bg-transparent transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-60 sm:right-6"
+          >
+            <XIcon className="size-5" aria-hidden="true" />
+            <span className="sr-only">Close</span>
+          </button>
         </div>
 
         {/* Scrollable content - matches Download Modal */}
