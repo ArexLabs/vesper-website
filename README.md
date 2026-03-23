@@ -32,6 +32,7 @@ Explore Vesper's features, system requirements, and guides at [launcher.devflare
 ## 🧰 Getting Started
 
 **How to install:**
+
 1. Visit [launcher.devflare.de](https://launcher.devflare.de).
 2. Copy the one-line install script provided on the homepage and paste it in your terminal (**Windows**).
 3. Alternative installers for Linux and macOS coming soon.
