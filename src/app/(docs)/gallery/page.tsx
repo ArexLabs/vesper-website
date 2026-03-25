@@ -49,7 +49,17 @@ const galleryItems = [
 ];
 
 // GalleryImage component to handle missing image or error loading
-function GalleryImage({ src, alt, ...props }: { src?: string; alt: string; fill?: boolean; className?: string }) {
+function GalleryImage({
+  src,
+  alt,
+  fill,
+  className,
+}: {
+  src?: string;
+  alt: string;
+  fill?: boolean;
+  className?: string;
+}) {
   const [imgSrc, setImgSrc] = useState(src || PLACEHOLDER_IMAGE);
   const [hasError, setHasError] = useState(false);
 
@@ -67,8 +77,8 @@ function GalleryImage({ src, alt, ...props }: { src?: string; alt: string; fill?
     <Image
       src={imgSrc}
       alt={alt}
-      fill
-      className={props.className}
+      fill={fill}
+      className={className}
       onError={() => {
         if (imgSrc !== PLACEHOLDER_IMAGE) {
           setImgSrc(PLACEHOLDER_IMAGE);
@@ -76,7 +86,6 @@ function GalleryImage({ src, alt, ...props }: { src?: string; alt: string; fill?
           setHasError(true);
         }
       }}
-      style={props.style}
     />
   ) : (
     <div className="w-full h-full flex flex-col items-center justify-center bg-muted/10 text-muted-foreground">
