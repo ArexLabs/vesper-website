@@ -70,15 +70,11 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Watch scroll to update navbar padding
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 8) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 8);
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -132,7 +128,7 @@ export function Navigation() {
             minHeight: 0,
             // Set background directly based on 'scrolled' state. No animation between non-animatable values.
             background: scrolled
-              ? "rgba(var(--background-rgb),0.96)"
+              ? "color-mix(in srgb, var(--background) 96%, transparent)"
               : "transparent",
             transition:
               "background 0.2s, gap 0.3s, padding 0.3s, max-width 0.3s, box-shadow 0.3s, border-radius 0.3s",
@@ -163,6 +159,7 @@ export function Navigation() {
                   <Link
                     key={link.name}
                     href={link.href}
+                    aria-current={isActive ? "page" : undefined}
                     className={`px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
                       isActive
                         ? "text-brand-accent bg-brand-accent/10"
@@ -258,6 +255,7 @@ export function Navigation() {
                       <motion.div key={link.name} variants={itemVariants}>
                         <Link
                           href={link.href}
+                          aria-current={isActive ? "page" : undefined}
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-colors ${
                             isActive
