@@ -8,6 +8,8 @@ import { Search, Image as ImageIcon, History, Map, Home, Command as CommandIcon 
 import Link from "next/link";
 import DownloadModal from "./download_modal";
 
+// Type error fix: Only pass allowed props (`className`) to lucide-react icons (and similar), do not pass 'style' or spread all props.
+
 function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg
@@ -250,6 +252,8 @@ export function Navigation() {
 
                   {navLinks.map((link) => {
                     const isActive = pathname === link.href;
+                    // Only pass className to icon, do not pass other props like style (or spread props).
+                    const Icon = link.icon;
                     return (
                       <motion.div key={link.name} variants={itemVariants}>
                         <Link
@@ -261,7 +265,7 @@ export function Navigation() {
                               : "text-foreground hover:bg-white/5"
                           }`}
                         >
-                          <link.icon
+                          <Icon
                             className={`size-6 ${
                               isActive
                                 ? "text-brand-accent"
