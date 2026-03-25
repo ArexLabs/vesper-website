@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { CommandLineIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Search, Image as ImageIcon, History, Map, Home, Command as CommandIcon } from "lucide-react";
 import Link from "next/link";
 import DownloadModal from "./download_modal";
+
+// Type error fix: Only pass allowed props (`className`) to lucide-react icons (and similar), do not pass 'style' or spread all props.
 
 function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
@@ -46,6 +48,7 @@ const navLinks: NavLink[] = [
   { name: "Search", href: "/search", icon: Search },
 ];
 
+// Only animate mobile menu items from top, not from the side.
 const menuVariants: Variants = {
   closed: { opacity: 0, y: -20, transition: { staggerChildren: 0.05, staggerDirection: -1 } },
   open: {
@@ -55,15 +58,26 @@ const menuVariants: Variants = {
   }
 };
 
+// Only y (top) animation for menu items, not x (side)
 const itemVariants: Variants = {
-  closed: { opacity: 0, x: -20 },
-  open: { opacity: 1, x: 0 }
+  closed: { opacity: 0, y: -20 },
+  open: { opacity: 1, y: 0 }
 };
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleOpenDownloadModal = () => {
     setDownloadModalOpen(true);
@@ -75,74 +89,122 @@ export function Navigation() {
     setMobileMenuOpen(false);
   };
 
+  // Animate all animatable values, but switch the background directly rather than animating it
   return (
     <>
       <motion.header
-        initial={{ y: -20, opacity: 0 }}
+        initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 130, damping: 25 }}
         className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-2xl border-b border-white/5"
         id="navbar"
       >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 z-60 group">
-            <div className="p-2 rounded-xl bg-brand-accent/10 group-hover:bg-brand-accent/20 transition-colors">
-              <CommandLineIcon className="w-6 h-6 text-brand-accent" />
-            </div>
-            <span className="font-mono font-bold tracking-tight text-foreground text-lg italic">Vesper.init()</span>
-          </Link>
+        <motion.div
+          animate={scrolled ? "scrolled" : "top"}
+          variants={{
+            top: {
+              paddingLeft: "1.5rem",
+              paddingRight: "1.5rem",
+              maxWidth: "80rem",
+              marginLeft: "auto",
+              marginRight: "auto",
+              borderRadius: "2.5rem", // rounded-[2.5rem]
+              boxShadow: "none",
+              gap: "2.5rem",
+            },
+            scrolled: {
+              paddingLeft: "0.75rem",
+              paddingRight: "0.75rem",
+              maxWidth: "56rem",
+              marginLeft: "auto",
+              marginRight: "auto",
+              borderRadius: "2.5rem", // rounded-[2.5rem]
+              boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)",
+              gap: "1.5rem",
+            },
+          }}
+          className="h-20 flex items-center justify-between transition-all duration-300"
+          style={{
+            minHeight: 0,
+            // Set background directly based on 'scrolled' state. No animation between non-animatable values.
+            background: scrolled
+              ? "color-mix(in srgb, var(--background) 96%, transparent)"
+              : "transparent",
+            transition:
+              "background 0.2s, gap 0.3s, padding 0.3s, max-width 0.3s, box-shadow 0.3s, border-radius 0.3s",
+          }}
+        >
+          {/* Use an extra container to ensure the title and nav have a gap when scrolled */}
+          <div
+            className="flex items-center w-full"
+            style={{
+              gap: scrolled ? "0.75rem" : "1.5rem",
+              transition: "gap 0.3s",
+            }}
+          >
+            <Link href="/" className="flex items-center gap-2.5 z-60 group">
+              <div className="p-2 rounded-xl bg-brand-accent/10 group-hover:bg-brand-accent/20 transition-colors">
+                <CommandLineIcon className="w-6 h-6 text-brand-accent" />
+              </div>
+              <span className="font-mono font-bold tracking-tight text-foreground text-lg italic">
+                Vesper.init()
+              </span>
+            </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${isActive
-                    ? "text-brand-accent bg-brand-accent/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-1 flex-shrink-0">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`px-4 py-2 text-sm font-medium transition-all duration-200 rounded-full ${
+                      isActive
+                        ? "text-brand-accent bg-brand-accent/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
                     }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+
+              <div className="h-4 w-px bg-white/10 mx-4" />
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleOpenSearch}
+                  className="flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all duration-200"
                 >
-                  {link.name}
-                </Link>
-              );
-            })}
+                  <Search className="size-4" />
+                  <span>Search...</span>
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 rounded border border-white/10 bg-white/5 text-[10px] font-bold">
+                    <span className="text-[8px] opacity-60">⌘</span>
+                    <span>K</span>
+                  </div>
+                </button>
 
-            <div className="h-4 w-px bg-white/10 mx-4" />
+                <button
+                  onClick={handleOpenDownloadModal}
+                  className="px-6 py-2 bg-brand-accent text-background text-sm font-bold rounded-full hover:shadow-[0_0_20px_-5px_var(--brand-accent)] active:scale-95 transition-all duration-200"
+                >
+                  Download
+                </button>
 
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleOpenSearch}
-                className="flex items-center gap-3 px-4 py-2 text-sm text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all duration-200"
-              >
-                <Search className="size-4" />
-                <span>Search...</span>
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded border border-white/10 bg-white/5 text-[10px] font-bold">
-                  <span className="text-[8px] opacity-60">⌘</span>
-                  <span>K</span>
-                </div>
-              </button>
-
-              <button
-                onClick={handleOpenDownloadModal}
-                className="px-6 py-2 bg-brand-accent text-background text-sm font-bold rounded-full hover:shadow-[0_0_20px_-5px_var(--brand-accent)] active:scale-95 transition-all duration-200"
-              >
-                Download
-              </button>
-
-              <a
-                href="https://github.com/IMDevFlare/vesper-website"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
-                aria-label="Open GitHub repository"
-              >
-                <GitHubIcon className="w-6 h-6" />
-              </a>
-            </div>
-          </nav>
-
+                <a
+                  href="https://github.com/IMDevFlare/vesper-website"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
+                  aria-label="Open GitHub repository"
+                >
+                  <GitHubIcon className="w-6 h-6" />
+                </a>
+              </div>
+            </nav>
+          </div>
           {/* Mobile Toggle */}
           <button
             className="md:hidden z-60 p-2 rounded-xl bg-white/5 active:scale-90 transition-transform"
@@ -150,7 +212,7 @@ export function Navigation() {
           >
             {mobileMenuOpen ? <XMarkIcon className="w-7 h-7" /> : <Bars3Icon className="w-7 h-7" />}
           </button>
-        </div>
+        </motion.div>
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
@@ -187,24 +249,39 @@ export function Navigation() {
 
                   {navLinks.map((link) => {
                     const isActive = pathname === link.href;
+                    // Only pass className to icon, do not pass other props like style (or spread props).
+                    const Icon = link.icon;
                     return (
                       <motion.div key={link.name} variants={itemVariants}>
                         <Link
                           href={link.href}
+                          aria-current={isActive ? "page" : undefined}
                           onClick={() => setMobileMenuOpen(false)}
-                          className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-colors ${isActive
-                            ? "bg-brand-accent/10 text-brand-accent"
-                            : "text-foreground hover:bg-white/5"
-                            }`}
+                          className={`flex items-center gap-4 w-full p-4 rounded-2xl transition-colors ${
+                            isActive
+                              ? "bg-brand-accent/10 text-brand-accent"
+                              : "text-foreground hover:bg-white/5"
+                          }`}
                         >
-                          <link.icon className={`size-6 ${isActive ? "text-brand-accent" : "text-brand-accent/60"}`} />
-                          <span className="text-lg font-semibold">{link.name}</span>
+                          <Icon
+                            className={`size-6 ${
+                              isActive
+                                ? "text-brand-accent"
+                                : "text-brand-accent/60"
+                            }`}
+                          />
+                          <span className="text-lg font-semibold">
+                            {link.name}
+                          </span>
                         </Link>
                       </motion.div>
                     );
                   })}
 
-                  <motion.div variants={itemVariants} className="pt-4 flex flex-col gap-3">
+                  <motion.div
+                    variants={itemVariants}
+                    className="pt-4 flex flex-col gap-3"
+                  >
                     <button
                       onClick={handleOpenDownloadModal}
                       className="w-full p-5 bg-brand-accent text-background rounded-2xl font-bold text-lg shadow-lg active:scale-[0.98] transition-all"
