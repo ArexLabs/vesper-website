@@ -157,6 +157,7 @@ export const VesperButton: React.FC<VesperButtonProps> = ({
   </button>
 );
 ```
+
 - **File name:** `vesper_button.tsx` (snake_case, TypeScript)
 - **Component name:** `VesperButton` (PascalCase)
 - **Interface name:** `VesperButtonProps` (PascalCase)
@@ -164,4 +165,4 @@ export const VesperButton: React.FC<VesperButtonProps> = ({
 
 ---
 
-*Thank you for helping build the Vesper Launcher Website!*
+> Thank you for helping improving the Vesper Launcher!
