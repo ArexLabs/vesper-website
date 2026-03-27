@@ -8,6 +8,7 @@ import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
 import { CommandPalette } from "@/components/command_palette";
+import { ScrollToTop } from "@/components/scroll_to_top";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { SessionProvider } from "@/components/providers/session_provider";
@@ -69,6 +70,7 @@ export default function RootLayout({
             <CommandPalette />
             <main>{children}</main>
             <Toaster richColors />
+            <ScrollToTop />
           </SessionProvider>
           <Footer
             aRR
