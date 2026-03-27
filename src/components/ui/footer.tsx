@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button } from "./button";
 import React from "react";
 
 const footerVariants = cva(

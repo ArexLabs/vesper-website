@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { CommandLineIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut, Command as CommandIcon, Info } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
-import DownloadModal from "./download_modal";
+import DownloadModal from "./download-modal";
 import { ThemeToggle } from "./theme-toggle";
+import { IconVesper } from "../icons/vesper-icon";
 
 function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
@@ -133,9 +134,7 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16 sm:h-20">
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <div className="p-2 rounded-xl bg-brand-accent/10 group-hover:bg-brand-accent/20 transition-colors">
-                <CommandLineIcon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent" />
-              </div>
+              <IconVesper className="w-9 h-9 sm:w-10 sm:h-10 mr-0" />
               <span className="font-mono font-bold tracking-tight text-foreground text-base sm:text-lg italic">
                 Vesper.init()
               </span>
@@ -181,7 +180,7 @@ export function Navigation() {
               <button
                 onClick={handleOpenDownloadModal}
                 className={cn(
-                  "px-4 sm:px-6 py-2 bg-brand-accent text-background text-sm font-bold rounded-full hover:shadow-[0_0_20px_-5px_var(--brand-accent)] active:scale-95 transition-all duration-200",
+                  "px-4 sm:px-6 py-2 bg-brand-accent text-background text-sm font-bold rounded-full dark:hover:brightness-110 hover:brightness-90 active:scale-95 transition-all duration-200",
                   isCompact && "hidden md:inline-flex"
                 )}
               >

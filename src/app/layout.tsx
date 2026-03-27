@@ -1,14 +1,14 @@
-import { Navigation } from "@/components/navigation";
+import { Navigation } from "@/components/ui/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { JetBrains_Mono as FontMono, Noto_Sans as FontSans } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/components/ui/footer";
 import { Toaster } from "sonner";
-import { CommandPalette } from "@/components/command_palette";
-import { ScrollToTop } from "@/components/scroll_to_top";
+import { CommandPalette } from "@/components/ui/command-palette";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { SessionProvider } from "@/components/providers/session_provider";

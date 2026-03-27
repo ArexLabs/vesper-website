@@ -3,16 +3,22 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { IconBrandRust, IconBrandNextjs, IconBrandReact, IconBrandTypescript, IconBrandJavascript, IconBrandTailwind, IconBrandCss3, IconBrandHtml5, IconBrandGit, IconBrandGithub, IconBrandDocker, IconBrandMinecraft, IconCode } from "@tabler/icons-react";
+import { IconBrandRust, IconBrandNextjs, IconBrandReact, IconBrandTypescript, IconBrandJavascript, IconBrandTailwind, IconBrandCss3, IconBrandHtml5, IconBrandGit, IconBrandGithub, IconBrandDocker, IconBrandMinecraft, IconCode, IconApi, IconClock, IconArchive, IconSparkles, IconLock, IconDatabase } from "@tabler/icons-react";
+import { IconTauri } from "@/components/icons/tauri-icon";
+import { IconVercel } from "@/components/icons/vercel-icon";
+import { IconVSCode } from "@/components/icons/cursor-icon";
+import { IconFigma } from "@/components/icons/figma-icon";
+import { IconEraser } from "@/components/icons/eraser-icon";
+import { IconMiro } from "@/components/icons/miro-icon";
 
 const launcher_stack = [
   { name: "Rust", description: "Core launcher application - performance & safety", icon: IconBrandRust },
-  { name: "Tauri", description: "WebView-based desktop framework", icon: IconCode },
+  { name: "Tauri", description: "WebView-based desktop framework", icon: IconTauri },
   { name: "TypeScript", description: "Plugin API and UI scripting", icon: IconBrandTypescript },
   { name: "Minecraft Protocol", description: "Protocol implementation", icon: IconBrandMinecraft },
-  { name: "reqwest", description: "HTTP client for API requests", icon: IconCode },
-  { name: "tokio", description: "Async runtime for concurrent tasks", icon: IconCode },
-  { name: "serde", description: "Serialization/deserialization", icon: IconCode },
+  { name: "reqwest", description: "HTTP client for API requests", icon: IconApi },
+  { name: "tokio", description: "Async runtime for concurrent tasks", icon: IconClock },
+  { name: "serde", description: "Serialization/deserialization", icon: IconArchive },
 ];
 
 const website_stack = [
@@ -20,18 +26,20 @@ const website_stack = [
   { name: "React", description: "UI library", icon: IconBrandReact },
   { name: "TypeScript", description: "Type-safe JavaScript", icon: IconBrandTypescript },
   { name: "Tailwind CSS", description: "Utility-first CSS framework", icon: IconBrandTailwind },
-  { name: "Framer Motion", description: "Animation library", icon: IconCode },
-  { name: "Better Auth", description: "Authentication", icon: IconCode },
-  { name: "Neon", description: "Serverless PostgreSQL", icon: IconCode },
-  { name: "Vercel", description: "Deployment platform", icon: IconBrandGithub },
+  { name: "Framer Motion", description: "Animation library", icon: IconSparkles },
+  { name: "Better Auth", description: "Authentication", icon: IconLock },
+  { name: "Neon", description: "Serverless PostgreSQL", icon: IconDatabase },
+  { name: "Vercel", description: "Deployment platform", icon: IconVercel },
 ];
 
 const tools = [
   { name: "Git", description: "Version control", icon: IconBrandGit },
   { name: "GitHub", description: "Code hosting & CI/CD", icon: IconBrandGithub },
   { name: "Docker", description: "Containerization", icon: IconBrandDocker },
-  { name: "VS Code/ Cursor", description: "IDE", icon: IconCode },
-  { name: "Figma", description: "Design", icon: IconCode },
+  { name: "VS Code/ Cursor", description: "IDE", icon: IconVSCode },
+  { name: "Figma", description: "Design", icon: IconFigma },
+  { name: "Eraser.io", description: "DB & API planning", icon: IconEraser },
+  { name: "Miro", description: "Tech stack planning", icon: IconMiro },
 ];
 
 function TechItem({ name, description, icon: Icon, delay }: { name: string; description: string; icon: React.ComponentType<{ className?: string }>; delay: number }) {
