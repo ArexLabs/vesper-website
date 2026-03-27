@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { CommandLineIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut, Command as CommandIcon, Info } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
@@ -44,6 +44,7 @@ const navLinks: NavLink[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Roadmap", href: "/roadmap", icon: Map },
   { name: "Tech Stack", href: "/techstack", icon: Code },
+  { name: "About", href: "/about", icon: Info },
   { name: "Changelog", href: "/changelog", icon: History },
   { name: "Gallery", href: "/gallery", icon: ImageIcon },
 ];
@@ -296,7 +297,7 @@ export function Navigation() {
                   })}
 
                   <motion.div variants={itemVariants} className="pt-4 flex flex-col gap-3 border-t border-white/5 mt-2">
-                    {!isPending && session && (
+                    {/* {!isPending && session && (
                       <Link
                         href="/dashboard"
                         onClick={() => setMobileMenuOpen(false)}
@@ -323,7 +324,7 @@ export function Navigation() {
                         <LogOut className="size-5" />
                         Sign out
                       </button>
-                    )}
+                    )} */}
                     <button
                       onClick={handleOpenDownloadModal}
                       className="w-full p-5 bg-brand-accent text-background rounded-2xl font-bold text-lg shadow-lg active:scale-[0.98] transition-all"
