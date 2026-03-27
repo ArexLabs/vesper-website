@@ -6,112 +6,30 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+// Changelog for the actual Vesper Launcher / Client Desktop Application
 const changelog = [
   {
-    version: "1.5.1",
-    date: "2026-03-19",
-    changes: [
-      {
-        type: "Changed",
-        items: [
-          "Upgraded many packages to their latest versions for improved security and performance.",
-          "Upgraded `next` to version 16.2.0.",
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.5.0",
-    date: "2026-03-09",
+    version: "alpha v0.0.0",
+    date: "2024-07-05",
     changes: [
       {
         type: "Added",
         items: [
-          "Implemented a brand-new Gallery page with a responsive Bento Grid layout and smooth hover effects.",
-          "Introduced a global Command Palette (Cmd+K / Ctrl+K) for instant site-wide navigation.",
-          "Created a dedicated Search page with a high-contrast search bar and a custom hand-drawn title animation.",
-          "Integrated the Satoshi font family for a more premium and modern typography feel.",
+          "Initial alpha release of the Vesper Launcher Desktop Client.",
+          "Multi-platform builds for Windows (.exe), Mac (.dmg), and Linux (.AppImage, .deb, .rpm).",
+          "Modern user interface with light and dark mode support.",
+          "Launcher autoupdate support (checks for new versions on startup).",
+          "Simple onboarding and account login flow.",
+          "First implementation of Minecraft modpack installation for supported platforms.",
+          "Integrated automatic Java runtime download for Minecraft instances.",
         ],
       },
       {
-        type: "Improved",
+        type: "Known Issues",
         items: [
-          "Refactored the Changelog page with a structured timeline design and categorized badges.",
-          "Enhanced global layout and typography across all pages.",
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.4.0",
-    date: "2026-06-28",
-    changes: [
-      {
-        type: "Added",
-        items: [
-          "Introduced DownloadModal for easy, direct downloads of desktop client builds for Windows (.exe), Mac (.dmg), Debian/Ubuntu (.deb), Fedora/RedHat (.rpm), and Linux Universal (.AppImage). The modal fetches the latest GitHub release via the Releases API and adapts to available files.",
-          "Platform-specific SVG icons for each OS/platform appear on download buttons.",
-        ],
-      },
-      {
-        type: "Improved",
-        items: [
-          "Added a GitHub button to the navbar for quick access to the website's repository.",
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.3.0",
-    date: "2026-06-28",
-    changes: [
-      {
-        type: "Added",
-        items: [
-          "Added legal pages: Legal Notice, Privacy Policy, Terms of Use, and Terms of Service.",
-          'Merged the "Minecraft 1.21 Ready" badge into the "Install script is not working yet" alert.',
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.2.0",
-    date: "2026-06-28",
-    changes: [
-      {
-        type: "Added",
-        items: [
-          "Added click-to-copy functionality for the install script (feature not yet fully working).",
-        ],
-      },
-      {
-        type: "Removed",
-        items: [
-          "Removed documentation page.",
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.1.0",
-    date: "2026-06-24",
-    changes: [
-      {
-        type: "Added",
-        items: [
-          "Added documentation page.",
-        ],
-      },
-    ],
-  },
-  {
-    version: "1.0.0",
-    date: "2026-02-21",
-    changes: [
-      {
-        type: "Added",
-        items: [
-          "Initial homepage.",
+          "Some advanced modpack installs may fail or need workarounds.",
+          "Authentication is basic and may not fully reflect future planned account features.",
+          "Not all Minecraft versions, mods, or loaders are fully tested in this early alpha.",
         ],
       },
     ],
@@ -123,6 +41,7 @@ const typeStyles: Record<string, string> = {
   Improved: "bg-blue-500/10 text-blue-500 border-blue-500/20 hover:bg-blue-500/20",
   Removed: "bg-red-500/10 text-red-500 border-red-500/20 hover:bg-red-500/20",
   Fixed: "bg-orange-500/10 text-orange-500 border-orange-500/20 hover:bg-orange-500/20",
+  "Known Issues": "bg-yellow-400/10 text-yellow-600 border-yellow-400/20 hover:bg-yellow-400/20",
 };
 
 export default function ChangelogPage() {
@@ -149,19 +68,19 @@ export default function ChangelogPage() {
               Changelog
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Follow the evolution of Vesper. Notable changes are listed here and in our{" "}
+              Follow the evolution of the <span className="font-bold text-brand-accent">Vesper Launcher Desktop App</span>. Notable changes for the client are listed here and in our{" "}
               <Link
                 className="text-brand-accent hover:underline decoration-brand-accent/30 transition-all"
                 target="_blank"
-                href="https://github.com/IMDevFlare/vesper-website/blob/main/CHANGELOG.md"
+                href="https://github.com/IMDevFlare/vesper-launcher/blob/main/CHANGELOG.md"
               >
                 CHANGELOG.md
               </Link>{" "}
               on GitHub.
             </p>
-            <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-500 text-sm max-w-lg mx-auto">
+            <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-500 text-sm max-w-lg mx-auto">
               <AlertCircle className="size-4 shrink-0" />
-              <span>This is the website changelog. Launcher updates coming soon in private beta.</span>
+              <span>This is the Vesper Launcher <b>Desktop App</b> changelog. Use in production at your own risk – this is a private alpha and will likely contain bugs.</span>
             </div>
           </div>
 
@@ -170,7 +89,7 @@ export default function ChangelogPage() {
               <div key={entry.version} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
                 {/* Icon */}
                 <div className="flex items-center justify-center w-10 h-10 rounded-full border border-brand-accent/30 bg-background text-brand-accent shadow md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                  <span className="text-xs font-bold">{entry.version.split('.')[0]}</span>
+                  <span className="text-xs font-bold">{entry.version.replace(/[^0-9]/g,'').charAt(0) || "0"}</span>
                 </div>
 
                 {/* Content */}
@@ -178,7 +97,7 @@ export default function ChangelogPage() {
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between mb-1">
                       <CardTitle className="text-2xl font-bold text-brand-accent">
-                        v{entry.version}
+                        {entry.version}
                       </CardTitle>
                       <Badge variant="outline" className="text-muted-foreground border-muted-foreground/20 flex gap-1 items-center">
                         <Calendar className="size-3" />
