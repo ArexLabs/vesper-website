@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { CommandLineIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Command as CommandIcon, LogIn, LogOut } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
@@ -43,9 +43,9 @@ interface NavLink {
 const navLinks: NavLink[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Roadmap", href: "/roadmap", icon: Map },
+  { name: "Tech Stack", href: "/techstack", icon: Code },
   { name: "Changelog", href: "/changelog", icon: History },
   { name: "Gallery", href: "/gallery", icon: ImageIcon },
-  { name: "Search", href: "/search", icon: Search },
 ];
 
 const menuVariants: Variants = {
