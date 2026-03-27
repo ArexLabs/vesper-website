@@ -1,16 +1,17 @@
 "use client";
 
-import { AlertCircle, Calendar } from "lucide-react";
+import { AlertCircle, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Changelog for the actual Vesper Launcher / Client Desktop Application
 const changelog = [
   {
-    version: "alpha v0.0.0",
-    date: "2024-07-05",
+    version: "alpha-0.0.0",
+    displayVersion: "Alpha v0.0.0",
+    date: "2026-03-27",
+    isReleased: false,
     changes: [
       {
         type: "Added",
@@ -27,9 +28,9 @@ const changelog = [
       {
         type: "Known Issues",
         items: [
-          "Some advanced modpack installs may fail or need workarounds.",
           "Authentication is basic and may not fully reflect future planned account features.",
           "Not all Minecraft versions, mods, or loaders are fully tested in this early alpha.",
+          "By default minecraft version 1.20.1 is selected",
         ],
       },
     ],
@@ -96,8 +97,19 @@ export default function ChangelogPage() {
                 <Card className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border-brand-accent/10 bg-background/50 backdrop-blur-sm hover:border-brand-accent/30 transition-all duration-300">
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between mb-1">
-                      <CardTitle className="text-2xl font-bold text-brand-accent">
-                        {entry.version}
+                      <CardTitle className="text-2xl font-bold text-brand-accent flex items-center gap-2">
+                        {/* Use displayVersion if provided, fallback to version */}
+                        {entry.displayVersion || entry.version}
+                        {!entry.isReleased && (
+                          <Badge
+                            variant="outline"
+                            className="ml-2 text-yellow-800 border-yellow-400/60 bg-yellow-100/80 shadow-[0_2px_8px_0_rgba(251,191,36,0.08)] flex items-center gap-1 font-semibold px-3 py-1 rounded-full"
+                            title="Not released yet"
+                          >
+                            <Clock className="size-4 text-yellow-600 inline" />
+                            <span className="tracking-wide">Upcoming release</span>
+                          </Badge>
+                        )}
                       </CardTitle>
                       <Badge variant="outline" className="text-muted-foreground border-muted-foreground/20 flex gap-1 items-center">
                         <Calendar className="size-3" />
