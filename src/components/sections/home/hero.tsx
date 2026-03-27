@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircleIcon, ArrowDownTrayIcon, XCircleIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import Link from "next/link";
 
-const install_script = "curl -sSfL https://vesper.devflare.de/install | sh";
+type os_type = "windows" | "mac" | "linux" | "unknown";
+
+const install_scripts: Record<os_type, string> = {
+  windows: "irm https://vesper.devflare.de/install | iex",
+  mac: "curl -sSfL https://vesper.devflare.de/install | sh",
+  linux: "curl -sSfL https://vesper.devflare.de/install | sh",
+  unknown: "curl -sSfL https://vesper.devflare.de/install | sh",
+};
+
+const os_labels: Record<os_type, string> = {
+  windows: "Windows",
+  mac: "macOS / Linux",
+  linux: "macOS / Linux",
+  unknown: "macOS / Linux",
+};
 
 const features = [
   "Blazing fast startup",
@@ -15,12 +29,28 @@ const features = [
   "Free & open source",
 ];
 
+function detect_os(): os_type {
+  if (typeof window === "undefined") return "unknown";
+  const platform = navigator.platform.toLowerCase();
+  const user_agent = navigator.userAgent.toLowerCase();
+
+  if (platform.includes("win") || user_agent.includes("win")) return "windows";
+  if (platform.includes("mac") || user_agent.includes("mac")) return "mac";
+  if (platform.includes("linux") || user_agent.includes("linux")) return "linux";
+  return "unknown";
+}
+
 export function hero() {
+  const [os, set_os] = useState<os_type>("unknown");
   const [copy_state, set_copy_state] = useState<"idle" | "copied" | "error">("idle");
+
+  useEffect(() => {
+    set_os(detect_os());
+  }, []);
 
   async function copy_install_script() {
     try {
-      await navigator.clipboard.writeText(install_script);
+      await navigator.clipboard.writeText(install_scripts[os]);
       set_copy_state("copied");
       toast.success("Copied install script!");
       setTimeout(() => set_copy_state("idle"), 1800);
@@ -50,7 +80,7 @@ export function hero() {
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap justify-center gap-3 mb-12">
-          {features.map((feature, i) => (
+          {features.map((feature) => (
             <span key={feature} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/60 border border-border text-sm font-medium">
               <CheckCircleIcon className="w-4 h-4 text-brand-accent" />
               {feature}
@@ -58,36 +88,31 @@ export function hero() {
           ))}
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-col items-center gap-3">
           <div className="w-full max-w-xl border border-border rounded-xl bg-card/80 backdrop-blur overflow-hidden">
             <code className="block px-4 py-3 text-sm sm:text-base font-mono text-foreground truncate sm:whitespace-normal sm:overflow-visible select-all">
-              {install_script}
+              {install_scripts[os]}
             </code>
           </div>
           <button
             type="button"
             onClick={copy_install_script}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
-              copy_state === "copied"
-                ? "bg-green-600 text-white"
-                : copy_state === "error"
-                ? "bg-destructive text-white"
-                : "bg-brand-accent text-background hover:shadow-[0_0_30px_-5px_var(--brand-accent)]"
-            }`}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-white/5 hover:bg-white/10 border border-border transition-all active:scale-95"
             aria-label={copy_state === "copied" ? "Copied!" : "Copy install script"}
           >
             {copy_state === "copied" ? (
-              <><CheckCircleIcon className="w-5 h-5" /> Copied</>
+              <><CheckCircleIcon className="w-4 h-4 text-green-500" /> Copied</>
             ) : copy_state === "error" ? (
-              <><XCircleIcon className="w-5 h-5" /> Error</>
+              <><XCircleIcon className="w-4 h-4 text-destructive" /> Error</>
             ) : (
-              <><ArrowDownTrayIcon className="w-5 h-5" /> Copy Script</>
+              <><ClipboardIcon className="w-4 h-4" /> Copy Script</>
             )}
           </button>
+          <p className="text-xs text-muted-foreground">Install script is not working yet</p>
         </motion.div>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.6 }} className="mt-8 text-sm text-muted-foreground">
-          Available for Windows 10/11 (64-bit) · Coming soon to Linux
+          Available for {os_labels[os]} · Coming soon to all platforms
         </motion.p>
       </motion.div>
 
