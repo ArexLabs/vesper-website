@@ -57,7 +57,7 @@ This style guide defines best practices and conventions for contributing to the 
 
 ## 5. CSS/TailwindCSS Guidelines
 
-### For Tailwind CSS:
+### For Tailwind CSS
 
 - Use utility classes to compose styles directly in your JSX/HTML.
 - Compose custom utility classes using `@apply` in your CSS/SCSS if you need to extract repetitive styles.
@@ -67,7 +67,7 @@ This style guide defines best practices and conventions for contributing to the 
 - Whenever possible, use Tailwind's spacing, typography, and color scale utilities instead of raw values.
 - Responsive and state-based classes (e.g., `sm:`, `md:`, `hover:`, `focus:`) should be applied as needed for adaptive design.
 
-### For CSS/SCSS:
+### For CSS/SCSS
 
 > The project currently does not use SCSS, but CSS for the TailwindCSS
 
@@ -81,6 +81,7 @@ This style guide defines best practices and conventions for contributing to the 
 > **Note:** For buttons and other UI elements, it is recommended to use reusable component primitives (e.g., [shadcn/ui's Button](https://ui.shadcn.com/docs/components/button)) instead of default HTML elements for consistency, accessibility, and theme support.
 
 **Example (Tailwind in JSX, using a component like `Button` from shadcn/ui):**
+
 ```tsx
 import { Button } from "@/components/ui/button";
 
@@ -90,6 +91,7 @@ import { Button } from "@/components/ui/button";
 ```
 
 **Example (Custom SCSS with Tailwind `@apply`):**
+
 ```scss
 .button-primary {
   @apply px-4 py-2 font-semibold text-white bg-brand-accent rounded hover:bg-brand-accent/90;
