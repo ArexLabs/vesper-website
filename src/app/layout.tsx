@@ -7,9 +7,10 @@ import { JetBrains_Mono as FontMono, Noto_Sans as FontSans } from "next/font/goo
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
-import { CommandPalette } from "@/components/command-palette";
+import { CommandPalette } from "@/components/command_palette";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { SessionProvider } from "@/components/providers/session_provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -63,10 +64,12 @@ export default function RootLayout({
         <SpeedInsights />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navigation />
-          <CommandPalette />
-          <main>{children}</main>
-          <Toaster richColors />
+          <SessionProvider>
+            <Navigation />
+            <CommandPalette />
+            <main>{children}</main>
+            <Toaster richColors />
+          </SessionProvider>
           <Footer
             aRR
             aRRText="Not affiliated with Mojang or Microsoft."
