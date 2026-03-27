@@ -44,11 +44,12 @@ Project maintainers who do not follow or enforce the Code of Conduct in good fai
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.1:
-https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.1. You can view the original at the [Contributor Covenant Version 2.1 Code of Conduct][code_of_conduct].
+
+[code_of_conduct]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
 
 [homepage]: https://www.contributor-covenant.org
 
 ---
 
-Thank you for helping us keep the Vesper Launcher community welcoming, friendly, and respectful!
+> Thank you for helping improving the Vesper Launcher!
