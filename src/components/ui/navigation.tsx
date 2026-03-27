@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut, Command as CommandIcon, Info } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut, Command as CommandIcon, Info, ChevronDown, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
@@ -44,11 +44,38 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Roadmap", href: "/roadmap", icon: Map },
-  { name: "Tech Stack", href: "/techstack", icon: Code },
-  { name: "About", href: "/about", icon: Info },
-  { name: "Changelog", href: "/changelog", icon: History },
-  { name: "Gallery", href: "/gallery", icon: ImageIcon },
+];
+
+interface DropdownItem {
+  name: string;
+  href: string;
+  icon: React.ElementType;
+  description?: string;
+}
+
+interface Dropdown {
+  name: string;
+  items: DropdownItem[];
+}
+
+const dropdowns: Dropdown[] = [
+  {
+    name: "Explore",
+    items: [
+      { name: "Roadmap", href: "/roadmap", icon: Map, description: "Future plans" },
+      { name: "Tech Stack", href: "/techstack", icon: Code, description: "Technologies used" },
+      { name: "About", href: "/about", icon: Info, description: "About Vesper" },
+      { name: "Changelog", href: "/changelog", icon: History, description: "Version history" },
+      { name: "Gallery", href: "/gallery", icon: ImageIcon, description: "Screenshots" },
+    ],
+  },
+  {
+    name: "Community",
+    items: [
+      { name: "GitHub", href: "https://github.com/IMDevFlare/vesper-website", icon: ExternalLink, description: "Source code" },
+      { name: "Discord", href: "https://discord.devflare.de", icon: ExternalLink, description: "Join our server" },
+    ],
+  },
 ];
 
 const menuVariants: Variants = {
@@ -70,6 +97,7 @@ export function Navigation() {
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const { data: session, isPending } = useSession();
   const navRef = useRef<HTMLElement>(null);
@@ -159,6 +187,54 @@ export function Navigation() {
                   </Link>
                 );
               })}
+              {dropdowns.map((dropdown) => (
+                <div
+                  key={dropdown.name}
+                  className="relative"
+                  onMouseEnter={() => setOpenDropdown(dropdown.name)}
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <button
+                    className={cn(
+                      "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-full whitespace-nowrap",
+                      openDropdown === dropdown.name
+                        ? "text-brand-accent bg-brand-accent/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    )}
+                  >
+                    {dropdown.name}
+                    <ChevronDown className={cn("size-4 transition-transform duration-200", openDropdown === dropdown.name && "rotate-180")} />
+                  </button>
+                  <AnimatePresence>
+                    {openDropdown === dropdown.name && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-0 mt-2 w-56 py-2 bg-card border border-border rounded-xl shadow-xl z-50"
+                      >
+                        {dropdown.items.map((item) => {
+                          const Icon = item.icon;
+                          const isExternal = item.href.startsWith("http");
+                          return (
+                            <a key={item.name} href={item.href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-white/5 transition-colors">
+                              <Icon className="size-5 text-brand-accent shrink-0 mt-0.5" />
+                              <div>
+                                <div className="font-medium text-foreground">
+                                  {item.name}
+                                  {isExternal && <ExternalLink className="inline-block size-3 ml-1 opacity-50" />}
+                                </div>
+                                {item.description && <div className="text-xs text-muted-foreground">{item.description}</div>}
+                              </div>
+                            </a>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
             </nav>
 
             <div className="flex items-center gap-2 sm:gap-3">
@@ -187,34 +263,6 @@ export function Navigation() {
                 <span className="hidden sm:inline">Download</span>
                 <span className="sm:hidden">Get</span>
               </button>
-
-              {/* {!isPending && (
-                session ? (
-                  <div className="hidden sm:flex items-center gap-2">
-                    <Link
-                      href="/dashboard"
-                      className="px-3 py-2 text-sm font-medium text-foreground hover:bg-white/5 rounded-full transition-all"
-                    >
-                      Dashboard
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
-                      title="Sign out"
-                    >
-                      <LogOut className="w-5 h-5" />
-                    </button>
-                  </div>
-                ) : (
-                  <Link
-                    href="/login"
-                    className="hidden sm:flex items-center gap-2 px-3 py-2 text-sm font-medium bg-white/5 hover:bg-white/10 rounded-full transition-all"
-                  >
-                    <LogIn className="w-4 h-4" />
-                    <span>Sign in</span>
-                  </Link>
-                )
-              )} */}
 
               <a
                 href="https://github.com/IMDevFlare/vesper-website"
@@ -298,39 +346,40 @@ export function Navigation() {
                     );
                   })}
 
+                  {dropdowns.map((dropdown) => (
+                    <motion.div key={dropdown.name} variants={itemVariants} className="pt-4 border-t border-white/5 mt-2">
+                      <div className="px-4 py-2 text-sm font-semibold text-muted-foreground">{dropdown.name}</div>
+                      {dropdown.items.map((item) => {
+                        const Icon = item.icon;
+                        const isExternal = item.href.startsWith("http");
+                        return (
+                          <a
+                            key={item.name}
+                            href={item.href}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-center gap-4 w-full p-4 rounded-2xl text-foreground hover:bg-white/5 transition-colors"
+                          >
+                            <Icon className="size-6 text-brand-accent/60" />
+                            <div>
+                              <div className="font-semibold">
+                                {item.name}
+                                {isExternal && <ExternalLink className="inline-block size-3 ml-1 opacity-50" />}
+                              </div>
+                              {item.description && <div className="text-sm text-muted-foreground">{item.description}</div>}
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </motion.div>
+                  ))}
+
                   <motion.div variants={itemVariants} className="pt-4 flex flex-col gap-3 border-t border-white/5 mt-2">
                     <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
                       <span className="text-muted-foreground font-medium">Theme</span>
                       <ThemeToggle />
                     </div>
-                    {/* {!isPending && session && (
-                      <Link
-                        href="/dashboard"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="w-full p-4 rounded-2xl bg-white/5 text-foreground flex items-center gap-4 font-medium transition-colors"
-                      >
-                        Dashboard
-                      </Link>
-                    )}
-                    {!isPending && !session && (
-                      <Link
-                        href="/login"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="w-full p-4 rounded-2xl bg-white/5 text-foreground flex items-center gap-4 font-medium transition-colors"
-                      >
-                        <LogIn className="size-5" />
-                        Sign in
-                      </Link>
-                    )}
-                    {session && (
-                      <button
-                        onClick={handleSignOut}
-                        className="w-full p-4 rounded-2xl bg-white/5 text-foreground flex items-center gap-4 font-medium transition-colors"
-                      >
-                        <LogOut className="size-5" />
-                        Sign out
-                      </button>
-                    )} */}
                     <button
                       onClick={handleOpenDownloadModal}
                       className="w-full p-5 bg-brand-accent text-background rounded-2xl font-bold text-lg shadow-lg active:scale-[0.98] transition-all"
