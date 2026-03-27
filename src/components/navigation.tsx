@@ -9,6 +9,7 @@ import Link from "next/link";
 import { signOut, useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import DownloadModal from "./download_modal";
+import { ThemeToggle } from "./theme-toggle";
 
 function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
@@ -226,6 +227,8 @@ export function Navigation() {
                 <GitHubIcon className="w-5 h-5 sm:w-6 sm:h-6" />
               </a>
 
+              <ThemeToggle />
+
               <button
                 className="lg:hidden p-2 rounded-xl bg-white/5 active:scale-90 transition-transform"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -297,6 +300,10 @@ export function Navigation() {
                   })}
 
                   <motion.div variants={itemVariants} className="pt-4 flex flex-col gap-3 border-t border-white/5 mt-2">
+                    <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
+                      <span className="text-muted-foreground font-medium">Theme</span>
+                      <ThemeToggle />
+                    </div>
                     {/* {!isPending && session && (
                       <Link
                         href="/dashboard"
