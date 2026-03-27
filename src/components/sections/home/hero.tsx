@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
-import Link from "next/link";
 
 type os_type = "windows" | "mac" | "linux" | "unknown";
 
@@ -117,14 +116,18 @@ export function hero() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <Link href="#features" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+        <button
+          type="button"
+          onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
           <span className="text-xs font-medium">Scroll to explore</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>
-        </Link>
+        </button>
       </motion.div>
     </section>
   );
