@@ -2,189 +2,148 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Maximize2, Sparkles, Image as ImageIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { IconX, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-const PLACEHOLDER_IMAGE = "https://placehold.co/1920x1080";
-
-const galleryItems = [
-  {
-    id: 1,
-    title: "Vesper Dashboard",
-    category: "Interface",
-    image: "/gallery/og-image.png",
-    className: "md:col-span-2 md:row-span-2",
-  },
-  {
-    id: 2,
-    title: "Code Precision",
-    category: "Development",
-    image: "/gallery/ui-2.png",
-    className: "md:col-span-1 md:row-span-1",
-  },
-  {
-    id: 3,
-    title: "Brand Vision",
-    category: "Branding",
-    image: "/gallery/brand.png",
-    className: "md:col-span-1 md:row-span-2",
-  },
-  {
-    id: 4,
-    title: "Performance First",
-    category: "Stats",
-    content: "Vesper is designed for ultimate performance and low latency in every interaction.",
-    className: "md:col-span-1 md:row-span-1 bg-brand-accent/5 flex flex-col justify-center p-6 border-brand-accent/20",
-    isText: true,
-  },
-  {
-    id: 5,
-    title: "Anti-Gravity Tech",
-    category: "Core",
-    content: "Floating UI elements and smooth transitions define the Vesper experience.",
-    className: "md:col-span-2 md:row-span-1 bg-gradient-to-br from-background to-brand-accent/10 p-6 border-brand-accent/20",
-    isText: true,
-  },
+const gallery_images = [
+  { id: 1, title: "Vesper Dashboard", category: "Interface", src: "/gallery/og-image.png", description: "Main dashboard view showcasing the clean interface" },
+  // { id: 2, title: "UI Element", category: "Interface", src: "/gallery/ui-2.png", description: "Modern UI components" },
+  // { id: 3, title: "Brand Identity", category: "Branding", src: "/gallery/brand.png", description: "Visual brand elements" },
 ];
 
-// GalleryImage component to handle missing image or error loading
-function GalleryImage({
-  src,
-  alt,
-  fill,
-  className,
-}: {
-  src?: string;
-  alt: string;
-  fill?: boolean;
-  className?: string;
-}) {
-  const [imgSrc, setImgSrc] = useState(src || PLACEHOLDER_IMAGE);
-  const [hasError, setHasError] = useState(false);
+export default function gallery_page() {
+  const [selected_image, set_selected_image] = useState<number | null>(null);
 
-  if (!imgSrc) {
-    // No image specified at all, show placeholder
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center bg-muted/10 text-muted-foreground">
-        <ImageIcon size={48} />
-        <span className="mt-2 text-xs">No image available</span>
-      </div>
-    );
+  function open_lightbox(index: number) {
+    set_selected_image(index);
   }
 
-  return !hasError ? (
-    <Image
-      src={imgSrc}
-      alt={alt}
-      fill={fill}
-      className={className}
-      onError={() => {
-        if (imgSrc !== PLACEHOLDER_IMAGE) {
-          setImgSrc(PLACEHOLDER_IMAGE);
-        } else {
-          setHasError(true);
-        }
-      }}
-    />
-  ) : (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-muted/10 text-muted-foreground">
-      <ImageIcon size={48} />
-      <span className="mt-2 text-xs">No image available</span>
-    </div>
-  );
-}
+  function close_lightbox() {
+    set_selected_image(null);
+  }
 
-export default function GalleryPage() {
+  function go_previous() {
+    set_selected_image((prev) => (prev === null ? null : (prev - 1 + gallery_images.length) % gallery_images.length));
+  }
+
+  function go_next() {
+    set_selected_image((prev) => (prev === null ? null : (prev + 1) % gallery_images.length));
+  }
+
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-brand-accent/30 selection:text-brand-accent">
-      {/* Background elements */}
       <div className="fixed inset-0 z-[-2] bg-background" />
       <div
         className="fixed inset-0 z-[-1] opacity-20 dark:opacity-10 pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23a0a0a0' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3C/g%3E%3C/svg%3E")`,
           maskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)"
+          WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)",
         }}
       />
-      <div className="fixed top-0 right-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-      <main className="flex-1 w-full pt-16 flex flex-col items-center">
-        <div className="w-full max-w-6xl px-6 py-12 mx-auto">
-          <div className="text-center mb-16 space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-brand-accent animate-in fade-in slide-in-from-top-4 duration-1000">
+      <main className="flex-1 w-full pt-24 pb-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
               Gallery
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              A visual journey through Vesper&apos;s design system, interfaces, and core philosophy.
+              A visual journey through Vesper&apos;s design system and interfaces.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[250px]">
-            {galleryItems.map((item) => (
-              <motion.div
-                key={item.id}
-                className={`relative group rounded-3xl overflow-hidden border border-brand-accent/10 shadow-lg ${item.className}`}
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {gallery_images.map((image, index) => (
+              <motion.button
+                key={image.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onClick={() => open_lightbox(index)}
+                className="group relative aspect-video rounded-xl overflow-hidden border border-border bg-card/50"
               >
-                {item.isText ? (
-                  <div className="h-full w-full flex flex-col justify-end p-8 relative overflow-hidden">
-                    <div className="absolute top-6 left-6">
-                      <Badge variant="outline" className="text-brand-accent border-brand-accent/30 bg-brand-accent/5">
-                        {item.category}
-                      </Badge>
-                    </div>
-                    <div className="space-y-2 mt-auto">
-                      <h2 className="text-2xl font-bold text-brand-accent">{item.title}</h2>
-                      <p className="text-muted-foreground leading-relaxed">{item.content}</p>
-                    </div>
-                    {/* Decorative element */}
-                    <div className="absolute -bottom-4 -right-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                      <Sparkles size={120} className="text-brand-accent" />
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <GalleryImage
-                      src={item.image}
-                      alt={item.title}
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      fill
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
-                        <div className="space-y-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                          <Badge className="bg-brand-accent text-black font-semibold mb-2">
-                            {item.category}
-                          </Badge>
-                          <h2 className="text-2xl font-bold text-white">{item.title}</h2>
-                        </div>
-                        <motion.button
-                          className="p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Maximize2 size={20} />
-                        </motion.button>
-                      </div>
-                    </div>
-                    {/* Border glow on hover */}
-                    <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-brand-accent/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  </>
-                )}
-              </motion.div>
+                <Image
+                  src={image.src}
+                  alt={image.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <span className="text-xs font-medium text-white/60 uppercase tracking-wider">{image.category}</span>
+                  <h3 className="text-sm font-semibold text-white mt-1">{image.title}</h3>
+                </div>
+              </motion.button>
             ))}
           </div>
 
-          <div className="mt-24 text-center">
-            <p className="text-muted-foreground">
-              More screens and brand assets coming soon.
-            </p>
-          </div>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="text-center text-sm text-muted-foreground mt-12">
+            More screenshots coming soon.
+          </motion.p>
         </div>
       </main>
+
+      <AnimatePresence>
+        {selected_image !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={close_lightbox}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); close_lightbox(); }}
+              className="absolute top-4 right-4 p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <IconX className="size-6 text-white" />
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); go_previous(); }}
+              className="absolute left-4 p-3 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <IconChevronLeft className="size-6 text-white" />
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); go_next(); }}
+              className="absolute right-4 p-3 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <IconChevronRight className="size-6 text-white" />
+            </button>
+
+            <motion.div
+              key={selected_image}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden bg-black"
+            >
+              <Image
+                src={gallery_images[selected_image].src}
+                alt={gallery_images[selected_image].title}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain"
+              />
+            </motion.div>
+
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+              <span className="text-xs font-medium text-white/40 uppercase tracking-wider">{gallery_images[selected_image].category}</span>
+              <h2 className="text-lg font-semibold text-white mt-1">{gallery_images[selected_image].title}</h2>
+              <p className="text-sm text-white/60 mt-1">{gallery_images[selected_image].description}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
