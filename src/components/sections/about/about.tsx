@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { SparklesIcon, HeartIcon, UsersIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { SparklesIcon, UsersIcon, ArrowRightIcon, HeartIcon } from "@heroicons/react/24/outline";
 import { IconBrandGithub, IconRocket, IconShield, IconCode, IconHeartHandshake } from "@tabler/icons-react";
 
 interface TeamMember {
