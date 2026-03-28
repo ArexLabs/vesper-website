@@ -11,55 +11,30 @@
 
 ---
 
-## Authentication
+## Symbols
 
-- [ ] Implement and thoroughly test login and signup flows (incl. social and email/password)
-- [ ] Add password reset workflow: UI, backend logic, and UX feedback
-- [ ] Set up email verification, including resend verification email and error handling
-- [ ] Add "forgot password" UI and secure backend flow
-- [ ] Add session management, including "remember me" and session timeout/expiry logic
-- [ ] Implement logout everywhere option from account security page
-- [ ] Add 2FA (TOTP authenticator and backup codes)
-- [ ] Display last login and recent sessions/locations in profile
-- [ ] Enforce password requirements and add password strength indicator
-- [ ] Handle auth errors and display user-friendly messages
+[ ] = isn't done
+[-] = is halfly done
+[x] = is done
 
-## Dashboard
-
-- [ ] Design and build main dashboard layout (responsive)
-- [ ] Implement global navigation/navigation drawer for dashboard
-- [ ] Develop user profile section with editable avatar, username, display name, and bio
-- [ ] Add account settings with email/password change, preferences, and notification controls
-- [ ] Implement download management with install status, version switching, and action history
-- [ ] Dashboard welcome/onboarding experience
-- [ ] Add activity feed for recent actions
-- [ ] Add security settings and session management
-- [ ] Implement error boundaries
+---
 
 ## Pages
 
-- [ ] Plan and write content for Roadmap page
-- [ ] Add detailed changelog entries and change segmentation
+- [x] Roadmap page (component-based)
+- [x] Tech Stack page (component-based)
+- [x] About page (component-based)
+- [x] Changelog page (component-based)
+- [x] Gallery page (component-based)
 - [x] Finish and review all legal pages
 - [x] Create a custom 404 page
-- [ ] Build and style About page
-- [ ] Add FAQ/help page
 - [ ] Create Support/Contact page
-- [ ] Add server error (500) page
-
-## Features & Integrations
-
-- [ ] Integrate GitHub OAuth authentication
-- [ ] Integrate Microsoft OAuth provider
-- [ ] Prepare for additional login providers (Google, Discord)
-- [ ] Add announcement/banner system
 
 ## Content & Visuals
 
-- [ ] Replace gallery placeholder images with real screenshots
-- [ ] Update digital assets with latest branding
+- [-] Replace gallery placeholder images with real screenshots
+- [ ] Add more changelog entries
 - [ ] Update roadmap items and projected timelines
-- [ ] Add team and contributors images to About page
 - [ ] Add favicon and meta images
 
 ## Polish & UX
@@ -67,10 +42,8 @@
 - [ ] Add loading states and progress bars
 - [ ] Improve form validation
 - [ ] Add toast notifications
-- [ ] Implement skeleton loaders
 - [ ] Finalize responsive design
 - [ ] Review accessibility
-- [ ] Add animated transitions
 
 ## SEO & Performance
 
@@ -78,7 +51,6 @@
 - [ ] Set up Open Graph/Twitter card images
 - [ ] Generate sitemap.xml
 - [ ] Add robots.txt
-- [ ] Implement structured data (JSON-LD)
 - [ ] Optimize images
 - [ ] Set up analytics
 
@@ -87,9 +59,8 @@
 - [x] Complete README.md
 - [x] Add CONTRIBUTING.md
 - [x] Add LICENSE
-- [ ] Document local development steps
 - [x] Create Code of Conduct
-- [ ] Document API interfaces
+- [ ] Document local development steps
 
 ## Testing & Quality
 
@@ -97,7 +68,6 @@
 - [ ] Add E2E tests
 - [ ] Set up CI/CD
 - [ ] Enable type checking and linting
-- [ ] Add visual regression testing
 
 ---
 
