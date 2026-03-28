@@ -53,7 +53,7 @@ export default function LegalNotice() {
                         </ul>
                         <h2 className="mt-8 text-xl font-semibold text-foreground">Open Source</h2>
                         <p>
-                            Vesper Launcher and this website are open source — see the code and license on <Link href="https://github.com/IMDevFlare/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</Link>.
+                            Vesper Launcher and this website are open source — see the code and license on <Link href="https://github.com/ArexLabs/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</Link>.
                         </p>
                         <hr className="my-10 border-border/40" />
                         <p className="text-xs text-muted-foreground text-center">
