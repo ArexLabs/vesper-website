@@ -1,170 +1,128 @@
-# Vesper Launcher Website – Code & Style Guide
+<div align="center">
 
-This style guide defines best practices and conventions for contributing to the Vesper Launcher Website project. Adhering to these guidelines ensures a clean, consistent, and maintainable codebase for all contributors.
+# Vesper Website — Code & Style Guide
+
+[![Discord](https://img.shields.io/discord/1200726878757085194?label=Discord&logo=discord)](https://dc.devflare.de)
+[![GitHub](https://img.shields.io/github/stars/IMDevFlare/vesper-website)](https://github.com/IMDevFlare/vesper-website)
+
+This style guide defines best practices and conventions for contributing to the Vesper Website project.
+
+</div>
+
+> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
 
 ---
 
 ## Table of Contents
 
-1. General Principles
-2. File & Folder Organization
-3. Naming Conventions
-4. HTML Guidelines
-5. CSS/SCSS Guidelines
-6. JavaScript/TypeScript Guidelines
-7. Git & Commit Messages
-8. Documentation
-9. Example Component
+1. [General Principles](#1-general-principles)
+2. [File & Folder Organization](#2-file--folder-organization)
+3. [Naming Conventions](#3-naming-conventions)
+4. [HTML Guidelines](#4-html-guidelines)
+5. [CSS/TailwindCSS Guidelines](#5-csstailwindcss-guidelines)
+6. [JavaScript/TypeScript Guidelines](#6javascripttypescript-guidelines)
+7. [Git & Commit Messages](#7-git--commit-messages)
+8. [Documentation](#8-documentation)
 
 ---
 
 ## 1. General Principles
 
-- Prioritize readability and simplicity.
-- Use clear, descriptive names for variables, functions, and files.
-- Write self-documenting code where possible.
-- Remove unused code instead of commenting it out.
-- Ensure code is linted and passes all automated checks before committing.
+- Prioritize readability and simplicity
+- Use clear, descriptive names for variables, functions, and files
+- Write self-documenting code where possible
+- Remove unused code instead of commenting it out
+- Ensure code is linted and passes all automated checks before committing
 
 ---
 
 ## 2. File & Folder Organization
 
-- Group related files into feature-oriented or functional directories.
-- Use `kebab-case` for folder and file names (e.g., `user-profile.js`).
-- Keep assets (images, fonts, etc.) in a dedicated `/public` folder.
+- Group related files into feature-oriented or functional directories
+- Use `kebab-case` for folder and file names
+- Keep assets (images, fonts, etc.) in the `/public` folder
 
 ---
 
 ## 3. Naming Conventions
 
-- Use `camelCase` for variables and functions: `launchVesper()`
-- Use `PascalCase` for React components and classes: `VesperButton`
-- Use `SCREAMING_SNAKE_CASE` for constants: `API_BASE_URL`
-- Use `snake_case` for file names: `user_profile.ts`
+| Type | Convention | Example |
+|------|------------|---------|
+| Variables & functions | `camelCase` | `launchVesper()` |
+| React components & classes | `PascalCase` | `VesperButton` |
+| Constants | `SCREAMING_SNAKE_CASE` | `API_BASE_URL` |
+| File names | `kebab-case` | `user-profile.ts` |
 
 ---
 
 ## 4. HTML Guidelines
 
-- Write semantic HTML5 where possible (`<header>`, `<nav>`, `<main>`, `<footer>`, etc.).
-- Use alt text for all images.
-- Minimize unnecessary nesting.
-- Indent code using 4 spaces or tabs.
-- Use _improved_ Next.js Components (instead of an a-tag use the Link-tag )
+- Write semantic HTML5 where possible (`<header>`, `<nav>`, `<main>`, `<footer>`)
+- Use alt text for all images
+- Minimize unnecessary nesting
+- Use Next.js `Link` component instead of `<a>` tags
 
 ---
 
 ## 5. CSS/TailwindCSS Guidelines
 
-### For Tailwind CSS
+### Tailwind CSS
 
-- Use utility classes to compose styles directly in your JSX/HTML.
-- Compose custom utility classes using `@apply` in your CSS/SCSS if you need to extract repetitive styles.
-- Prefer semantic and grouped Tailwind classes for clarity (e.g., `px-4 py-2 text-brand-accent`).
-- Keep Tailwind class lists tidy and avoid excessive chaining.
-- Use the official [TailwindCSS color palette](https://tailwindcss.com/docs/customizing-colors) or the project's custom theme via `globals.css`.
-- Whenever possible, use Tailwind's spacing, typography, and color scale utilities instead of raw values.
-- Responsive and state-based classes (e.g., `sm:`, `md:`, `hover:`, `focus:`) should be applied as needed for adaptive design.
+- Use utility classes to compose styles directly in JSX/HTML
+- Prefer semantic and grouped Tailwind classes (e.g., `px-4 py-2 text-brand-accent`)
+- Use the official TailwindCSS color palette or custom theme via `globals.css`
+- Use responsive and state-based classes (`sm:`, `md:`, `hover:`, `focus:`)
 
-### For CSS/SCSS
+### Custom CSS
 
-> The project currently does not use SCSS, but CSS for the TailwindCSS
+- Use `@apply` in SCSS for reusable styles
+- Use BEM naming (`.block__element--modifier`)
+- Place all reusable values in variables
+- Avoid `!important` unless absolutely necessary
 
-- If custom CSS/SCSS is needed, prefer SCSS partials, and organize using the 7-1 pattern (base, components, layout, utilities, etc.).
-- Use BEM naming (`.block__element--modifier`) for custom class names in SCSS.
-- Place all colors, spacing, typography, and frequently reused values in SCSS variables or Tailwind config.
-- Avoid using `!important` unless absolutely unavoidable.
-- Never write plain `.css` files; use `.scss` for all custom styles.
-- Use semantic class names and keep specificity low to work seamlessly with Tailwind utilities.
-
-> **Note:** For buttons and other UI elements, it is recommended to use reusable component primitives (e.g., [shadcn/ui's Button](https://ui.shadcn.com/docs/components/button)) instead of default HTML elements for consistency, accessibility, and theme support.
-
-**Example (Tailwind in JSX, using a component like `Button` from shadcn/ui):**
+> **Note:** Use shadcn/ui components (e.g., Button) for consistency and accessibility.
 
 ```tsx
 import { Button } from "@/components/ui/button";
 
-<Button className="px-4 py-2 text-sm font-mono text-brand-accent hover:bg-brand-accent/10 transition-colors">
+<Button className="px-4 py-2 text-sm font-mono">
   Launch Vesper
 </Button>
-```
-
-**Example (Custom SCSS with Tailwind `@apply`):**
-
-```scss
-.button-primary {
-  @apply px-4 py-2 font-semibold text-white bg-brand-accent rounded hover:bg-brand-accent/90;
-}
 ```
 
 ---
 
 ## 6. JavaScript/TypeScript Guidelines
 
-- Prefer modern ES6+ features (arrow functions, destructuring, etc.).
-- All new code should be written in TypeScript.
-- Strictly type all function inputs and outputs.
-- Avoid using `any` type unless absolutely necessary.
-- Use async/await for asynchronous operations.
-- Prettier and ESLint must be run before PR submission.
+- Prefer modern ES6+ features (arrow functions, destructuring)
+- Write all new code in TypeScript
+- Strictly type all function inputs and outputs
+- Avoid `any` type unless absolutely necessary
+- Use async/await for asynchronous operations
+- Run Prettier and ESLint before PR submission
 
 ---
 
 ## 7. Git & Commit Messages
 
-- Use feature branches named with `feature/`, `fix/`, or `chore/` prefixes.
-- Commit messages should follow [Conventional Commits](https://www.conventionalcommits.org/) (e.g., `feat: add user login component`).
-- Rebase and resolve conflicts before submitting PRs.
+- Use feature branches: `feature/`, `fix/`, `chore/`
+- Follow [Conventional Commits](https://www.conventionalcommits.org/):
+  - `feat: add user login component`
+  - `fix: resolve authentication bug`
+  - `chore: update dependencies`
+- Rebase and resolve conflicts before submitting PRs
 
 ---
 
 ## 8. Documentation
 
-- All components, utilities, and services should include basic JSDoc or TSDoc comments.
-- Update related README sections when adding features or making significant changes.
+- Include JSDoc/TSDoc comments for components, utilities, and services
+- Update README sections when adding features
 
 ---
 
-## 9. Example Component
+<div align="center">
 
-Below is an example React component illustrating the coding conventions described above.
+[**launcher.devflare.de**](https://launcher.devflare.de) · [**GitHub**](https://github.com/IMDevFlare/vesper-website) · [**Discord**](https://dc.devflare.de)
 
-```tsx
-// File: vesper_button.tsx
-
-import React from "react";
-
-interface VesperButtonProps {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-}
-
-/**
- * VesperButton - Standard button for the Vesper Launcher
- */
-export const VesperButton: React.FC<VesperButtonProps> = ({
-  label,
-  onClick,
-  disabled = false
-}) => (
-  <button
-    className="vesper-button"
-    onClick={onClick}
-    disabled={disabled}
-    type="button"
-  >
-    {label}
-  </button>
-);
-```
-
-- **File name:** `vesper_button.tsx` (snake_case, TypeScript)
-- **Component name:** `VesperButton` (PascalCase)
-- **Interface name:** `VesperButtonProps` (PascalCase)
-- **Uses:** TypeScript, JSDoc, semantic props, consistent formatting
-
----
-
-> Thank you for helping improving the Vesper Launcher!
+</div>
