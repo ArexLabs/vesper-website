@@ -35,7 +35,11 @@
 - [-] Replace gallery placeholder images with real screenshots
 - [ ] Add more changelog entries
 - [ ] Update roadmap items and projected timelines
-- [ ] Add favicon and meta images
+- [ ] Add favicon and meta images (og:image, twitter:image)
+- [ ] Add more FAQ entries
+- [ ] Create blog/news section for updates
+- [ ] Add team member cards with photos
+- [ ] Add animated hero demo/video
 
 ## Polish & UX
 
@@ -43,7 +47,12 @@
 - [ ] Improve form validation
 - [-] Add toast notifications
 - [x] Finalize responsive design
-- [ ] Review accessibility
+- [ ] Review accessibility (ARIA labels, keyboard nav)
+- [ ] Add keyboard shortcuts documentation
+- [ ] Improve dark/light mode transitions
+- [ ] Add page transition animations
+- [ ] Add skeleton loaders for content
+- [ ] Implement infinite scroll for changelog
 
 ## SEO & Performance
 
@@ -51,8 +60,20 @@
 - [ ] Set up Open Graph/Twitter card images
 - [x] Generate sitemap.xml
 - [x] Add robots.txt
-- [ ] Optimize images
+- [ ] Optimize images (WebP, compression)
 - [x] Set up analytics
+- [ ] Add structured data (JSON-LD)
+- [ ] Implement lazy loading for images
+- [ ] Add prefetching for critical pages
+
+## Features
+
+- [ ] Add newsletter signup form
+- [ ] Implement search functionality across pages
+- [ ] Add dark/light mode toggle to footer
+- [ ] Create downloadable assets section (logos, banners)
+- [ ] Add social media share buttons
+- [ ] Implement comments/feedback on blog posts
 
 ## Documentation & Community
 
@@ -61,6 +82,8 @@
 - [x] Add LICENSE
 - [x] Create Code of Conduct
 - [ ] Document local development steps
+- [ ] Add API documentation link
+- [ ] Create brand assets kit
 
 ## Testing & Quality
 
@@ -68,6 +91,17 @@
 - [ ] Add E2E tests
 - [ ] Set up CI/CD
 - [ ] Enable type checking and linting
+- [ ] Set up pre-commit hooks
+- [ ] Add visual regression testing
+- [ ] Audit for security vulnerabilities
+
+## Deployment
+
+- [x] Set up Vercel deployment
+- [ ] Configure environment variables
+- [-] Set up preview deployments
+- [ ] Add CDN configuration
+- [-] Set up backup strategy
 
 ---
 
