@@ -28,7 +28,7 @@
 - [x] Gallery page (component-based)
 - [x] Finish and review all legal pages
 - [x] Create a custom 404 page
-- [ ] Create Support/Contact page
+- [x] Create Support/Contact page
 
 ## Content & Visuals
 
