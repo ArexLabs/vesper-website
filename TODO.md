@@ -3,11 +3,11 @@
 # Vesper Website — Roadmap & TODOs
 
 [![Discord](https://img.shields.io/discord/1200726878757085194?label=Discord&logo=discord)](https://dc.devflare.de)
-[![GitHub Issues](https://img.shields.io/github/issues/IMDevFlare/vesper-website)](https://github.com/IMDevFlare/vesper-website/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/ArexLabs/vesper-website)](https://github.com/ArexLabs/vesper-website/issues)
 
 </div>
 
-> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
+> **Launcher Repository:** [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client)
 
 ---
 
@@ -42,17 +42,17 @@
 - [-] Add loading states and progress bars
 - [ ] Improve form validation
 - [-] Add toast notifications
-- [ ] Finalize responsive design
+- [x] Finalize responsive design
 - [ ] Review accessibility
 
 ## SEO & Performance
 
-- [ ] Add unique meta tags to all key pages
+- [x] Add unique meta tags to all key pages
 - [ ] Set up Open Graph/Twitter card images
-- [ ] Generate sitemap.xml
-- [ ] Add robots.txt
+- [x] Generate sitemap.xml
+- [x] Add robots.txt
 - [ ] Optimize images
-- [ ] Set up analytics
+- [x] Set up analytics
 
 ## Documentation & Community
 
@@ -73,6 +73,6 @@
 
 <div align="center">
 
-[**launcher.devflare.de**](https://launcher.devflare.de) · [**GitHub**](https://github.com/IMDevFlare/vesper-website) · [**Discord**](https://dc.devflare.de)
+[**launcher.devflare.de**](https://launcher.devflare.de) · [**GitHub**](https://github.com/ArexLabs/vesper-website) · [**Discord**](https://dc.devflare.de)
 
 </div>
