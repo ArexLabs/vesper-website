@@ -39,9 +39,9 @@
 
 ## Polish & UX
 
-- [ ] Add loading states and progress bars
+- [-] Add loading states and progress bars
 - [ ] Improve form validation
-- [ ] Add toast notifications
+- [-] Add toast notifications
 - [ ] Finalize responsive design
 - [ ] Review accessibility
 
