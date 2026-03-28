@@ -1,6 +1,11 @@
-"use client";
-
+import { Metadata } from "next";
 import { RoadmapSection } from "@/components/sections/roadmap";
+
+export const metadata: Metadata = {
+  title: "Roadmap",
+  description: "Explore Vesper Launcher's development roadmap. See what's planned, in progress, and our long-term vision for the ultimate Minecraft launcher.",
+  keywords: ["Vesper Roadmap", "Minecraft Launcher Development", "Vesper Features", "Launcher Plans"],
+};
 
 export default function Roadmap() {
     return (

@@ -46,6 +46,10 @@ export const metadata: Metadata = {
     "Custom Minecraft",
   ],
   authors: [{ name: "DevFlare", url: "https://devflare.de" }],
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
