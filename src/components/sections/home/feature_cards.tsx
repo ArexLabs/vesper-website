@@ -30,11 +30,11 @@ export function feature_cards() {
           >
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-accent/20 group-hover:bg-brand-accent transition-colors" />
             <div className="flex flex-col h-full">
-              <div className="flex items-center gap-4 mb-4">
-                <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-12 h-12 shrink-0">
-                  <feature.icon className="w-6 h-6 text-brand-accent" />
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-10 h-10 sm:w-12 sm:h-12 shrink-0">
+                  <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent" />
                 </span>
-                <h3 className="text-lg font-semibold text-foreground tracking-tight">{feature.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight">{feature.title}</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>

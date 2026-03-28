@@ -31,10 +31,10 @@ export function for_developers() {
             transition={{ duration: 0.45, delay: i * 0.1 }}
             className="flex flex-col p-5 border border-dashed border-border bg-card/30 rounded-xl hover:border-brand-accent/50 hover:bg-card/50 transition-all"
           >
-            <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-10 h-10 mb-4">
-              <feature.icon className="w-5 h-5 text-brand-accent" />
+            <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-10 h-10 sm:w-12 sm:h-12 mb-3 sm:mb-4">
+              <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-brand-accent" />
             </span>
-            <h3 className="text-base font-semibold text-foreground mb-2">{feature.title}</h3>
+            <h3 className="text-base font-semibold text-foreground mb-1.5 sm:mb-2">{feature.title}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
           </motion.div>
         ))}

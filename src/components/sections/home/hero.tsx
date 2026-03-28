@@ -89,7 +89,7 @@ export function hero() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-col items-center gap-3">
           <div className="w-full max-w-xl border border-border rounded-xl bg-card/80 backdrop-blur overflow-hidden">
-            <code className="block px-4 py-3 text-sm sm:text-base font-mono text-foreground truncate sm:whitespace-normal sm:overflow-visible select-all">
+            <code className="block px-3 py-3 text-xs sm:text-sm font-mono text-foreground truncate max-w-[calc(100%-2rem)] select-all">
               {install_scripts[os]}
             </code>
           </div>

@@ -47,14 +47,14 @@ export default function faq() {
             className="rounded-lg bg-muted/20 border border-border hover:border-brand-accent/40 transition-all"
           >
             <button
-              className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left focus:outline-none group"
+              className="w-full flex items-start justify-between gap-2 px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none group"
               onClick={() => toggle_faq(i)}
               aria-expanded={open_index === i}
               aria-controls={`faq-answer-${i}`}
             >
-              <span className="flex items-center font-mono text-lg md:text-xl font-bold text-foreground group-hover:text-brand-accent transition-colors">
+              <span className="flex items-start font-mono text-base sm:text-lg md:text-xl font-bold text-foreground group-hover:text-brand-accent transition-colors pt-0.5">
                 <ChevronDownIcon
-                  className={`w-6 h-6 mr-2 transition-transform duration-200 ${open_index === i ? "rotate-180 text-brand-accent" : "rotate-0 text-muted-foreground"}`}
+                  className={`w-5 h-5 sm:w-6 sm:h-6 mr-2 shrink-0 transition-transform duration-200 ${open_index === i ? "rotate-180 text-brand-accent" : "rotate-0 text-muted-foreground"}`}
                   aria-hidden="true"
                 />
                 {faq.question}
@@ -69,7 +69,7 @@ export default function faq() {
                   exit="collapsed"
                   variants={{ open: { height: "auto", opacity: 1 }, collapsed: { height: 0, opacity: 0 } }}
                   transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                  className="px-14 pb-5 text-muted-foreground text-base font-medium overflow-hidden -mt-3"
+                  className="px-10 sm:px-14 pb-5 text-muted-foreground text-sm sm:text-base font-medium overflow-hidden -mt-3"
                 >
                   {faq.answer}
                 </motion.div>

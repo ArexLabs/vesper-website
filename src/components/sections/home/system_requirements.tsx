@@ -39,13 +39,13 @@ export function system_requirements() {
                 REQUIRED
               </span>
             )}
-            <div className="flex items-start gap-4">
-              <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-11 h-11 shrink-0">
-                <req.icon className="w-5 h-5 text-brand-accent" />
+            <div className="flex items-start gap-3 sm:gap-4">
+              <span className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-10 h-10 sm:w-11 sm:h-11 shrink-0">
+                <req.icon className="w-4 h-4 sm:w-5 sm:h-5 text-brand-accent" />
               </span>
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-mono font-semibold text-foreground mb-1">{req.label}</h3>
-                <p className="text-base text-foreground font-medium mb-1">{req.value}</p>
+                <h3 className="text-xs sm:text-sm font-mono font-semibold text-foreground mb-0.5 sm:mb-1">{req.label}</h3>
+                <p className="text-sm sm:text-base text-foreground font-medium mb-0.5 sm:mb-1">{req.value}</p>
                 <p className="text-xs text-muted-foreground leading-relaxed">{req.description}</p>
               </div>
             </div>

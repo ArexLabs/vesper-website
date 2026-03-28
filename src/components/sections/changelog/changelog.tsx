@@ -53,19 +53,19 @@ function ChangelogItem({ entry }: { entry: typeof changelog[0] }) {
       transition={{ duration: 0.5 }}
       className="relative min-h-[200px]"
     >
-      <div className="absolute left-4 top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-px" />
+      <div className="absolute left-4 top-0 bottom-0 w-px bg-border lg:left-1/2 lg:-translate-x-px" />
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="flex items-center justify-center w-8 h-8 rounded-full border border-brand-accent/30 bg-background text-brand-accent absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 z-10"
+        className="flex items-center justify-center w-8 h-8 rounded-full border border-brand-accent/30 bg-background text-brand-accent absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 lg:left-1/2 lg:-translate-x-1/2 z-10"
       >
         <span className="text-xs font-bold">{entry.version.replace(/[^0-9]/g, "").charAt(0) || "0"}</span>
       </motion.div>
 
-      <div className="ml-12 md:ml-0 md:w-[calc(50%-2rem)] md:odd:ml-auto">
+      <div className="ml-12 lg:ml-0 lg:w-[calc(50%-2rem)] lg:odd:ml-auto">
         <div className="p-6 rounded-2xl border border-border bg-card/40 hover:bg-card/60 hover:border-brand-accent/30 transition-all">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div className="flex items-center gap-2">

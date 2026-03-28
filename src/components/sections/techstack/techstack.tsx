@@ -133,9 +133,9 @@ export function TechStackSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: colIndex * 0.1 }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <h3 className={`text-2xl font-bold ${category.accent}`}>{category.title}</h3>
-                <div className="h-px flex-1 bg-border" />
+              <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                <h3 className={`text-xl sm:text-2xl font-bold ${category.accent}`}>{category.title}</h3>
+                <div className="h-px flex-1 bg-border min-w-[40px]" />
               </div>
               <p className="text-muted-foreground mb-6">{category.description}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -249,7 +249,7 @@ export function Navigation() {
               <button
                 onClick={handleOpenDownloadModal}
                 className={cn(
-                  "px-4 sm:px-6 py-2 bg-brand-accent text-background text-sm font-bold rounded-full dark:hover:brightness-110 hover:brightness-90 active:scale-95 transition-all duration-200",
+                  "px-4 sm:px-6 py-2.5 sm:py-2 bg-brand-accent text-background text-sm font-bold rounded-full dark:hover:brightness-110 hover:brightness-90 active:scale-95 transition-all duration-200",
                   isCompact && "hidden md:inline-flex"
                 )}
               >

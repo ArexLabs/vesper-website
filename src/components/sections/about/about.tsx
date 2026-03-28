@@ -103,12 +103,12 @@ export function AboutSection() {
           </p>
         </motion.div>
 
-        <motion.div
+          <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-3 gap-4 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8 sm:mb-12"
         >
           {stats.map((stat, i) => (
             <motion.div
@@ -117,10 +117,10 @@ export function AboutSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="p-6 rounded-2xl border border-border bg-card/40 text-center"
+              className="p-4 sm:p-6 rounded-2xl border border-border bg-card/40 text-center"
             >
-              <div className="text-3xl font-bold text-brand-accent mb-1">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-brand-accent mb-1">{stat.value}</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
