@@ -1,6 +1,6 @@
 "use client";
 
-import { RoadmapSection } from "@/components/sections/home";
+import { RoadmapSection } from "@/components/sections/roadmap";
 
 export default function Roadmap() {
     return (

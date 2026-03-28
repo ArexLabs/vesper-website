@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangelogSection } from "@/components/sections/home";
+import { ChangelogSection } from "@/components/sections/changelog";
 
 export default function ChangelogPage() {
     return (

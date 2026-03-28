@@ -1,6 +1,6 @@
 "use client";
 
-import { GallerySection } from "@/components/sections/home";
+import { GallerySection } from "@/components/sections/gallery";
 
 export default function GalleryPage() {
     return (

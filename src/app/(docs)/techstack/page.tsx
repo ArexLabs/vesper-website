@@ -1,6 +1,6 @@
 "use client";
 
-import { TechStackSection } from "@/components/sections/home";
+import { TechStackSection } from "@/components/sections/techstack";
 
 export default function TechStackPage() {
     return (
