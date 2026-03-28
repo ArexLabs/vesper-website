@@ -4,10 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, LogIn, LogOut, Command as CommandIcon, Info, ChevronDown, ExternalLink } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { signOut, useSession } from "@/lib/auth-client";
-import { toast } from "sonner";
 import DownloadModal from "./download-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { IconVesper } from "../icons/vesper-icon";
@@ -99,7 +97,6 @@ export function Navigation() {
   const [isCompact, setIsCompact] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
-  const { data: session, isPending } = useSession();
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -126,7 +123,7 @@ export function Navigation() {
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, [session]);
+  }, []);
 
   const handleOpenDownloadModal = () => {
     setDownloadModalOpen(true);
@@ -135,12 +132,6 @@ export function Navigation() {
 
   const handleOpenSearch = () => {
     window.dispatchEvent(new CustomEvent("vesper:open-cmdk"));
-    setMobileMenuOpen(false);
-  };
-
-  const handleSignOut = async () => {
-    await signOut();
-    toast.success("Signed out successfully");
     setMobileMenuOpen(false);
   };
 
