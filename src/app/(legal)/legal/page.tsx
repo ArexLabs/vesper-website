@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function LegalNotice() {
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-brand-accent/30 selection:text-brand-accent">
-            {/* Subtle Dot Grid Background */}
             <div className="fixed inset-0 z-[-2] bg-background" />
             <div
                 className="fixed inset-0 z-[-1] opacity-20 dark:opacity-10 pointer-events-none"
@@ -15,51 +14,114 @@ export default function LegalNotice() {
                     WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)"
                 }}
             />
-
-            {/* Vesper Ambient Glow */}
             <div className="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
             <main className="flex-1 w-full pt-16">
-                <section className="max-w-2xl mx-auto px-6 py-20">
-                    <h1 className="text-3xl md:text-4xl font-mono font-bold text-foreground mb-8 text-center">
-                        Legal <span className="text-brand-accent">Notice</span>
-                    </h1>
-                    <div className="prose dark:prose-invert prose-neutral mx-auto text-muted-foreground">
-                        <p>
-                            <strong>Vesper Launcher</strong> is an independent open source project and is <span className="text-brand-accent">not affiliated with Mojang, Microsoft, or any of their subsidiaries.</span>
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Publisher Information</h2>
-                        <p>
-                            <span className="font-medium">Project Lead:</span> DevFlare by ItzzMateo<br />
-                            <span className="font-medium">Legal Contact Email:</span>{" "}
-                            <a href="mailto:itzzmateo@devflare.de" className="text-brand-accent underline underline-offset-2">itzzmateo@devflare.de</a><br />
-                            <span className="font-medium">Support Email:</span>{" "}
-                            <a href="mailto:support@devflare.de" className="text-brand-accent underline underline-offset-2">support@devflare.de</a>
-                        </p>
-                        <p>
-                            <strong>Contact <span className="text-brand-accent">itzzmateo@devflare.de</span> for legal inquiries only. For support requests, please use <span className="text-brand-accent">support@devflare.de</span>.</strong>
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Disclaimer</h2>
-                        <ul className="list-disc pl-6 mt-2 mb-6">
-                            <li>
-                                Minecraft® is a trademark of Mojang AB. This project is <span className="text-brand-accent">not endorsed or supported by Mojang or Microsoft</span>. All assets, names, and related content are property of their respective owners.
-                            </li>
-                            <li>
-                                Vesper Launcher provides no warranty and is supplied &quot;as-is&quot;. Use at your own risk.
-                            </li>
-                            <li>
-                                We collect <span className="font-medium">no telemetry or tracking data</span>. For privacy concerns, refer to our <Link href="/privacy" className="text-brand-accent underline underline-offset-4">Privacy Policy</Link>.
-                            </li>
-                        </ul>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Open Source</h2>
-                        <p>
-                            Vesper Launcher and this website are open source — see the code and license on <Link href="https://github.com/ArexLabs/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</Link>.
-                        </p>
-                        <hr className="my-10 border-border/40" />
-                        <p className="text-xs text-muted-foreground text-center">
-                            Legal Notice last updated: February 2026
+                <section className="max-w-3xl mx-auto px-6 py-12 md:py-20">
+                    <div className="text-center mb-12">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+                            Legal <span className="text-brand-accent italic">Notice</span>
+                        </h1>
+                        <p className="text-muted-foreground max-w-lg mx-auto">
+                            Important legal information about Vesper Launcher and this website.
                         </p>
                     </div>
+
+                    <div className="space-y-8">
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Independent Project</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                <strong>Vesper Launcher</strong> is an independent open source project and is <span className="text-brand-accent font-medium">not affiliated with Mojang, Microsoft, or any of their subsidiaries</span>. It is not endorsed or supported by them in any way.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Publisher Information</h2>
+                            <div className="space-y-3 text-muted-foreground">
+                                <p>
+                                    <span className="font-medium text-foreground">Project Lead:</span> DevFlare by ItzzMateo
+                                </p>
+                                <p>
+                                    <span className="font-medium text-foreground">Website:</span>{" "}
+                                    <a href="https://vesper.devflare.de" className="text-brand-accent hover:underline">vesper.devflare.de</a>
+                                </p>
+                                <p>
+                                    <span className="font-medium text-foreground">Legal Contact:</span>{" "}
+                                    <a href="mailto:itzzmateo@devflare.de" className="text-brand-accent hover:underline">itzzmateo@devflare.de</a>
+                                </p>
+                                <p>
+                                    <span className="font-medium text-foreground">Support:</span>{" "}
+                                    <a href="mailto:support@devflare.de" className="text-brand-accent hover:underline">support@devflare.de</a>
+                                </p>
+                            </div>
+                            <p className="mt-4 text-sm text-muted-foreground">
+                                <span className="font-medium text-foreground">Note:</span> Contact <span className="text-brand-accent">itzzmateo@devflare.de</span> for legal inquiries only. For support, use <span className="text-brand-accent">support@devflare.de</span>.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Disclaimer</h2>
+                            <ul className="space-y-3 text-muted-foreground">
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span><span className="font-medium text-foreground">Minecraft®</span> is a trademark of Mojang AB. This project is <span className="text-brand-accent">not endorsed or supported</span> by Mojang or Microsoft.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>Vesper Launcher provides <span className="font-medium text-foreground">no warranty</span> and is supplied &quot;as-is&quot;. Use at your own risk.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>We collect <span className="font-medium text-foreground">no telemetry or tracking data</span>. See our <Link href="/privacy" className="text-brand-accent hover:underline">Privacy Policy</Link> for details.</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Open Source</h2>
+                            <p className="text-muted-foreground leading-relaxed mb-4">
+                                Vesper Launcher and this website are open source. View the source code and license on GitHub.
+                            </p>
+                            <div className="flex flex-wrap gap-3">
+                                <a
+                                    href="https://github.com/ArexLabs/vesper-client"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm font-medium"
+                                >
+                                    vesper-client
+                                </a>
+                                <a
+                                    href="https://github.com/ArexLabs/vesper-website"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm font-medium"
+                                >
+                                    vesper-website
+                                </a>
+                            </div>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Quick Links</h2>
+                            <div className="flex flex-wrap gap-3">
+                                <Link href="/privacy" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Privacy Policy
+                                </Link>
+                                <Link href="/terms" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Terms of Use
+                                </Link>
+                                <Link href="/tos" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Terms of Service
+                                </Link>
+                            </div>
+                        </section>
+                    </div>
+
+                    <hr className="my-12 border-border/40" />
+                    <p className="text-sm text-muted-foreground text-center">
+                        Last updated: March 2026
+                    </p>
                 </section>
             </main>
         </div>

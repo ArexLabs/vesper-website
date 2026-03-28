@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function TermsOfUse() {
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-brand-accent/30 selection:text-brand-accent">
-            {/* Subtle Dot Grid Background */}
             <div className="fixed inset-0 z-[-2] bg-background" />
             <div
                 className="fixed inset-0 z-[-1] opacity-20 dark:opacity-10 pointer-events-none"
@@ -15,77 +14,172 @@ export default function TermsOfUse() {
                     WebkitMaskImage: "linear-gradient(to bottom, black 40%, transparent 100%)"
                 }}
             />
-
-            {/* Vesper Ambient Glow */}
             <div className="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
             <main className="flex-1 w-full pt-16">
-                <section className="max-w-2xl mx-auto px-6 py-20">
-                    <h1 className="text-3xl md:text-4xl font-mono font-bold text-foreground mb-8 text-center">
-                        Terms of <span className="text-brand-accent">Use</span>
-                    </h1>
-                    <div className="prose dark:prose-invert prose-neutral mx-auto text-muted-foreground">
-                        <p>
-                            These Terms of Use (&quot;Terms&quot;) govern your use of <strong>Vesper Launcher</strong> and its website. By accessing or using Vesper Launcher or this website, you agree to comply with these Terms.
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Usage Eligibility</h2>
-                        <ul className="list-disc pl-6 mt-2 mb-6">
-                            <li>
-                                Vesper Launcher is intended for personal and non-commercial use only.
-                            </li>
-                            <li>
-                                You must comply with all applicable laws and respect the intellectual property rights of Mojang, Microsoft, and other third parties.
-                            </li>
-                        </ul>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Acceptable Use</h2>
-                        <ul className="list-disc pl-6 mt-2 mb-6">
-                            <li>
-                                Do not use Vesper Launcher for illegal activities or to attempt to bypass, exploit, or compromise Minecraft, official game servers, or any other systems.
-                            </li>
-                            <li>
-                                Do not attempt to reverse engineer, decompile, or otherwise tamper with Vesper Launcher or its distribution infrastructure.
-                            </li>
-                            <li>
-                                Usage of Vesper Launcher must comply with Mojang&apos;s and Microsoft&apos;s official End User License Agreements (EULAs).
-                            </li>
-                        </ul>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">No Warranty</h2>
-                        <p>
-                            Vesper Launcher is provided &quot;as is&quot; and &quot;as available&quot;. No warranty of any kind is provided, whether express or implied, including but not limited to fitness for a particular purpose, non-infringement, or uninterrupted or error-free operation. You use Vesper Launcher at your own risk.
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Limitation of Liability</h2>
-                        <p>
-                            In no event will DevFlare or the contributors of Vesper Launcher be liable for any damages arising from the use or inability to use Vesper Launcher or this website, including any loss of data, interruption of business, or indirect damages.
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Intellectual Property</h2>
-                        <ul className="list-disc pl-6 mt-2 mb-6">
-                            <li>
-                                Minecraft® is a trademark of Mojang AB. Vesper Launcher is independent and not affiliated with Mojang, Microsoft, or their subsidiaries.
-                            </li>
-                            <li>
-                                All third-party assets, names, and content referenced are property of their respective owners.
-                            </li>
-                            <li>
-                                <span className="font-medium">Open Source:</span> Vesper Launcher and this website are open source. See the license and full source on <a href="https://github.com/ArexLabs/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</a>.
-                            </li>
-                        </ul>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Updates &amp; Changes</h2>
-                        <p>
-                            These Terms of Use may be updated at any time. Continued use after changes constitutes acceptance of the new terms.
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Termination</h2>
-                        <p>
-                            We reserve the right to revoke your access to Vesper Launcher or this website at any time for violation of these Terms or for any other reason.
-                        </p>
-                        <h2 className="mt-8 text-xl font-semibold text-foreground">Contact</h2>
-                        <p>
-                            For questions about these Terms, contact <a href="mailto:support@devflare.de" className="text-brand-accent underline underline-offset-2">support@devflare.de</a>. For legal information, see our <Link href="/legal" className="text-brand-accent underline underline-offset-4">Legal Notice</Link>.
-                        </p>
-                        <hr className="my-10 border-border/40" />
-                        <p className="text-xs text-muted-foreground text-center">
-                            Terms of Use last updated: February 2026
+                <section className="max-w-3xl mx-auto px-6 py-12 md:py-20">
+                    <div className="text-center mb-12">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+                            Terms of <span className="text-brand-accent italic">Use</span>
+                        </h1>
+                        <p className="text-muted-foreground max-w-lg mx-auto">
+                            The rules and conditions for using Vesper Launcher.
                         </p>
                     </div>
+
+                    <div className="space-y-8">
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <p className="text-muted-foreground leading-relaxed">
+                                These Terms of Use (&quot;Terms&quot;) govern your use of <strong>Vesper Launcher</strong> and this website. By accessing or using Vesper, you agree to be bound by these Terms.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Eligibility</h2>
+                            <ul className="space-y-3 text-muted-foreground">
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>Vesper Launcher is for <span className="font-medium text-foreground">personal, non-commercial use</span> only.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>You must comply with all applicable laws and respect the intellectual property rights of others.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>You must have a valid Minecraft account to use the launcher.</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Acceptable Use</h2>
+                            <p className="text-muted-foreground mb-4">You agree NOT to:</p>
+                            <ul className="space-y-3 text-muted-foreground">
+                                <li className="flex items-start gap-3">
+                                    <span className="text-destructive mt-1">✕</span>
+                                    <span>Use Vesper Launcher for any <span className="font-medium text-foreground">illegal activities</span>.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-destructive mt-1">✕</span>
+                                    <span>Attempt to <span className="font-medium text-foreground">bypass, exploit, or compromise</span> Minecraft servers or systems.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-destructive mt-1">✕</span>
+                                    <span><span className="font-medium text-foreground">Reverse engineer, decompile,</span> or tamper with Vesper Launcher.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-destructive mt-1">✕</span>
+                                    <span>Violate Mojang's or Microsoft's End User License Agreement (EULA).</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="p-2 rounded-lg bg-amber-500/10">
+                                    <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <h2 className="text-xl font-semibold text-foreground">No Warranty</h2>
+                            </div>
+                            <p className="text-muted-foreground leading-relaxed">
+                                Vesper Launcher is provided <span className="font-medium text-foreground">&quot;as is&quot;</span> and <span className="font-medium text-foreground">&quot;as available&quot;</span>. <span className="text-brand-accent font-medium">No warranty</span> of any kind is provided, express or implied, including fitness for a particular purpose or non-infringement.
+                            </p>
+                            <p className="mt-4 text-sm text-muted-foreground">
+                                You use Vesper Launcher at your own risk.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Limitation of Liability</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                In no event shall DevFlare or Vesper Launcher contributors be liable for any damages arising from your use or inability to use Vesper Launcher. This includes, but is not limited to:
+                            </p>
+                            <ul className="mt-4 space-y-2 text-muted-foreground">
+                                <li className="flex items-start gap-2">
+                                    <span className="text-brand-accent">•</span>
+                                    <span className="text-sm">Loss of data</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-brand-accent">•</span>
+                                    <span className="text-sm">Business interruption</span>
+                                </li>
+                                <li className="flex items-start gap-2">
+                                    <span className="text-brand-accent">•</span>
+                                    <span className="text-sm">Indirect or consequential damages</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Intellectual Property</h2>
+                            <ul className="space-y-3 text-muted-foreground">
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span><span className="font-medium text-foreground">Minecraft®</span> is a trademark of Mojang AB. Vesper is independent and not affiliated.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>All third-party assets and content are property of their respective owners.</span>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <span className="text-brand-accent mt-1">•</span>
+                                    <span>Vesper Launcher and this website are <span className="font-medium text-foreground">open source</span>. See <a href="https://github.com/ArexLabs/vesper-client" target="_blank" rel="noopener noreferrer" className="text-brand-accent hover:underline">GitHub</a> for details.</span>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Changes to Terms</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                These Terms may be updated at any time. <span className="font-medium text-foreground">Continued use</span> of Vesper Launcher after changes constitutes acceptance of the new Terms.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Termination</h2>
+                            <p className="text-muted-foreground leading-relaxed">
+                                We reserve the right to <span className="font-medium text-foreground">revoke access</span> to Vesper Launcher or this website at any time for violation of these Terms or for any other reason.
+                            </p>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Contact</h2>
+                            <p className="text-muted-foreground leading-relaxed mb-4">
+                                Questions about these Terms? Contact us:
+                            </p>
+                            <div className="flex flex-wrap gap-3">
+                                <a href="mailto:support@devflare.de" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    support@devflare.de
+                                </a>
+                                <Link href="/legal" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Legal Notice
+                                </Link>
+                            </div>
+                        </section>
+
+                        <section className="p-6 sm:p-8 rounded-2xl border border-border bg-card/30">
+                            <h2 className="text-xl font-semibold text-foreground mb-4">Quick Links</h2>
+                            <div className="flex flex-wrap gap-3">
+                                <Link href="/legal" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Legal Notice
+                                </Link>
+                                <Link href="/privacy" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Privacy Policy
+                                </Link>
+                                <Link href="/tos" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
+                                    Terms of Service
+                                </Link>
+                            </div>
+                        </section>
+                    </div>
+
+                    <hr className="my-12 border-border/40" />
+                    <p className="text-sm text-muted-foreground text-center">
+                        Last updated: March 2026
+                    </p>
                 </section>
             </main>
         </div>
