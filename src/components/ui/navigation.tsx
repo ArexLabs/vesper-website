@@ -71,6 +71,7 @@ const dropdowns: Dropdown[] = [
   {
     name: "Community",
     items: [
+      { name: "Support", href: "/support", icon: Info, description: "Get help & contact" },
       { name: "GitHub", href: "https://github.com/ArexLabs/vesper-website", icon: ExternalLink, description: "Source code" },
       { name: "Discord", href: "https://discord.devflare.de", icon: ExternalLink, description: "Join our server" },
     ],
