@@ -266,7 +266,7 @@ export function AboutSection() {
               Vesper is open source. Contribute, fork, or audit the code anytime.
             </p>
             <a
-              href="https://github.com/IMDevFlare/vesper"
+              href="https://github.com/ArexLabs/vesper-client"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium bg-white/5 hover:bg-white/10 border border-border transition-all"

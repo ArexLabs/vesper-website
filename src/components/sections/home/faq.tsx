@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const faqs = [
   { question: "What is Vesper?", answer: "Vesper is a minimal, high-performance Minecraft launcher and toolkit for creators and people who like to mess with or customize their game. It gives you full control over your Minecraft setup and removes all unnecessary bloat." },
-  { question: "Is Vesper open source?", answer: <><span>Yes! Vesper is open source. You can view the code, contribute, or suggest features on{" "}</span><Link href="https://github.com/IMDevFlare/vesper-website" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">GitHub</Link><span>.</span></> },
+  { question: "Is Vesper open source?", answer: <><span>Yes! Vesper is open source. You can view the code, contribute, or suggest features on{" "}</span><Link href="https://github.com/ArexLabs/vesper-website" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">GitHub</Link><span>.</span></> },
   { question: "Will Vesper work with modpacks?", answer: "Yes. Vesper is designed to support modded Minecraft — Fabric, Forge, Quilt, and more. Manage your modpacks like real projects, not just folders." },
   { question: "Who is Vesper for?", answer: "Vesper is for players who want control, speed, and transparency — creators, people who like to change things, or anyone who wants to go beyond what other launchers offer." },
   { question: "What platforms does Vesper support?", answer: "During the closed beta, Vesper will only support Windows (10/11, 64-bit). Public beta will add Linux support as well. macOS support is undecided and may come later." },
@@ -15,7 +15,7 @@ const faqs = [
   { question: "How do I install Vesper?", answer: "You can install Vesper easily using the one-line install script on our homepage! Just copy and paste it into your terminal. Alternatively, you can download a .exe (for Windows) or the right installer for your platform directly from the website." },
   { question: "Can I migrate from other launchers?", answer: "Importing from other launchers is planned. In the meantime, you can manually import your modpacks or instances." },
   { question: "How often does Vesper update?", answer: "Vesper features seamless automatic updates to keep your experience smooth, secure, and up-to-date." },
-  { question: "Where can I get support or provide feedback?", answer: <><span>Join our{" "}</span><Link href="https://dc.devflare.de" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">Discord community</Link><span> or open an issue or discussion on{" "}</span><Link href="https://github.com/IMDevFlare/vesper-website" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">GitHub</Link><span>! We are always glad to help or hear your ideas.</span></> },
+  { question: "Where can I get support or provide feedback?", answer: <><span>Join our{" "}</span><Link href="https://dc.devflare.de" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">Discord community</Link><span> or open an issue or discussion on{" "}</span><Link href="https://github.com/ArexLabs/vesper-website" target="_blank" rel="noopener noreferrer" className="text-brand-accent underline hover:opacity-80">GitHub</Link><span>! We are always glad to help or hear your ideas.</span></> },
 ];
 
 export default function faq() {

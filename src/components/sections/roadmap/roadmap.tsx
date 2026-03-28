@@ -115,7 +115,7 @@ export function RoadmapSection() {
                     className="mt-12 text-center text-sm text-muted-foreground"
                 >
                     This roadmap reflects our <span className="text-brand-accent font-medium">intentions</span>, not official promises.
-                    Want to suggest something? <a className="underline hover:text-brand-accent transition-colors" target="_blank" href="https://github.com/IMDevFlare/vesper-website">Contribute on GitHub</a>.
+                    Want to suggest something? <a className="underline hover:text-brand-accent transition-colors" target="_blank" href="https://github.com/ArexLabs/vesper-website">Contribute on GitHub</a>.
                 </motion.p>
             </motion.div>
         </section>

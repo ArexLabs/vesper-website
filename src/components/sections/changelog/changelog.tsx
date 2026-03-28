@@ -146,7 +146,7 @@ export function ChangelogSection() {
             <Link
               className="text-brand-accent hover:underline"
               target="_blank"
-              href="https://github.com/IMDevFlare/vesper-launcher/blob/main/CHANGELOG.md"
+              href="https://github.com/ArexLabs/vesper-client/blob/main/CHANGELOG.md"
             >
               CHANGELOG.md
             </Link>{" "}

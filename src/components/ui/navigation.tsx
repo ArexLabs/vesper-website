@@ -7,6 +7,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import DownloadModal from "./download-modal";
+import GitHubModal from "./github-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { IconVesper } from "../icons/vesper-icon";
 
@@ -70,7 +71,7 @@ const dropdowns: Dropdown[] = [
   {
     name: "Community",
     items: [
-      { name: "GitHub", href: "https://github.com/IMDevFlare/vesper-website", icon: ExternalLink, description: "Source code" },
+      { name: "GitHub", href: "https://github.com/ArexLabs/vesper-website", icon: ExternalLink, description: "Source code" },
       { name: "Discord", href: "https://discord.devflare.de", icon: ExternalLink, description: "Join our server" },
     ],
   },
@@ -93,6 +94,7 @@ const itemVariants: Variants = {
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
+  const [githubModalOpen, setGithubModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -255,15 +257,13 @@ export function Navigation() {
                 <span className="sm:hidden">Get</span>
               </button>
 
-              <a
-                href="https://github.com/IMDevFlare/vesper-website"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setGithubModalOpen(true)}
                 className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
                 aria-label="Open GitHub repository"
               >
                 <GitHubIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
+              </button>
 
               <ThemeToggle />
 
@@ -377,15 +377,13 @@ export function Navigation() {
                     >
                       Download Client
                     </button>
-                    <a
-                      href="https://github.com/IMDevFlare/vesper-website"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
+                      onClick={() => { setGithubModalOpen(true); setMobileMenuOpen(false); }}
                       className="w-full p-4 rounded-2xl bg-white/5 text-muted-foreground flex items-center justify-center gap-3 font-medium transition-colors"
                     >
                       <GitHubIcon className="w-5 h-5" />
                       View on GitHub
-                    </a>
+                    </button>
                   </motion.div>
                 </div>
               </motion.div>
@@ -394,6 +392,7 @@ export function Navigation() {
         </AnimatePresence>
       </motion.header>
       <DownloadModal open={downloadModalOpen} onClose={() => setDownloadModalOpen(false)} />
+      <GitHubModal open={githubModalOpen} onClose={() => setGithubModalOpen(false)} />
     </>
   );
 }

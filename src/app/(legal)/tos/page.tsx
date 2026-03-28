@@ -66,7 +66,7 @@ export default function TermsOfService() {
                                 All referenced content, names, and assets are the property of their respective owners.
                             </li>
                             <li>
-                                <span className="font-medium">Open Source:</span> Vesper Launcher and this website are open source. View the full details and license on <a href="https://github.com/IMDevFlare/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</a>.
+                                <span className="font-medium">Open Source:</span> Vesper Launcher and this website are open source. View the full details and license on <a href="https://github.com/ArexLabs/vesper-website" rel="noopener noreferrer" target="_blank" className="text-brand-accent underline underline-offset-4">GitHub</a>.
                             </li>
                         </ul>
                         <h2 className="mt-8 text-xl font-semibold text-foreground">Service Updates &amp; Modifications</h2>

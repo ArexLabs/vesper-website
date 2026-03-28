@@ -41,7 +41,7 @@ export function for_developers() {
       </div>
 
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="mt-8 text-center">
-        <a href="https://github.com/IMDevFlare/vesper" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all">
+        <a href="https://github.com/ArexLabs/vesper-client" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all">
           <WrenchScrewdriverIcon className="w-4 h-4" />
           View Developer Documentation
         </a>
