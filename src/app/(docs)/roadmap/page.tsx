@@ -1,28 +1,10 @@
 "use client";
 
-const planned = [
-    "Performance optimizations",
-    "Integrate launcher auto-updater",
-    "Create documentation and extend help resources",
-];
-
-const inProgress = [
-    "Release Windows, Linux and macOS clients",
-    "Configurable keyboard shortcuts",
-    "Rich presence in Discord",
-    "Built-in mod installer",
-];
-
-const longTerm = [
-    "Plugin/extension system for client",
-    "Mobile companion app",
-    "Custom authentication and OAuth2 integrations for Website",
-];
+import { RoadmapSection } from "@/components/sections/home";
 
 export default function Roadmap() {
     return (
         <div className="min-h-screen relative overflow-hidden flex flex-col selection:bg-brand-accent/30 selection:text-brand-accent">
-            {/* Subtle Dot Grid Background */}
             <div className="fixed inset-0 z-[-2] bg-background" />
             <div
                 className="fixed inset-0 z-[-1] opacity-20 dark:opacity-10 pointer-events-none"
@@ -33,55 +15,10 @@ export default function Roadmap() {
                 }}
             />
 
-            {/* Vesper Ambient Glow */}
             <div className="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
-            <main className="flex-1 w-full pt-24 flex flex-col items-center justify-center">
-                <section className="max-w-4xl px-4 mx-auto text-center flex flex-col items-center">
-                    <h1 className="text-5xl md:text-7xl font-bold text-center tracking-tight text-foreground mb-6">
-                        Vesper <span className="text-brand-accent italic">Roadmap</span>
-                    </h1>
-                    <p className="mt-2 text-lg md:text-xl text-muted-foreground mb-10">
-                        Here’s what we’re building, what’s brewing, and where we want to take Vesper. <br />
-                        No hype—just a clear path. Some things in motion, others on the horizon.
-                    </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full text-left text-base md:text-lg">
-                        {/* Planned Features */}
-                        <div>
-                            <h2 className="text-2xl font-semibold text-brand-accent mb-3">Planned</h2>
-                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
-                                {planned.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                        {/* In Progress */}
-                        <div>
-                            <h2 className="text-2xl font-semibold text-brand-accent mb-3">In Progress</h2>
-                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
-                                {inProgress.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                        {/* Experimental/Long-Term */}
-                        <div>
-                            <h2 className="text-2xl font-semibold text-brand-accent mb-3">Long-Term & Experiments</h2>
-                            <ul className="pl-6 py-2 text-muted-foreground text-lg list-disc space-y-2">
-                                {longTerm.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="mt-14 text-muted-foreground text-center text-sm px-2">
-                        <span>
-                            This roadmap reflects our <span className="text-brand-accent font-medium">intentions</span>, not official promises.<br />
-                            {/* Want to suggest something or see progress? <a className="underline hover:text-brand-accent" target="_blank" href="https://github.com/vespermc/vesper">Contribute on GitHub</a> or join the discussion. */}
-                            Want to suggest something or see progress? <a className="underline hover:text-brand-accent" target="_blank" href="https://github.com/IMDevFlare/vesper-website">Contribute on GitHub</a> or join the discussion.
-                        </span>
-                    </div>
-                </section>
+            <main className="flex-1 w-full pt-24">
+                <RoadmapSection />
             </main>
         </div>
     );
