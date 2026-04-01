@@ -28,6 +28,7 @@ This style guide defines best practices and conventions for contributing to the 
 
 ## 1. General Principles
 
+- Use **Bun** as the package manager (not npm, pnpm, or yarn)
 - Prioritize readability and simplicity
 - Use clear, descriptive names for variables, functions, and files
 - Write self-documenting code where possible
