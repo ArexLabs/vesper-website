@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon, StarIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
+import Link from "next/link";
 
 type os_type = "windows" | "mac" | "linux" | "unknown";
 
@@ -67,18 +68,18 @@ export function hero() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-brand-accent/10 border border-brand-accent/20">
           <SparklesIcon className="w-4 h-4 text-brand-accent" />
-          <span className="text-sm font-medium text-brand-accent">Closed Beta Coming Soon</span>
+          <span className="text-sm font-medium text-brand-accent">Beta Coming Soon — Join the Waitlist</span>
         </motion.div>
 
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-6">
-          Minecraft, <span className="text-brand-accent italic">reimagined</span>
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
+          Minecraft Launchers, <span className="text-brand-accent italic">Redefined</span>
         </motion.h1>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          A blazingly fast, modern Minecraft launcher built for performance enthusiasts and power users.
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          Built from scratch with <span className="text-foreground font-semibold">Rust + egui</span> for instant startup, minimal resource usage, and a modern native experience that puts you in control.
         </motion.p>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap justify-center gap-3 mb-12">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap justify-center gap-3 mb-10">
           {features.map((feature) => (
             <span key={feature} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/60 border border-border text-sm font-medium">
               <CheckCircleIcon className="w-4 h-4 text-brand-accent" />
@@ -87,38 +88,59 @@ export function hero() {
           ))}
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-col items-center gap-3">
-          <div className="w-full max-w-xl border border-border rounded-xl bg-card/80 backdrop-blur overflow-hidden">
-            <code className="block px-3 py-3 text-xs sm:text-sm font-mono text-foreground truncate max-w-[calc(100%-2rem)] select-all">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-col items-center gap-4">
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="https://github.com/ArexLabs/vesper-website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground transition-all active:scale-95"
+            >
+              <StarIcon className="w-5 h-5 text-yellow-400" />
+              Star on GitHub
+            </a>
+            <Link
+              href="https://dc.devflare.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold bg-brand-accent hover:bg-brand-accent/90 text-background transition-all active:scale-95"
+            >
+              Join Discord
+            </Link>
+          </div>
+
+          <div className="w-full max-w-xl border border-border rounded-xl bg-card/80 backdrop-blur overflow-hidden opacity-60 pointer-events-none relative">
+            <code className="block px-3 py-3 text-xs sm:text-sm font-mono text-muted-foreground truncate max-w-[calc(100%-2rem)] select-none">
               {install_scripts[os]}
             </code>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="px-3 py-1.5 rounded-full bg-background/80 backdrop-blur text-xs font-medium text-muted-foreground border border-border">
+                Coming Soon
+              </span>
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={copy_install_script}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium bg-white/5 hover:bg-white/10 border border-border transition-all active:scale-95"
-            aria-label={copy_state === "copied" ? "Copied!" : "Copy install script"}
-          >
-            {copy_state === "copied" ? (
-              <><CheckCircleIcon className="w-4 h-4 text-green-500" /> Copied</>
-            ) : copy_state === "error" ? (
-              <><XCircleIcon className="w-4 h-4 text-destructive" /> Error</>
-            ) : (
-              <><ClipboardIcon className="w-4 h-4" /> Copy Script</>
-            )}
-          </button>
-          <p className="text-xs text-muted-foreground">Install script is not working yet</p>
+          <p className="text-xs text-muted-foreground flex items-center gap-2">
+            Installer under development
+            <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+          </p>
         </motion.div>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.6 }} className="mt-8 text-sm text-muted-foreground">
-          Available for {os_labels[os]} · Coming soon to all platforms
+          Currently targeting {os_labels[os]} · Public beta coming soon
         </motion.p>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="absolute bottom-2 left-1/2 -translate-x-1/2"
+      >
         <button
           type="button"
-          onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() =>
+            document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })
+          }
           className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <span className="text-xs font-medium">Scroll to explore</span>

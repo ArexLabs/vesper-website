@@ -257,16 +257,20 @@ export function Navigation() {
                 </div>
               </button>
 
-              <button
-                onClick={handleOpenDownloadModal}
+              <a
+                href="https://github.com/ArexLabs/vesper-website"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={cn(
-                  "px-4 sm:px-6 py-2.5 sm:py-2 bg-brand-accent text-background text-sm font-bold rounded-full dark:hover:brightness-110 hover:brightness-90 active:scale-95 transition-all duration-200",
+                  "flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground rounded-full transition-all duration-200",
                   isCompact && "hidden md:inline-flex"
                 )}
               >
-                <span className="hidden sm:inline">Download</span>
-                <span className="sm:hidden">Get</span>
-              </button>
+                <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.427 2.867 8.184 6.839 9.504.5.093.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.153-1.11-1.46-1.11-1.46-.908-.62.069-.608.069-.608 1.004.071 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.635-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.254-.447-1.272.098-2.651 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.6 9.6 0 0 1 2.504.338c1.909-1.296 2.747-1.025 2.747-1.025.547 1.379.203 2.397.1 2.651.64.699 1.028 1.593 1.028 2.686 0 3.847-2.337 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .267.18.579.688.481A10.019 10.019 0 0 0 22 12.021C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span className="hidden sm:inline">Star</span>
+              </a>
 
               <button
                 onClick={() => setGithubModalOpen(true)}

@@ -1,15 +1,24 @@
 "use client";
 
-import React from "react";
-import { useTheme } from "next-themes";
+import React, { useState, useEffect } from "react";
 
 interface DiscordWidgetProps {
   className?: string;
 }
 
 const DiscordWidget: React.FC<DiscordWidgetProps> = ({ className }) => {
-  const { resolvedTheme } = useTheme();
-  const theme = resolvedTheme === "dark" ? "dark" : "light";
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setTheme(mediaQuery.matches ? "dark" : "light");
+
+    const handler = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? "dark" : "light");
+    };
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   return (
     <div className={className}>

@@ -21,7 +21,7 @@ interface TechCategory {
 
 const launcher_stack: TechItem[] = [
   { name: "Rust", description: "Core launcher application - performance & safety", icon: IconBrandRust },
-  { name: "Tauri", description: "WebView-based desktop framework", icon: IconTauri },
+  { name: "egui", description: "Native immediate mode GUI framework", icon: IconTauri },
   { name: "TypeScript", description: "Plugin API and UI scripting", icon: IconBrandTypescript },
   { name: "Minecraft Protocol", description: "Protocol implementation", icon: IconBrandMinecraft },
   { name: "reqwest", description: "HTTP client for API requests", icon: IconApi },

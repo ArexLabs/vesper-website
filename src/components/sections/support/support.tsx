@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparklesIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { SparklesIcon, EnvelopeIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import { IconBrandDiscord, IconBrandGithub } from "@tabler/icons-react";
+import Link from "next/link";
 import DiscordWidget from "@/components/ui/discord-widget";
 
 const contactMethods = [
@@ -12,6 +13,7 @@ const contactMethods = [
     email: "support@devflare.de",
     icon: EnvelopeIcon,
     color: "bg-blue-500/10 text-blue-500 border-blue-500/20",
+    hoverColor: "hover:border-blue-500/40 hover:bg-blue-500/5",
   },
   {
     name: "Discord",
@@ -19,6 +21,7 @@ const contactMethods = [
     href: "https://discord.devflare.de",
     icon: IconBrandDiscord,
     color: "bg-indigo-500/10 text-indigo-500 border-indigo-500/20",
+    hoverColor: "hover:border-indigo-500/40 hover:bg-indigo-500/5",
   },
   {
     name: "GitHub",
@@ -26,74 +29,9 @@ const contactMethods = [
     href: "https://github.com/ArexLabs/vesper-website/issues",
     icon: IconBrandGithub,
     color: "bg-gray-500/10 text-gray-500 border-gray-500/20",
+    hoverColor: "hover:border-gray-500/40 hover:bg-gray-500/5",
   },
 ];
-
-const faqItems = [
-  {
-    question: "How do I download Vesper?",
-    answer: "Visit our homepage and run the install script for your platform. Windows users can copy the PowerShell script, while Linux/macOS users can use the curl command.",
-  },
-  {
-    question: "Is Vesper free to use?",
-    answer: "Yes, Vesper is completely free and open source. We believe in keeping gaming accessible to everyone.",
-  },
-  {
-    question: "What Minecraft versions are supported?",
-    answer: "Vesper supports all major Minecraft versions. During the alpha, we default to 1.20.1 but are working on adding more versions soon.",
-  },
-  {
-    question: "How do I report a bug?",
-    answer: "You can report bugs by opening an issue on our GitHub repository or by reaching out on Discord.",
-  },
-  {
-    question: "Can I contribute to Vesper?",
-    answer: "Absolutely! We welcome contributions. Check out our CONTRIBUTING.md on GitHub for guidelines.",
-  },
-];
-
-function ContactCard({ method, index }: { method: typeof contactMethods[0]; index: number }) {
-  const Icon = method.icon;
-  
-  return (
-    <motion.a
-      href={method.href || `mailto:${method.email}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="flex items-start gap-4 p-6 rounded-2xl border border-border bg-card/40 hover:bg-card/60 hover:border-brand-accent/30 transition-all group"
-    >
-      <div className={`p-3 rounded-xl shrink-0 ${method.color}`}>
-        <Icon className="w-6 h-6" />
-      </div>
-      <div>
-        <h3 className="font-semibold text-foreground group-hover:text-brand-accent transition-colors">{method.name}</h3>
-        <p className="text-sm text-muted-foreground mt-1">{method.description}</p>
-        {method.email && (
-          <p className="text-sm text-brand-accent mt-2">{method.email}</p>
-        )}
-      </div>
-    </motion.a>
-  );
-}
-
-function FAQItem({ item, index }: { item: typeof faqItems[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="p-4 rounded-xl border border-border bg-card/30"
-    >
-      <h4 className="font-medium text-foreground">{item.question}</h4>
-      <p className="text-sm text-muted-foreground mt-2">{item.answer}</p>
-    </motion.div>
-  );
-}
 
 export function SupportSection() {
   return (
@@ -133,11 +71,39 @@ export function SupportSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 sm:mb-12">
-          {contactMethods.map((method, i) => (
-            <ContactCard key={method.name} method={method} index={i} />
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 sm:mb-12"
+        >
+          {contactMethods.map((method, i) => {
+            const Icon = method.icon;
+            return (
+              <motion.a
+                key={method.name}
+                href={method.href || `mailto:${method.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className={`flex flex-col items-center justify-center p-8 rounded-2xl border border-border bg-card/40 ${method.hoverColor} transition-all group text-center`}
+              >
+                <div className={`p-4 rounded-2xl ${method.color} mb-4`}>
+                  <Icon className="w-8 h-8" />
+                </div>
+                <h3 className="font-semibold text-foreground group-hover:text-brand-accent transition-colors">{method.name}</h3>
+                <p className="text-sm text-muted-foreground mt-2">{method.description}</p>
+                {method.email && (
+                  <p className="text-sm text-brand-accent mt-3 font-medium">{method.email}</p>
+                )}
+              </motion.a>
+            );
+          })}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -158,10 +124,34 @@ export function SupportSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Frequently Asked Questions</h3>
-          <div className="space-y-3">
-            {faqItems.map((item, i) => (
-              <FAQItem key={item.question} item={item} index={i} />
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <h3 className="text-2xl font-bold text-foreground">Frequently Asked Questions</h3>
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-brand-accent/10 text-brand-accent hover:bg-brand-accent/20 transition-colors"
+            >
+              View All
+              <ArrowTopRightOnSquareIcon className="w-3 h-3" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              { q: "How do I download Vesper?", a: "Visit our homepage and run the install script for your platform." },
+              { q: "Is Vesper free to use?", a: "Yes, Vesper is completely free and open source." },
+              { q: "What Minecraft versions are supported?", a: "Vesper supports all major Minecraft versions." },
+              { q: "How do I report a bug?", a: "Open an issue on GitHub or reach out on Discord." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.q}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                className="p-5 rounded-xl border border-border bg-card/30 hover:bg-card/50 transition-colors"
+              >
+                <h4 className="font-medium text-foreground mb-2">{item.q}</h4>
+                <p className="text-sm text-muted-foreground">{item.a}</p>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -173,7 +163,14 @@ export function SupportSection() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center text-sm text-muted-foreground mt-12"
         >
-          Can&apos;t find what you&apos;re looking for? <a href="mailto:support@devflare.de" className="text-brand-accent hover:underline">Email us </a> and we&apos;ll get back to you.
+          Can&apos;t find what you&apos;re looking for?{" "}
+          <Link href="/faq" className="text-brand-accent hover:underline">
+            Check our FAQ
+          </Link>{" "}
+          or{" "}
+          <a href="mailto:support@devflare.de" className="text-brand-accent hover:underline">
+            email us
+          </a>
         </motion.p>
       </motion.div>
     </section>
