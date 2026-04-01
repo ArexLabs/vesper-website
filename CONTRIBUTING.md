@@ -9,7 +9,7 @@ Thank you for your interest in contributing to Vesper!
 
 </div>
 
-> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
+> **Launcher Repository:** [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client)
 
 ---
 

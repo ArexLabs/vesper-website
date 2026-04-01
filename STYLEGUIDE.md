@@ -9,7 +9,7 @@ This style guide defines best practices and conventions for contributing to the 
 
 </div>
 
-> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
+> **Launcher Repository:** [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client)
 
 ---
 

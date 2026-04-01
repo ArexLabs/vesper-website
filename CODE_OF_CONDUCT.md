@@ -9,7 +9,7 @@ We are committed to maintaining a welcoming, respectful, and collaborative envir
 
 </div>
 
-> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
+> **Launcher Repository:** [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client)
 
 ---
 

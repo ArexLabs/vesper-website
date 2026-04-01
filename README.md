@@ -11,7 +11,7 @@ A blazing-fast, native Minecraft launcher built for performance and simplicity.
 
 </div>
 
-> **Launcher Repository:** [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client)
+> **Launcher Repository:** [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client)
 
 ---
 
@@ -54,7 +54,7 @@ Explore features, system requirements, and guides at [launcher.devflare.de](http
 ## FAQ
 
 **Is Vesper open source?**  
-Yes! The launcher source is available at [IMDevFlare/vesper-client](https://github.com/IMDevFlare/vesper-client).
+Yes! The launcher source is available at [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client).
 
 **What platforms are supported?**  
 Windows 10/11 (64-bit) at launch. Linux support is planned for the public beta.
@@ -71,7 +71,7 @@ Yes. Vesper uses Microsoft OAuth2 and never tracks or sends unnecessary data.
 
 Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTING.md) before submitting PRs.
 
-- Open issues at [GitHub](https://github.com/IMDevFlare/vesper-website)
+- Open issues at [GitHub](https://github.com/ArexLabs/vesper-website)
 - Join our [Discord](https://dc.devflare.de) for discussions
 
 ---
@@ -79,7 +79,7 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
 ## Support
 
 - **Discord** — [Join our community](https://dc.devflare.de)
-- **Issues** — [Report bugs or request features](https://github.com/IMDevFlare/vesper-website/issues)
+- **Issues** — [Report bugs or request features](https://github.com/ArexLabs/vesper-website/issues)
 
 ---
 
