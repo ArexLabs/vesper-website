@@ -11,6 +11,27 @@ import GitHubModal from "./github-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { IconVesper } from "../icons/vesper-icon";
 
+// Custom GitHub "star" icon
+function StarIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      fill="currentColor"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <title>GitHub Star</title>
+      <polygon
+        fill="currentColor"
+        stroke="none"
+        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+        className="star"
+      />
+    </svg>
+  );
+}
+
 function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg
@@ -168,7 +189,7 @@ export function Navigation() {
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
               <IconVesper className="w-9 h-9 sm:w-10 sm:h-10 mr-0" />
               <span className="font-mono font-bold tracking-tight text-foreground text-base sm:text-lg italic">
-                Vesper.init()
+                Vesper Client.
               </span>
             </Link>
 
@@ -256,22 +277,7 @@ export function Navigation() {
                   <span>K</span>
                 </div>
               </button>
-
-              <a
-                href="https://github.com/ArexLabs/vesper-website"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  "flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-2 text-sm font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-foreground rounded-full transition-all duration-200",
-                  isCompact && "hidden md:inline-flex"
-                )}
-              >
-                <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.427 2.867 8.184 6.839 9.504.5.093.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.153-1.11-1.46-1.11-1.46-.908-.62.069-.608.069-.608 1.004.071 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.635-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.254-.447-1.272.098-2.651 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844a9.6 9.6 0 0 1 2.504.338c1.909-1.296 2.747-1.025 2.747-1.025.547 1.379.203 2.397.1 2.651.64.699 1.028 1.593 1.028 2.686 0 3.847-2.337 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .267.18.579.688.481A10.019 10.019 0 0 0 22 12.021C22 6.484 17.522 2 12 2z"/>
-                </svg>
-                <span className="hidden sm:inline">Star</span>
-              </a>
-
+              
               <button
                 onClick={() => setGithubModalOpen(true)}
                 className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
