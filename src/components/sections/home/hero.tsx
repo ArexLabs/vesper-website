@@ -75,7 +75,7 @@ export function hero() {
           Minecraft Launchers, <span className="text-brand-accent italic">Redefined</span>
         </motion.h1>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-8">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-8">
           Built from scratch with <span className="text-foreground font-semibold">Rust + egui</span> for instant startup, minimal resource usage, and a modern native experience that puts you in control.
         </motion.p>
 
