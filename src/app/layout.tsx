@@ -5,12 +5,11 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { JetBrains_Mono as FontMono, Noto_Sans as FontSans } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components/ui/footer";
+import { FooterLogo } from "@/components/ui/footer-logo";
 import { Toaster } from "sonner";
 import { CommandPalette } from "@/components/ui/command-palette";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { SessionProvider } from "@/components/providers/session_provider";
 
 const fontSans = FontSans({
@@ -32,8 +31,8 @@ export const metadata: Metadata = {
     "Vesper Launcher is a sleek, modern, and high-utility Minecraft client designed for performance, customization, and an enhanced gameplay experience.",
   icons: {
     icon: [
-      { url: "/logo.png", type: "image/png" },
-      { url: "/logo.ico", type: "image/x-icon" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon.png", type: "image/png" },
     ],
   },
   keywords: [
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     "Launcher",
     "Custom Minecraft",
   ],
-  authors: [{ name: "DevFlare", url: "https://devflare.de" }],
+  authors: [{ name: "DevFlare / ArexLabs", url: "https://devflare.de" }],
   robots: {
     index: true,
     follow: true,
@@ -76,18 +75,9 @@ export default function RootLayout({
             <Toaster richColors />
             <ScrollToTop />
           </SessionProvider>
-          <Footer
+          <FooterLogo
             aRR
             aRRText="Not affiliated with Mojang or Microsoft."
-            logo={
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-                priority
-              />
-            }
             year={2025}
             links={[
               { label: "Legal Notice", href: "/legal" },

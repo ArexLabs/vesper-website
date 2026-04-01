@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink, MessageCircle, FileText, Scale, ShieldCheck, Gavel, HelpCircle, Headphones } from "lucide-react";
 import Link from "next/link";
 import DownloadModal from "./download-modal";
 import GitHubModal from "./github-modal";
@@ -66,14 +66,24 @@ const dropdowns: Dropdown[] = [
       { name: "About", href: "/about", icon: Info, description: "About Vesper" },
       { name: "Changelog", href: "/changelog", icon: History, description: "Version history" },
       { name: "Gallery", href: "/gallery", icon: ImageIcon, description: "Screenshots" },
+      { name: "FAQ", href: "/faq", icon: HelpCircle, description: "Common questions" },
     ],
   },
   {
     name: "Community",
     items: [
-      { name: "Support", href: "/support", icon: Info, description: "Get help & contact" },
+      { name: "Support", href: "/support", icon: Headphones, description: "Get help & contact" },
       { name: "GitHub", href: "https://github.com/ArexLabs/vesper-website", icon: ExternalLink, description: "Source code" },
       { name: "Discord", href: "https://discord.devflare.de", icon: ExternalLink, description: "Join our server" },
+    ],
+  },
+  {
+    name: "Legal",
+    items: [
+      { name: "Legal Notice", href: "/legal", icon: FileText, description: "Legal information" },
+      { name: "Privacy Policy", href: "/privacy", icon: ShieldCheck, description: "Data & privacy" },
+      { name: "Terms & Conditions", href: "/terms", icon: Scale, description: "Usage terms" },
+      { name: "Terms of Service", href: "/tos", icon: Gavel, description: "Service agreement" },
     ],
   },
 ];

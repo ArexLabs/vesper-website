@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { useHotkey } from "@tanstack/react-hotkeys";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { IconX, IconHome, IconMap, IconHistory, IconPhoto, IconSearch, IconFileText, IconShieldCheck, IconScale, IconGavel, IconCode, IconInfoCircle, IconHelpCircle } from "@tabler/icons-react";
+import { IconX, IconHome, IconMap, IconHistory, IconPhoto, IconSearch, IconFileText, IconShieldCheck, IconScale, IconGavel, IconCode, IconInfoCircle, IconHelpCircle, IconMessageCircle } from "@tabler/icons-react";
 
 const navigation_items = [
   { name: "Home", href: "/", icon: IconHome, description: "Go to homepage" },
@@ -13,13 +13,14 @@ const navigation_items = [
   { name: "Changelog", href: "/changelog", icon: IconHistory, description: "Release history" },
   { name: "Gallery", href: "/gallery", icon: IconPhoto, description: "Screenshots & media" },
   { name: "About", href: "/about", icon: IconInfoCircle, description: "About the project" },
-  { name: "Support", href: "/support", icon: IconHelpCircle, description: "Get help & contact" },
+  { name: "FAQ", href: "/faq", icon: IconHelpCircle, description: "Frequently asked questions" },
+  { name: "Support", href: "/support", icon: IconMessageCircle, description: "Get help & contact" },
 ];
 
 const legal_items = [
   { name: "Legal Notice", href: "/legal", icon: IconFileText, description: "Legal information" },
   { name: "Privacy Policy", href: "/privacy", icon: IconShieldCheck, description: "Data & privacy" },
-  { name: "Terms of Use", href: "/terms", icon: IconScale, description: "Usage terms" },
+  { name: "Terms & Conditions", href: "/terms", icon: IconScale, description: "Usage terms" },
   { name: "Terms of Service", href: "/tos", icon: IconGavel, description: "Service agreement" },
 ];
 

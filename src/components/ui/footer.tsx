@@ -34,6 +34,7 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement>, VariantP
   aRRText?: string;                   // custom disclaimer/legal text
   year?: number;                      // copyright/founding year
   logo?: React.ReactNode;             // logo element
+  logoOnClick?: () => void;           // click handler for logo
   links?: FooterLink[];               // array of { label, href }
 }
 
@@ -45,6 +46,7 @@ export function Footer({
   aRRText,
   year,
   logo,
+  logoOnClick,
   links,
   ...props
 }: FooterProps) {
@@ -79,7 +81,15 @@ export function Footer({
         <div className="flex flex-col items-center sm:items-start gap-2 w-full sm:w-auto">
           {/* Optional logo */}
           {logo && (
-            <div className="mb-2">{logo}</div>
+            <div className="mb-2">
+              {logoOnClick ? (
+                <button onClick={logoOnClick} className="cursor-pointer">
+                  {logo}
+                </button>
+              ) : (
+                <div>{logo}</div>
+              )}
+            </div>
           )}
           <span className="block text-center sm:text-left">
             <span className="text-brand-accent font-semibold">
