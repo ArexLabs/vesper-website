@@ -1,6 +1,6 @@
 "use client";
 
-import { hero, feature_cards, for_developers, system_requirements, faq } from "@/components/sections/home";
+import { hero, feature_cards, performance_comparison, beta_waitlist, social_proof, for_developers, system_requirements, faq } from "@/components/sections/home";
 
 export default function home() {
   return (
@@ -18,6 +18,9 @@ export default function home() {
       <main className="flex-1 w-full pt-16">
         {hero()}
         {feature_cards()}
+        {performance_comparison()}
+        {beta_waitlist()}
+        {social_proof()}
         {for_developers()}
         {system_requirements()}
         {faq()}
