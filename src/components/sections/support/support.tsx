@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SparklesIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import { IconBrandDiscord, IconBrandGithub } from "@tabler/icons-react";
+import DiscordWidget from "@/components/ui/discord-widget";
 
 const contactMethods = [
   {
@@ -132,11 +133,24 @@ export function SupportSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 sm:mb-12">
           {contactMethods.map((method, i) => (
             <ContactCard key={method.name} method={method} index={i} />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-12 sm:mb-16"
+        >
+          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">Join Our Community</h3>
+          <div className="max-w-md mx-auto">
+            <DiscordWidget />
+          </div>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
