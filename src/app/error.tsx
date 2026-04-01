@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { XCircleIcon } from "@heroicons/react/24/outline";
@@ -11,6 +13,10 @@ export default function ErrorPage({
     error: Error & { digest?: string };
     reset: () => void;
 }) {
+    useEffect(() => {
+        Sentry.captureException(error);
+    }, [error]);
+
     return (
         <div className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center justify-center min-h-[70vh] selection:bg-brand-accent/30 selection:text-brand-accent">
             {/* Ambient Glow Bg */}
@@ -44,7 +50,7 @@ export default function ErrorPage({
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mt-6 text-lg md:text-xl text-muted-foreground text-center max-w-2xl"
             >
-                We’re sorry, an unexpected error has occurred.
+                We're sorry, an unexpected error has occurred.
                 <br />
                 <span className="block mt-2 text-sm text-destructive font-mono">
                     {error?.message && `Error: ${error.message}`}
