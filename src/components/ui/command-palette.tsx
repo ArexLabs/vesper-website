@@ -104,7 +104,7 @@ export function CommandPalette() {
                       onClick={() => runCommand(() => router.push(item.href))}
                       className="flex items-center gap-3 w-full rounded-lg px-3 py-2.5 text-left hover:bg-muted/50 transition-colors"
                     >
-                      <item.icon className="size-5 text-muted-foreground shrink-0" stroke={1.5} />
+                      <item.icon className="size-5 text-brand-accent shrink-0" stroke={1.5} />
                       <div className="flex flex-1 min-w-0">
                         <span className="text-sm font-medium">{item.name}</span>
                         <span className="mx-2 text-muted-foreground/30">·</span>
@@ -129,7 +129,7 @@ export function CommandPalette() {
                       onClick={() => runCommand(() => router.push(item.href))}
                       className="flex items-center gap-3 w-full rounded-lg px-3 py-2.5 text-left hover:bg-muted/50 transition-colors"
                     >
-                      <item.icon className="size-5 text-muted-foreground shrink-0" stroke={1.5} />
+                      <item.icon className="size-5 text-brand-accent shrink-0" stroke={1.5} />
                       <div className="flex flex-1 min-w-0">
                         <span className="text-sm font-medium">{item.name}</span>
                         <span className="mx-2 text-muted-foreground/30">·</span>
