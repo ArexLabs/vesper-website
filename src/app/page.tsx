@@ -1,6 +1,6 @@
 "use client";
 
-import { hero, feature_cards, performance_comparison, beta_waitlist, social_proof, for_developers, system_requirements, faq } from "@/components/sections/home";
+import { hero, feature_cards, performance_comparison, beta_waitlist, social_proof, for_developers, system_requirements, faq, download_cta } from "@/components/sections/home";
 
 export default function home() {
   return (
@@ -24,6 +24,7 @@ export default function home() {
         {for_developers()}
         {system_requirements()}
         {faq()}
+        {download_cta()}
       </main>
     </div>
   );
