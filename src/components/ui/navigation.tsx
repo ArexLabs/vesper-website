@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink, MessageCircle, FileText, Scale, ShieldCheck, Gavel, HelpCircle, Headphones } from "lucide-react";
+import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink, MessageCircle, FileText, Scale, ShieldCheck, Gavel, HelpCircle, Headphones, BookOpen } from "lucide-react";
 import Link from "next/link";
 import DownloadModal from "./download-modal";
 import GitHubModal from "./github-modal";
@@ -64,6 +64,7 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { name: "Home", href: "/", icon: Home },
+  { name: "Blog", href: "/blog", icon: BookOpen },
 ];
 
 interface DropdownItem {
@@ -168,6 +169,14 @@ export function Navigation() {
     window.dispatchEvent(new CustomEvent("vesper:open-cmdk"));
     setMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleOpenGitHub = () => {
+      setGithubModalOpen(true);
+    };
+    window.addEventListener("vesper:open-github", handleOpenGitHub);
+    return () => window.removeEventListener("vesper:open-github", handleOpenGitHub);
+  }, []);
 
   return (
     <>

@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { IconDownload } from "@tabler/icons-react";
+import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
@@ -161,7 +161,7 @@ const GitHubModal: React.FC<GitHubModalProps> = ({ open, onClose }) => {
                       </span>
                     ) : (
                       <span className="flex w-14 h-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-brand-accent/20 group-hover:text-brand-accent">
-                        <IconDownload className="size-5" stroke={2} />
+                        <IconExternalLink className="size-5" stroke={2} />
                       </span>
                     )}
                   </div>
