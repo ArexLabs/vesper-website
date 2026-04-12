@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { faqs } from "@/data/faqs";
 import Link from "next/link";
 
@@ -77,9 +77,10 @@ export default function FAQPage() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.03 }}
-                className="border-b border-border/30 pb-6 pt-2 group hover:bg-card/30 -mx-4 px-4 rounded-xl transition-all duration-200"
+                className="border-b border-border/30 pb-8 pt-2 group hover:bg-card/30 -mx-4 px-4 rounded-xl transition-all duration-200"
               >
-                <h3 className="font-semibold text-foreground mb-2">
+                <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                  <QuestionMarkCircleIcon className="w-5 h-5 text-brand-accent/50 shrink-0" />
                   {faq.question}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
