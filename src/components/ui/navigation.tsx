@@ -277,6 +277,13 @@ export function Navigation() {
                   <span>K</span>
                 </div>
               </button>
+
+              <button
+                onClick={handleOpenDownloadModal}
+                className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-brand-accent hover:bg-brand-accent/90 text-background rounded-full transition-all duration-200"
+              >
+                Download
+              </button>
               
               <button
                 onClick={() => setGithubModalOpen(true)}

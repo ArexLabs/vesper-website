@@ -15,6 +15,7 @@ import {
   IconBrandDebian,
   IconBrandRedhat,
   IconBrandUbuntu,
+  IconPackage,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
@@ -57,6 +58,11 @@ const PlatformIcons = {
   appimage: (
     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#E95420]/10 text-[#E95420] dark:bg-[#E95420]/20">
       <IconBrandUbuntu className="size-5" stroke={1.5} />
+    </div>
+  ),
+  portable: (
+    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-accent/10 text-brand-accent">
+      <IconPackage className="size-5" stroke={1.5} />
     </div>
   ),
 };
@@ -102,6 +108,14 @@ const platforms = [
     icon: PlatformIcons.appimage,
     group: "linux",
   },
+  {
+    label: "Linux (Portable Binary)",
+    subtitle: ".tar.gz archive",
+    match: (name: string) => name.toLowerCase().endsWith(".tar.gz"),
+    fallbackUrl: "https://github.com/ArexLabs/vesper-client/releases/latest",
+    icon: PlatformIcons.portable,
+    group: "linux",
+  },
 ];
 
 const DownloadModal: React.FC<DownloadModalProps> = ({ open, onClose }) => {
@@ -136,7 +150,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
-      <DialogContent className="max-w-2xl gap-0 overflow-hidden p-0 sm:max-w-2xl max-h-[90dvh] flex flex-col">
+      <DialogContent className="max-w-3xl gap-0 overflow-hidden p-0 sm:max-w-3xl max-h-[90dvh] flex flex-col">
         <div className="shrink-0 border-b border-border px-4 py-4 sm:px-6 sm:py-5">
           <DialogHeader>
             <DialogTitle className="text-lg font-semibold tracking-tight">
@@ -174,7 +188,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ open, onClose }) => {
               <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Linux
               </h3>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {linuxPlatforms.map((platform, i) => {
                   const idx = platforms.indexOf(platform);
                   const isDownloading = !!downloading[idx];
@@ -240,10 +254,10 @@ function PlatformTile({
     >
       {platform.icon}
       <div className="min-w-0 flex-1">
-        <span className="block text-sm font-medium text-foreground wrap-break-word">
+        <span className="block text-sm font-medium text-foreground whitespace-nowrap truncate">
           {platform.label}
         </span>
-        <span className="block text-xs text-muted-foreground">
+        <span className="block text-xs text-muted-foreground whitespace-nowrap">
           {platform.subtitle}
         </span>
       </div>
