@@ -29,7 +29,7 @@ export default function TermsOfUse() {
                             Terms of <span className="text-brand-accent italic">Use</span>
                         </h1>
                         <p className="text-muted-foreground max-w-lg mx-auto">
-                            The rules and conditions for using Vesper Launcher.
+                            The rules and conditions for using Vesper Client.
                         </p>
                     </motion.div>
 
@@ -38,7 +38,7 @@ export default function TermsOfUse() {
                             {
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        These Terms of Use (&quot;Terms&quot;) govern your use of <strong>Vesper Launcher</strong> and this website. By accessing or using Vesper, you agree to be bound by these Terms.
+                                        These Terms of Use (&quot;Terms&quot;) govern your use of <strong>Vesper Client</strong> and this website. By accessing or using Vesper, you agree to be bound by these Terms.
                                     </p>
                                 )
                             },
@@ -48,7 +48,7 @@ export default function TermsOfUse() {
                                     <ul className="space-y-3 text-muted-foreground">
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
-                                            <span>Vesper Launcher is for <span className="font-medium text-foreground">personal, non-commercial use</span> only.</span>
+                                            <span>Vesper Client is for <span className="font-medium text-foreground">personal, non-commercial use</span> only.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
@@ -69,7 +69,7 @@ export default function TermsOfUse() {
                                         <ul className="space-y-3 text-muted-foreground">
                                             <li className="flex items-start gap-3">
                                                 <span className="text-destructive mt-1">✕</span>
-                                                <span>Use Vesper Launcher for any <span className="font-medium text-foreground">illegal activities</span>.</span>
+                                                <span>Use Vesper Client for any <span className="font-medium text-foreground">illegal activities</span>.</span>
                                             </li>
                                             <li className="flex items-start gap-3">
                                                 <span className="text-destructive mt-1">✕</span>
@@ -77,7 +77,7 @@ export default function TermsOfUse() {
                                             </li>
                                             <li className="flex items-start gap-3">
                                                 <span className="text-destructive mt-1">✕</span>
-                                                <span><span className="font-medium text-foreground">Reverse engineer, decompile,</span> or tamper with Vesper Launcher.</span>
+                                                <span><span className="font-medium text-foreground">Reverse engineer, decompile,</span> or tamper with Vesper Client.</span>
                                             </li>
                                             <li className="flex items-start gap-3">
                                                 <span className="text-destructive mt-1">✕</span>
@@ -92,7 +92,7 @@ export default function TermsOfUse() {
                                 icon: true,
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        Vesper Launcher is provided <span className="font-medium text-foreground">&quot;as is&quot;</span> and <span className="font-medium text-foreground">&quot;as available&quot;</span>. <span className="text-brand-accent font-medium">No warranty</span> of any kind is provided, express or implied, including fitness for a particular purpose or non-infringement.
+                                        Vesper Client is provided <span className="font-medium text-foreground">&quot;as is&quot;</span> and <span className="font-medium text-foreground">&quot;as available&quot;</span>. <span className="text-brand-accent font-medium">No warranty</span> of any kind is provided, express or implied, including fitness for a particular purpose or non-infringement.
                                     </p>
                                 )
                             },
@@ -101,7 +101,7 @@ export default function TermsOfUse() {
                                 content: (
                                     <>
                                         <p className="text-muted-foreground leading-relaxed">
-                                            In no event shall DevFlare or Vesper Launcher contributors be liable for any damages arising from your use or inability to use Vesper Launcher. This includes, but is not limited to:
+                                            In no event shall DevFlare or Vesper Client contributors be liable for any damages arising from your use or inability to use Vesper Client. This includes, but is not limited to:
                                         </p>
                                         <ul className="mt-4 space-y-2 text-muted-foreground">
                                             <li className="flex items-start gap-2">
@@ -126,7 +126,7 @@ export default function TermsOfUse() {
                                     <ul className="space-y-3 text-muted-foreground">
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
-                                            <span><span className="font-medium text-foreground">Minecraft®</span> is a trademark of Mojang AB. Vesper is independent and not affiliated.</span>
+                                            <span><span className="font-medium text-foreground">Minecraft</span> is a trademark of Microsoft and Mojang. Vesper is independent and not affiliated.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
@@ -134,7 +134,7 @@ export default function TermsOfUse() {
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
-                                            <span>Vesper Launcher and this website are <span className="font-medium text-foreground">open source</span>. See <a href="https://github.com/ArexLabs/vesper-client" target="_blank" rel="noopener noreferrer" className="text-brand-accent hover:underline">GitHub</a> for details.</span>
+                                            <span>Vesper Client and this website are <span className="font-medium text-foreground">open source</span>. See <a href="https://github.com/ArexLabs/vesper-client" target="_blank" rel="noopener noreferrer" className="text-brand-accent hover:underline">GitHub</a> for details.</span>
                                         </li>
                                     </ul>
                                 )
@@ -143,7 +143,7 @@ export default function TermsOfUse() {
                                 title: "Changes to Terms",
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        These Terms may be updated at any time. <span className="font-medium text-foreground">Continued use</span> of Vesper Launcher after changes constitutes acceptance of the new Terms.
+                                        These Terms may be updated at any time. <span className="font-medium text-foreground">Continued use</span> of Vesper Client after changes constitutes acceptance of the new Terms.
                                     </p>
                                 )
                             },
@@ -151,7 +151,7 @@ export default function TermsOfUse() {
                                 title: "Termination",
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        We reserve the right to <span className="font-medium text-foreground">revoke access</span> to Vesper Launcher or this website at any time for violation of these Terms or for any other reason.
+                                        We reserve the right to <span className="font-medium text-foreground">revoke access</span> to Vesper Client or this website at any time for violation of these Terms or for any other reason.
                                     </p>
                                 )
                             },
@@ -216,7 +216,7 @@ export default function TermsOfUse() {
 
                     <hr className="my-12 border-border/40" />
                     <p className="text-sm text-muted-foreground text-center">
-                        Last updated: March 2026
+                        Last updated: April 2026
                     </p>
                 </section>
             </main>

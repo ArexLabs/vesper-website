@@ -120,7 +120,7 @@ export function TechStackSection() {
             Tech <span className="text-brand-accent italic">Stack</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            The technologies powering Vesper Launcher and this website.
+            The technologies powering Vesper Client and this website.
           </p>
         </motion.div>
 

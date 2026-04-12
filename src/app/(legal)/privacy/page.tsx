@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
                                 title: "Our Commitment",
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        <strong>Vesper Launcher</strong> is committed to protecting your privacy. We believe in <span className="text-brand-accent font-medium">minimal data collection</span> — your data stays on your machine.
+                                        <strong>Vesper Client</strong> is committed to protecting your privacy. We believe in <span className="text-brand-accent font-medium">minimal data collection</span> — your data stays on your machine.
                                     </p>
                                 ),
                                 icon: "shield",
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
                                 items: [
                                     { title: "No Telemetry", desc: "We do not collect any analytics, usage data, or telemetry from the launcher or website." },
                                     { title: "No Cookies", desc: "We don't use cookies or any tracking technologies on this website." },
-                                    { title: "No User Accounts", desc: "No registration required. The launcher doesn't store any personal data." }
+                                    { title: "No Custom Accounts", desc: "No registration required. We don't have our own user accounts — you use your Microsoft account." }
                                 ]
                             },
                             {
@@ -58,10 +58,13 @@ export default function PrivacyPolicy() {
                                 content: (
                                     <>
                                         <p className="text-muted-foreground leading-relaxed mb-4">
-                                            When you log in to Vesper Launcher, it uses <span className="text-brand-accent font-medium">Microsoft OAuth2</span> authentication. Your credentials are handled securely by Microsoft's services — we never see or store your password.
+                                            Vesper uses <span className="text-brand-accent font-medium">Microsoft OAuth2</span> authentication. You only need your Microsoft account — no custom account registration required.
+                                        </p>
+                                        <p className="text-muted-foreground leading-relaxed mb-4">
+                                            Your credentials are handled securely by Microsoft's services — we never see or store your password.
                                         </p>
                                         <p className="text-sm text-muted-foreground">
-                                            Only an access token is stored locally on your device to maintain your session.
+                                            Only an access token is stored locally on your device to keep you logged in. This is your login session — nothing else.
                                         </p>
                                     </>
                                 )
@@ -71,7 +74,7 @@ export default function PrivacyPolicy() {
                                 content: (
                                     <>
                                         <p className="text-muted-foreground leading-relaxed mb-4">
-                                            Vesper Launcher may interact with third-party services to provide mod and resource features:
+                                            Vesper Client may interact with third-party services to provide mod and resource features:
                                         </p>
                                         <div className="flex flex-wrap gap-2">
                                             <a href="https://modrinth.com" target="_blank" rel="noopener noreferrer" className="px-3 py-1.5 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm">
@@ -179,7 +182,7 @@ export default function PrivacyPolicy() {
 
                     <hr className="my-12 border-border/40" />
                     <p className="text-sm text-muted-foreground text-center">
-                        Last updated: March 2026
+                        Last updated: April 2026
                     </p>
                 </section>
             </main>

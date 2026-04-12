@@ -15,7 +15,7 @@ const changelog = [
       {
         type: "Added",
         items: [
-          "Initial alpha release of the Vesper Launcher Desktop Client.",
+          "Initial alpha release of the Vesper Client Desktop Client.",
           "Multi-platform builds for Windows (.exe), Mac (.dmg), and Linux (.AppImage, .deb, .rpm).",
           "Modern user interface with light and dark mode support.",
           "Launcher autoupdate support (checks for new versions on startup).",
@@ -142,7 +142,7 @@ export function ChangelogSection() {
             Change<span className="text-brand-accent italic">log</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-6">
-            Follow the evolution of Vesper Launcher. Check out our{" "}
+            Follow the evolution of Vesper Client. Check out our{" "}
             <Link
               className="text-brand-accent hover:underline"
               target="_blank"
@@ -154,7 +154,7 @@ export function ChangelogSection() {
           </p>
           <div className="inline-flex items-center gap-2 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-500 text-sm">
             <AlertCircle className="w-4 h-4 shrink-0" />
-            <span>This is the Vesper Launcher <b>Desktop App</b> changelog. Use at your own risk.</span>
+            <span>This is the Vesper Client <b>Desktop App</b> changelog. Use at your own risk.</span>
           </div>
         </motion.div>
 

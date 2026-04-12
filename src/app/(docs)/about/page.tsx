@@ -3,8 +3,8 @@ import { AboutSection } from "@/components/sections/about";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn about Vesper Launcher - a modern, high-performance Minecraft client built for players who demand speed, privacy, and control.",
-  keywords: ["About Vesper", "Vesper Launcher Info", "Minecraft Client About", "Vesper Team"],
+  description: "Learn about Vesper Client - a modern, high-performance Minecraft client built for players who demand speed, privacy, and control.",
+  keywords: ["About Vesper", "Vesper Client Info", "Minecraft Client About", "Vesper Team"],
 };
 
 export default function AboutPage() {

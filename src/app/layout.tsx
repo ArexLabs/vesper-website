@@ -24,11 +24,11 @@ const fontMono = FontMono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Vesper Launcher",
-    template: "%s | Vesper Launcher",
+    default: "Vesper Client",
+    template: "%s | Vesper Client",
   },
   description:
-    "Vesper Launcher is a sleek, modern, and high-utility Minecraft client designed for performance, customization, and an enhanced gameplay experience.",
+    "Vesper Client is a sleek, modern, and high-utility Minecraft client designed for performance, customization, and an enhanced gameplay experience.",
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon" },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Minecraft",
-    "Vesper Launcher",
+    "Vesper Client",
     "Minecraft Client",
     "High-Utility",
     "Modern",

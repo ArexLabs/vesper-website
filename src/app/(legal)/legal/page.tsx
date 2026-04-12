@@ -29,7 +29,7 @@ export default function LegalNotice() {
                             Legal <span className="text-brand-accent italic">Notice</span>
                         </h1>
                         <p className="text-muted-foreground max-w-lg mx-auto">
-                            Important legal information about Vesper Launcher and this website.
+                            Important legal information about Vesper Client and this website.
                         </p>
                     </motion.div>
 
@@ -39,7 +39,7 @@ export default function LegalNotice() {
                                 title: "Independent Project",
                                 content: (
                                     <p className="text-muted-foreground leading-relaxed">
-                                        <strong>Vesper Launcher</strong> is an independent open source project and is <span className="text-brand-accent font-medium">not affiliated with Mojang, Microsoft, or any of their subsidiaries</span>. It is not endorsed or supported by them in any way.
+                                        <strong>Vesper Client</strong> is an independent open source project and is <span className="text-brand-accent font-medium">not affiliated with Mojang, Microsoft, or any of their subsidiaries</span>. It is not endorsed or supported by them in any way.
                                     </p>
                                 )
                             },
@@ -71,11 +71,11 @@ export default function LegalNotice() {
                                     <ul className="space-y-3 text-muted-foreground">
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
-                                            <span><span className="font-medium text-foreground">Minecraft®</span> is a trademark of Mojang AB. This project is <span className="text-brand-accent">not endorsed or supported</span> by Mojang or Microsoft.</span>
+                                            <span><span className="font-medium text-foreground">Minecraft</span> is a trademark of Microsoft and Mojang. This project is <span className="text-brand-accent">not endorsed or supported</span> by Microsoft or Mojang.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
-                                            <span>Vesper Launcher provides <span className="font-medium text-foreground">no warranty</span> and is supplied &quot;as-is&quot;. Use at your own risk.</span>
+                                            <span>Vesper Client provides <span className="font-medium text-foreground">no warranty</span> and is supplied &quot;as-is&quot;. Use at your own risk.</span>
                                         </li>
                                         <li className="flex items-start gap-3">
                                             <span className="text-brand-accent mt-1">•</span>
@@ -89,7 +89,7 @@ export default function LegalNotice() {
                                 content: (
                                     <>
                                         <p className="text-muted-foreground leading-relaxed mb-4">
-                                            Vesper Launcher and this website are open source. View the source code and license on GitHub.
+                                            Vesper Client and this website are open source. View the source code and license on GitHub.
                                         </p>
                                         <div className="flex flex-wrap gap-3">
                                             <a href="https://github.com/ArexLabs/vesper-client" target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg bg-card border border-border hover:border-brand-accent/50 transition-colors text-sm font-medium">
@@ -135,7 +135,7 @@ export default function LegalNotice() {
 
                     <hr className="my-12 border-border/40" />
                     <p className="text-sm text-muted-foreground text-center">
-                        Last updated: March 2026
+                        Last updated: April 2026
                     </p>
                 </section>
             </main>

@@ -3,7 +3,7 @@ import { SupportSection } from "@/components/sections/support";
 
 export const metadata: Metadata = {
   title: "Support",
-  description: "Get help with Vesper Launcher. Contact our team via Discord, GitHub, or email. Find answers to frequently asked questions.",
+  description: "Get help with Vesper Client. Contact our team via Discord, GitHub, or email. Find answers to frequently asked questions.",
   keywords: ["Vesper Support", "Vesper Help", "Minecraft Launcher Support", "Vesper Contact"],
 };
 
