@@ -275,13 +275,15 @@ export function Navigation() {
               <button
                 onClick={handleOpenSearch}
                 className={cn(
-                  "hidden sm:flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all duration-200",
+                  "hidden sm:flex items-center justify-between gap-3 px-3 py-2 text-sm text-muted-foreground hover:text-foreground bg-card/50 border border-border hover:border-brand-accent/30 rounded-xl transition-all duration-200 min-w-[200px]",
                   isCompact && "hidden lg:hidden"
                 )}
               >
-                <Search className="size-4" />
-                <span className="hidden md:inline">Search...</span>
-                <div className="hidden md:flex items-center gap-1 px-1.5 py-0.5 rounded border border-white/10 bg-white/5 text-[10px] font-bold">
+                <div className="flex items-center gap-2">
+                  <Search className="size-4" />
+                  <span className="hidden md:inline">Search...</span>
+                </div>
+                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground">
                   <span className="text-[8px] opacity-60">⌘</span>
                   <span>K</span>
                 </div>
