@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   IconBrandWindows,
   IconBrandApple,
@@ -25,87 +26,141 @@ export function download_cta() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-[48px] md:text-[60px] font-bold text-foreground leading-[1.1] tracking-tight mb-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-[48px] md:text-[60px] font-bold text-foreground leading-[1.1] tracking-tight mb-6"
+          >
             Ready to
             <br />
-            <span className="text-brand-accent italic">launch?</span>
-          </h2>
-          <p className="text-lg font-light text-muted-foreground max-w-md mx-auto tracking-tight mb-12">
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-brand-accent italic"
+            >
+              launch?
+            </motion.span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg font-light text-muted-foreground max-w-md mx-auto tracking-tight mb-12"
+          >
             Download Vesper for free. Available on Windows, macOS, and Linux. No
             account required.
-          </p>
+          </motion.p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
-            <a
-              href="https://github.com/ArexLabs/vesper-client/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block w-full sm:w-auto"
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-b from-brand-accent/50 to-brand-accent/20 pointer-events-auto" />
-              <div className="relative bg-foreground rounded-xl px-6 py-4 flex items-center justify-center gap-3 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <IconBrandWindows
-                  className="relative z-10 text-background"
-                  stroke={1.5}
-                />
-                <div className="relative z-10 text-left">
-                  <div className="text-sm font-semibold text-background">
-                    Windows
-                  </div>
-                  <div className="text-[10px] font-mono text-background/80">
-                    x64 · exe
+              <Link
+                href="https://github.com/ArexLabs/vesper-client/releases/latest"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-block w-full sm:w-auto"
+              >
+                <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-b from-brand-accent/50 to-brand-accent/20 pointer-events-auto" />
+                <div className="relative bg-foreground rounded-xl px-6 py-4 flex items-center justify-center gap-3 overflow-hidden">
+                  <div className="absolute inset-0 bg-brand-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  <IconBrandWindows
+                    className="relative z-10 text-background"
+                    stroke={1.5}
+                  />
+                  <div className="relative z-10 text-left">
+                    <div className="text-sm font-semibold text-background">
+                      Windows
+                    </div>
+                    <div className="text-[10px] font-mono text-background/80">
+                      x64 · exe
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </Link>
+            </motion.div>
 
-            <a
-              href="https://github.com/ArexLabs/vesper-client/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block w-full sm:w-auto"
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="rounded-xl border border-border bg-card px-6 py-4 flex items-center justify-center gap-3 hover:bg-white/[0.03] hover:border-brand-accent/30 transition-all duration-300">
-                <IconBrandApple
-                  className="text-muted-foreground group-hover:text-brand-accent transition-colors"
-                  stroke={1.5}
-                />
-                <div className="text-left">
-                  <div className="text-sm font-semibold text-foreground">
-                    macOS
-                  </div>
-                  <div className="text-[10px] font-mono text-muted-foreground">
-                    aarch64 · dmg
+              <Link
+                href="https://github.com/ArexLabs/vesper-client/releases/latest"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-block w-full sm:w-auto"
+              >
+                <div className="rounded-xl border border-border bg-card px-6 py-4 flex items-center justify-center gap-3 hover:bg-white/[0.03] hover:border-brand-accent/30 transition-all duration-300">
+                  <IconBrandApple
+                    className="text-muted-foreground group-hover:text-brand-accent transition-colors"
+                    stroke={1.5}
+                  />
+                  <div className="text-left">
+                    <div className="text-sm font-semibold text-foreground">
+                      macOS
+                    </div>
+                    <div className="text-[10px] font-mono text-muted-foreground">
+                      aarch64 · dmg
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </Link>
+            </motion.div>
 
-            <a
-              href="https://github.com/ArexLabs/vesper-client/releases/latest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block w-full sm:w-auto"
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <div className="rounded-xl border border-border bg-card px-6 py-4 flex items-center justify-center gap-3 hover:bg-white/[0.03] hover:border-brand-accent/30 transition-all duration-300">
-                <IconBrandUbuntu
-                  className="text-muted-foreground group-hover:text-brand-accent transition-colors"
-                  stroke={1.5}
-                />
-                <div className="text-left">
-                  <div className="text-sm font-semibold text-foreground">
-                    Linux
-                  </div>
-                  <div className="text-[10px] font-mono text-muted-foreground">
-                    x64 · AppImage
+              <Link
+                href="https://github.com/ArexLabs/vesper-client/releases/latest"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-block w-full sm:w-auto"
+              >
+                <div className="rounded-xl border border-border bg-card px-6 py-4 flex items-center justify-center gap-3 hover:bg-white/[0.03] hover:border-brand-accent/30 transition-all duration-300">
+                  <IconBrandUbuntu
+                    className="text-muted-foreground group-hover:text-brand-accent transition-colors"
+                    stroke={1.5}
+                  />
+                  <div className="text-left">
+                    <div className="text-sm font-semibold text-foreground">
+                      Linux
+                    </div>
+                    <div className="text-[10px] font-mono text-muted-foreground">
+                      x64 · AppImage
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </Link>
+            </motion.div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground font-mono">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground font-mono"
+          >
             <span className="flex items-center gap-1.5">
               <ShieldCheckIcon className="w-3.5 h-3.5" /> No malware
             </span>
@@ -118,7 +173,7 @@ export function download_cta() {
             <span className="flex items-center gap-1.5">
               <CommandLineIcon className="w-3.5 h-3.5" /> Open Source
             </span>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
