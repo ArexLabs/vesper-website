@@ -331,54 +331,50 @@ export function Navigation() {
                 initial="closed"
                 animate="open"
                 exit="closed"
-                className="fixed top-20 left-4 right-4 p-6 bg-card border border-white/10 rounded-3xl z-50 lg:hidden shadow-3xl max-h-[80vh] overflow-y-auto"
+                className="fixed top-20 left-4 right-4 p-0 bg-card/95 backdrop-blur-xl rounded-2xl z-50 lg:hidden shadow-2xl max-h-[80vh] overflow-y-auto"
               >
-                <div className="flex flex-col gap-2">
+                <div className="space-y-1 p-2">
                   <button
                     onClick={handleOpenSearch}
-                    className="w-full flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-2xl border border-white/5 transition-colors mb-4 text-left"
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-muted-foreground hover:bg-accent transition-colors text-left"
                   >
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Search className="size-5" />
-                      <span className="font-medium">Global Search</span>
+                    <div className="flex items-center gap-3">
+                      <Search className="size-4" />
+                      <span className="text-sm font-medium">Search</span>
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-white/5 text-[10px] font-bold text-muted-foreground/60 border border-white/5">
+                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground">
                       <CommandIcon className="size-3" />
-                      <span>K</span>
                     </div>
                   </button>
 
-                  {navLinks.map((link) => {
-                    const isActive = pathname === link.href;
-                    const Icon = link.icon;
-                    return (
-                      <motion.div key={link.name} variants={itemVariants}>
-                        <Link
-                          href={link.href}
-                          aria-current={isActive ? "page" : undefined}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className={cn(
-                            "flex items-center gap-4 w-full p-4 rounded-2xl transition-colors",
-                            isActive
-                              ? "bg-brand-accent/10 text-brand-accent"
-                              : "text-foreground hover:bg-white/5"
-                          )}
-                        >
-                          <Icon
+                  <div className="pt-2 pb-1">
+                    {navLinks.map((link) => {
+                      const isActive = pathname === link.href;
+                      const Icon = link.icon;
+                      return (
+                        <motion.div key={link.name} variants={itemVariants}>
+                          <Link
+                            href={link.href}
+                            aria-current={isActive ? "page" : undefined}
+                            onClick={() => setMobileMenuOpen(false)}
                             className={cn(
-                              "size-6",
-                              isActive ? "text-brand-accent" : "text-brand-accent/60"
+                              "flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors",
+                              isActive
+                                ? "bg-brand-accent/10 text-brand-accent"
+                                : "text-foreground hover:bg-accent"
                             )}
-                          />
-                          <span className="text-lg font-semibold">{link.name}</span>
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
+                          >
+                            <Icon className="size-4" />
+                            <span className="text-sm font-medium">{link.name}</span>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
 
                   {dropdowns.map((dropdown) => (
-                    <motion.div key={dropdown.name} variants={itemVariants} className="pt-4 border-t border-white/5 mt-2">
-                      <div className="px-4 py-2 text-sm font-semibold text-muted-foreground">{dropdown.name}</div>
+                    <motion.div key={dropdown.name} variants={itemVariants} className="space-y-0.5">
+                      <div className="px-4 py-2 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">{dropdown.name}</div>
                       {dropdown.items.map((item) => {
                         const Icon = item.icon;
                         const isExternal = item.href.startsWith("http");
@@ -389,40 +385,39 @@ export function Navigation() {
                             target={isExternal ? "_blank" : undefined}
                             rel={isExternal ? "noopener noreferrer" : undefined}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-center gap-4 w-full p-4 rounded-2xl text-foreground hover:bg-white/5 transition-colors"
+                            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-foreground hover:bg-accent transition-colors"
                           >
-                            <Icon className="size-6 text-brand-accent/60" />
-                            <div>
-                              <div className="font-semibold">
+                            <Icon className="size-4 text-brand-accent" />
+                            <div className="flex-1">
+                              <div className="text-sm font-medium">
                                 {item.name}
-                                {isExternal && <ExternalLink className="inline-block size-3 ml-1 opacity-50" />}
                               </div>
-                              {item.description && <div className="text-sm text-muted-foreground">{item.description}</div>}
                             </div>
+                            {isExternal && <ExternalLink className="size-3.5 text-muted-foreground" />}
                           </a>
                         );
                       })}
                     </motion.div>
                   ))}
 
-                  <motion.div variants={itemVariants} className="pt-4 flex flex-col gap-3 border-t border-white/5 mt-2">
-                    <div className="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5">
-                      <span className="text-muted-foreground font-medium">Theme</span>
-                      <ThemeToggle />
-                    </div>
+                  <motion.div variants={itemVariants} className="space-y-1 pt-3 pb-1">
                     <button
                       onClick={handleOpenDownloadModal}
-                      className="w-full p-5 bg-brand-accent text-background rounded-2xl font-bold text-lg shadow-lg active:scale-[0.98] transition-all"
+                      className="w-full px-4 py-2.5 bg-brand-accent text-background rounded-xl text-sm font-semibold shadow-sm active:scale-[0.98] transition-all"
                     >
-                      Download Client
+                      Download Vesper
                     </button>
                     <button
                       onClick={() => { setGithubModalOpen(true); setMobileMenuOpen(false); }}
-                      className="w-full p-4 rounded-2xl bg-white/5 text-muted-foreground flex items-center justify-center gap-3 font-medium transition-colors"
+                      className="w-full px-4 py-2.5 rounded-xl text-muted-foreground flex items-center justify-center gap-2 text-sm font-medium hover:bg-accent transition-colors"
                     >
-                      <GitHubIcon className="w-5 h-5" />
+                      <GitHubIcon className="size-4" />
                       View on GitHub
                     </button>
+                    <div className="flex items-center justify-between px-4 py-2 rounded-xl hover:bg-accent transition-colors">
+                      <span className="text-sm text-muted-foreground font-medium">Theme</span>
+                      <ThemeToggle />
+                    </div>
                   </motion.div>
                 </div>
               </motion.div>
