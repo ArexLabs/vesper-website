@@ -82,7 +82,7 @@ export default function RootLayout({
             links={[
               { label: "Legal Notice", href: "/legal" },
               { label: "Privacy Policy", href: "/privacy" },
-              { label: "Terms & Conditions", href: "/terms" },
+              { label: "Terms of Use", href: "/terms" },
               { label: "Terms of Service", href: "/tos" }
             ]}
           />

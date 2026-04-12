@@ -20,7 +20,7 @@ const navigation_items = [
 const legal_items = [
   { name: "Legal Notice", href: "/legal", icon: IconFileText, description: "Legal information" },
   { name: "Privacy Policy", href: "/privacy", icon: IconShieldCheck, description: "Data & privacy" },
-  { name: "Terms & Conditions", href: "/terms", icon: IconScale, description: "Usage terms" },
+  { name: "Terms of Use", href: "/terms", icon: IconScale, description: "Usage terms" },
   { name: "Terms of Service", href: "/tos", icon: IconGavel, description: "Service agreement" },
 ];
 

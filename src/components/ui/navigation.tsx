@@ -104,7 +104,7 @@ const dropdowns: Dropdown[] = [
     items: [
       { name: "Legal Notice", href: "/legal", icon: FileText, description: "Legal information" },
       { name: "Privacy Policy", href: "/privacy", icon: ShieldCheck, description: "Data & privacy" },
-      { name: "Terms & Conditions", href: "/terms", icon: Scale, description: "Usage terms" },
+      { name: "Terms of Use", href: "/terms", icon: Scale, description: "Usage terms" },
       { name: "Terms of Service", href: "/tos", icon: Gavel, description: "Service agreement" },
     ],
   },
