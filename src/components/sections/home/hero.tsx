@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon, StarIcon, ArrowTopRightOnSquareIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ClipboardIcon, XCircleIcon, SparklesIcon, StarIcon, ArrowTopRightOnSquareIcon, RocketLaunchIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import Link from "next/link";
 
@@ -66,10 +66,11 @@ export function hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-64 bg-brand-accent/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center max-w-4xl mx-auto">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-brand-accent/10 border border-brand-accent/20">
-          <SparklesIcon className="w-4 h-4 text-brand-accent" />
-          <span className="text-sm font-medium text-brand-accent">Looking for Rust + egui Developer</span>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-yellow-200/20 border border-yellow-400/30">
+          <InformationCircleIcon className="w-4 h-4 text-yellow-500" />
+          <span className="text-sm font-medium text-yellow-600">Stats shown are just placeholders</span>
         </motion.div>
+   
 
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
           Minecraft Launchers, <span className="text-brand-accent italic">Redefined</span>
