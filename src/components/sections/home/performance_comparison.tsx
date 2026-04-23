@@ -150,7 +150,7 @@ export function performance_comparison() {
         transition={{ duration: 0.5, delay: 0.5 }}
         className="text-center text-xs text-muted-foreground mt-6"
       >
-        *Metrics based on typical benchmarks. Actual performance may vary. Labymod data from labymod.net/downloads.
+        *Metrics based on typical benchmarks. Actual performance may vary.
       </motion.p>
     </section>
   );
