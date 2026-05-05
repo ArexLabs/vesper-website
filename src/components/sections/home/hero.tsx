@@ -77,7 +77,7 @@ export function hero() {
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }} className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-          Built from scratch with <span className="text-foreground font-semibold">Rust + egui</span> for instant startup, minimal resource usage, and a modern native experience that puts you in control.
+          Built from scratch with <span className="text-foreground font-semibold">Rust + Tauri</span> for instant startup, minimal resource usage, and a modern native experience that puts you in control.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.35 }} className="flex flex-wrap justify-center gap-3 mb-10">

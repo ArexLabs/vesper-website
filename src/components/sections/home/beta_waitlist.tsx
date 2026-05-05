@@ -67,7 +67,7 @@ export function beta_waitlist() {
           </div>
           <h3 className="font-semibold text-foreground mb-2">Contributors Welcome</h3>
           <p className="text-sm text-muted-foreground">
-            Experienced with Rust + egui? Apply for early access via Discord.
+            Experienced with Rust + Tauri? Apply for early access via Discord.
           </p>
         </motion.div>
       </div>
@@ -89,7 +89,7 @@ export function beta_waitlist() {
           <ArrowTopRightOnSquareIcon className="w-4 h-4" />
         </Link>
         <p className="text-xs text-muted-foreground mt-4">
-          Limited spots available for early beta testers with Rust/egui experience
+          Limited spots available for early beta testers with Rust/Tauri experience
         </p>
       </motion.div>
     </section>

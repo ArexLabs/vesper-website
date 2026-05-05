@@ -21,7 +21,7 @@ interface TechCategory {
 
 const launcher_stack: TechItem[] = [
   { name: "Rust", description: "Core launcher application - performance & safety", icon: IconBrandRust },
-  { name: "egui", description: "Native immediate mode GUI framework", icon: IconTauri },
+  { name: "Tauri", description: "Tiny, secure framework for native desktop apps", icon: IconTauri },
   { name: "TypeScript", description: "Plugin API and UI scripting", icon: IconBrandTypescript },
   { name: "Minecraft Protocol", description: "Protocol implementation", icon: IconBrandMinecraft },
   { name: "reqwest", description: "HTTP client for API requests", icon: IconApi },
@@ -48,7 +48,7 @@ const tools_stack: TechItem[] = [
 const techstackData: TechCategory[] = [
   {
     title: "Launcher",
-    description: "Built with Rust for maximum performance and reliability.",
+    description: "I was learning Rust when I got the idea to train myself by making a Minecraft launcher, and this is what came out! Rust was the perfect choice — blazing fast, memory-safe, and lets me squeeze every drop of performance out of the system. Combined with Tauri, we get tiny binary sizes, secure native windows, and the ability to use web technologies for parts of the UI when needed. Waaaayyyyyyyy more efficient than Electron or Java-based launchers!",
     accent: "text-orange-400",
     items: launcher_stack,
   },
