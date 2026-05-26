@@ -18,19 +18,32 @@ A blazing-fast, native Minecraft launcher built for performance and simplicity.
 
 ## About
 
-Vesper is a next-generation Minecraft launcher designed to get you into the game **instantly** — without the bloat of Electron-based apps. With native mod support, seamless Microsoft authentication, and a sleek, distraction-free UI, Vesper delivers a premium gaming experience.
+Vesper is a next-generation Minecraft launcher designed to get you into the game **instantly** — without the bloat of Electron-based apps.
 
-Explore features, system requirements, and guides at [launcher.devflare.de](https://launcher.devflare.de).
+This repository contains the **Vesper website** ([ArexLabs/vesper-website](https://github.com/ArexLabs/vesper-website)). The launcher itself lives at [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client).
 
 ---
 
 ## Features
+
+### Client / Launcher
 
 - **Instant Launch** — No lag, no heavy frameworks. Launch directly into your game in seconds.
 - **Native Mod Support** — Integrated with Modrinth and CurseForge for effortless mod installation.
 - **Modern UI** — Clean, minimalist interface that puts you in control.
 - **Secure Authentication** — Microsoft OAuth2 login with zero telemetry.
 - **Rich Integrations** — Discord RPC and modloader presence support out of the box.
+
+### Website
+
+- **Landing Page** — Feature overview, hero section, and download CTA
+- **Documentation** — Roadmap, tech stack, changelog, and system requirements
+- **Gallery** — Screenshots and visual previews of the launcher
+- **Blog** — News and updates about Vesper development
+- **Support** — Contact form and FAQ
+- **Responsive Design** — Fully responsive across desktop and mobile
+- **Dark/Light Mode** — Theme toggle with system preference detection
+- **Press `d`** — Quick toggle between dark and light mode anywhere on the site
 
 ---
 
@@ -58,7 +71,7 @@ Explore features, system requirements, and guides at [launcher.devflare.de](http
 Yes! The launcher source is available at [ArexLabs/vesper-client](https://github.com/ArexLabs/vesper-client).
 
 **What platforms are supported?**  
-Windows 10/11 (64-bit) at launch. Linux support is planned for the public beta.
+Windows 10/11 (64-bit) at launch. Linux support is planned for the public beta & MacOS support will come at some point in the future after release.
 
 **Can I migrate from other launchers?**  
 Import tools are planned. Until then, you can manually import your instances.
