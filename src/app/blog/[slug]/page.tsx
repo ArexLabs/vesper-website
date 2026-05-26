@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { db } from "@/db";
+import { posts as postsTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { BlogPost } from "@/components/sections/blog/blog-post";
-import blogData from "@/data/blog.json";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -9,12 +11,12 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogData.posts.find((p) => p.slug === slug);
+  const post = await db.query.posts.findFirst({
+    where: eq(postsTable.slug, slug),
+  });
 
   if (!post) {
-    return {
-      title: "Post Not Found",
-    };
+    return { title: "Post Not Found" };
   }
 
   return {
@@ -25,14 +27,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  return blogData.posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const allPosts = await db.select({ slug: postsTable.slug }).from(postsTable);
+  return allPosts.map((post) => ({ slug: post.slug }));
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = blogData.posts.find((p) => p.slug === slug);
+  const post = await db.query.posts.findFirst({
+    where: eq(postsTable.slug, slug),
+  });
 
   if (!post) {
     notFound();
@@ -53,7 +56,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
       <main className="flex-1 w-full pt-32 pb-24">
-        <BlogPost slug={slug} />
+        <BlogPost post={post} />
       </main>
     </div>
   );

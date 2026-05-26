@@ -47,6 +47,97 @@ This repository contains the **Vesper website** ([ArexLabs/vesper-website](https
 
 ---
 
+## Blog
+
+The blog is powered by **PostgreSQL** via [Neon](https://neon.tech) and [Drizzle ORM](https://orm.drizzle.team).
+
+### Admin Dashboard
+
+The admin dashboard at `/admin` lets you manage blog posts (create, edit, delete). It uses **Better Auth** for authentication.
+
+#### Access
+
+Only users with the `admin` role can access the dashboard. Non-admin users and unauthenticated visitors are redirected to `/admin/login`.
+
+#### Setup
+
+```bash
+# Install dependencies
+npm install better-auth
+
+# Create auth tables
+npm run db:init
+
+# Create your first admin user
+bun scripts/create-admin.ts you@email.com yourpassword
+
+# Start dev server
+npm run dev
+```
+
+Then visit `/admin/login`, sign in, and manage posts at `/admin`.
+
+#### Env variables
+
+```
+BETTER_AUTH_SECRET=<base64 32-byte key>
+BETTER_AUTH_URL=http://localhost:3000
+```
+
+#### Schema
+
+Posts use the same `posts` table. Auth tables (`user`, `session`, `account`, `verification`) are in `src/db/auth-schema.ts`.
+
+### Schema
+
+Blog posts live in a `posts` table with: `slug`, `title`, `date`, `author`, `excerpt`, `content` (Markdown), and timestamps.
+
+### Database setup
+
+```bash
+# Copy the .env.example and add your DATABASE_URL
+cp .env.example .env
+
+# Initialize the table and seed with existing posts
+node scripts/init-db.mjs
+```
+
+### Adding a new post
+
+Posts are rendered from `content` as Markdown via `react-markdown`. To add a post, insert a row into the `posts` table:
+
+```sql
+INSERT INTO posts (slug, title, date, author, excerpt, content)
+VALUES (
+  'my-new-post',
+  'My New Post',
+  NOW(),
+  'Author Name',
+  'Short excerpt for the listing page.',
+  '## Full Markdown body here\n\nWith **formatting**.'
+);
+```
+
+Or directly from a seed script using Drizzle:
+
+```ts
+import { db } from "@/db";
+import { posts } from "@/db/schema";
+
+await db.insert(posts).values({
+  slug: "my-new-post",
+  title: "My New Post",
+  date: new Date(),
+  author: "Author Name",
+  excerpt: "Short excerpt...",
+  content: "## Full body",
+});
+```
+
+The blog listing page (`/blog`) and post pages (`/blog/:slug`) fetch from the database at request time and support static generation via `generateStaticParams`.
+
+---
+
 ## Getting Started
 
 1. Visit [launcher.devflare.de](https://launcher.devflare.de)

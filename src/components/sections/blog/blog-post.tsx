@@ -4,19 +4,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { IconCalendar, IconUser, IconArrowLeft } from "@tabler/icons-react";
 import ReactMarkdown from "react-markdown";
-import blogData from "@/data/blog.json";
+import type { Post } from "@/db/schema";
 
 interface BlogPostProps {
-  slug: string;
+  post: Post;
 }
 
-export function BlogPost({ slug }: BlogPostProps) {
-  const post = blogData.posts.find((p) => p.slug === slug);
-
-  if (!post) {
-    return null;
-  }
-
+export function BlogPost({ post }: BlogPostProps) {
   return (
     <div className="max-w-2xl mx-auto px-6">
       <motion.div

@@ -3,9 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconCalendar, IconUser, IconArrowRight } from "@tabler/icons-react";
-import blogData from "@/data/blog.json";
+import type { Post } from "@/db/schema";
 
-export function BlogList() {
+interface BlogListProps {
+  posts: Post[];
+}
+
+export function BlogList({ posts }: BlogListProps) {
   return (
     <div className="max-w-2xl mx-auto px-6">
       <motion.div
@@ -23,7 +27,7 @@ export function BlogList() {
       </motion.div>
 
       <div className="space-y-12">
-        {blogData.posts.map((post, index) => (
+        {posts.map((post, index) => (
           <motion.article
             key={post.slug}
             initial={{ opacity: 0, y: 20 }}
