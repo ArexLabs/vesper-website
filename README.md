@@ -1,13 +1,14 @@
-
 <div align="center">
 
 # Vesper Launcher
 
 A blazing-fast, native Minecraft launcher built for performance and simplicity.
 
-[![Website](https://img.shields.io/badge/Website-launcher.devflare.de-blue?style=flat&logo=google-chrome)](https://launcher.devflare.de)
-[![Discord](https://img.shields.io/discord/1441770650602831902?label=Discord&logo=discord)](https://dc.devflare.de)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE.md)
+[![Website](https://shieldcn.dev/badge/Website-launcher.devflare.de-blue.svg?variant=outline)](https://launcher.devflare.de)
+[![Discord](https://shieldcn.dev/badge/Discord-Join-white.svg?variant=outline&icon=discord)](https://dc.devflare.de)
+[![License GPLv3](https://shieldcn.dev/badge/license-GPLv3-green.svg?variant=outline)](LICENSE.md)
+[![Launcher built with Rust](https://shieldcn.dev/badge/Launcher%20built%20with-Rust-orange.svg?variant=outline)](https://www.rust-lang.org)
+[![TypeScript](https://shieldcn.dev/badge/TypeScript-3178C6.svg?variant=outline&icon=typescript)](https://www.typescriptlang.org)
 
 </div>
 
@@ -43,11 +44,11 @@ Explore features, system requirements, and guides at [launcher.devflare.de](http
 
 ## System Requirements
 
-| Requirement | Details |
-|-------------|---------|
-| **Java** | Version 17 or 21 (latest recommended) |
-| **OS** | Windows 10/11 (64-bit) |
-| **Optional** | Discord for RPC features |
+| Requirement  | Details                               |
+| ------------ | ------------------------------------- |
+| **Java**     | Version 17 or 21 (latest recommended) |
+| **OS**       | Windows 10/11 (64-bit)                |
+| **Optional** | Discord for RPC features              |
 
 ---
 
