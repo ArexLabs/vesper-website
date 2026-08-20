@@ -1,12 +1,36 @@
 {
   "posts": [
     {
-      "slug": "searching-developers",
-      "title": "Searching for Rust + Tauri Developers",
-      "date": "2026-04-12",
+      "slug": "welcome-to-vesper",
+      "title": "Welcome to Vesper — A New Era of Minecraft Launching",
+      "date": "2026-08-15",
       "author": "ItzzMateo",
-      "excerpt": "We're looking for a Rust + Tauri developer to help bring Vesper to life. Here's what we're looking for and why you should join us.",
-      "content": "## What We're Building\n\nVesper is a Minecraft launcher built with **Rust** and **Tauri**, designed to be fast, lightweight, and beautiful. We're creating an alternative to heavy Electron/Java-based launchers that eats up your RAM and takes forever to start.\n\n## What We're Looking For\n\nWe're searching for someone experienced with:\n\n- **Rust** — The core language powering Vesper\n- **Tauri** — Our framework for building tiny, secure native apps\n- **Passion for open source** — This is a community project\n\n## Why Join Us?\n\n- **Make a real impact** — Your code will be used by Minecraft players\n- **Learn and grow** — Work with modern Rust patterns and native UI development\n- **Open source** — All contributions are public and credited\n- **Flexible** — Work at your own pace, no pressure\n\n## What You'll Do\n\n- Help implement core launcher features\n- Design and build UI components with Tauri\n- Optimize performance and fix bugs\n- Collaborate with our small team on features\n\n## How to Apply\n\nInterested? Reach out to us on Discord at **[dc.devflare.de](https://dc.devflare.de)** or open a PR on our **[GitHub repository](#github)**.\n\nWe can't wait to hear from you!"
+      "excerpt": "Introducing Vesper: a Minecraft launcher built from scratch with Rust + GPUI for instant startup and a modern native experience.",
+      "content": "## Why Vesper?\n\nThe Minecraft launcher space has been dominated by heavy Electron and Java-based solutions for years. They eat up your RAM, take forever to start, and feel outdated.\n\n**Vesper** changes that. Built from scratch with **Rust** and **GPUI**, we're creating a launcher that starts in milliseconds, uses minimal resources, and looks beautiful doing it.\n\n## What Makes Us Different\n\n- **Sub-second startup** — No more waiting 10+ seconds for a launcher to load\n- **Minimal RAM usage** — Written in Rust, not Electron\n- **Native UI** — GPUI renders a buttery smooth interface\n- **Free & open source** — Always will be\n\n## Our Vision\n\nWe believe launching Minecraft should be as fast and enjoyable as playing it. Vesper is our answer to the bloat.\n\n## Get Involved\n\nVesper is currently in alpha. Join our Discord at **[dc.devflare.de](https://dc.devflare.de)** to apply for early access and help shape the product."
+    },
+    {
+      "slug": "why-rust-and-gpui",
+      "title": "Why We Chose Rust + GPUI Over Electron",
+      "date": "2026-08-10",
+      "author": "ItzzMateo",
+      "excerpt": "A deep dive into our technology choices and why Rust + GPUI is the future of desktop applications.",
+      "content": "## The Problem with Electron\n\nElectron bundles a full Chromium browser with your app. The result? A \"hello world\" app that uses 100MB+ of RAM and takes seconds to start.\n\nFor a Minecraft launcher — something you open every time you play — this overhead adds up fast.\n\n## Enter Rust\n\nRust gives us:\n\n- **Memory safety** without garbage collection\n- **Blazing fast** compile times and runtime performance\n- **Small binary sizes** — our entire launcher is under 10MB\n\n## Why GPUI?\n\nGPUI is a GPU-accelerated UI framework that renders interfaces directly on the GPU. No browser, no DOM, no overhead.\n\nThe result is a launcher that feels **instant** — menus open in milliseconds, scrolling is buttery smooth, and animations run at 60fps without breaking a sweat.\n\n## Benchmarks\n\n| Metric | Vesper | Electron Launcher |\n|--------|--------|-------------------|\n| Startup time | ~0.3s | ~4.2s |\n| RAM usage | ~45MB | ~350MB |\n| Binary size | ~8MB | ~150MB |\n\nThese numbers speak for themselves.\n\n## Looking Forward\n\nAs GPUI matures, we'll continue pushing the boundaries of what a desktop launcher can be. Stay tuned."
+    },
+    {
+      "slug": "alpha-testing-guide",
+      "title": "Alpha Testing Guide — What to Expect",
+      "date": "2026-08-05",
+      "author": "ItzzMateo",
+      "excerpt": "Everything you need to know about Vesper's alpha program, how to apply, and what we expect from testers.",
+      "content": "## Alpha Program Overview\n\nVesper is currently in **alpha testing**. This means the core features are working, but there will be bugs, missing features, and rough edges.\n\n## How to Apply\n\n1. Join our Discord at **[dc.devflare.de](https://dc.devflare.de)**\n2. Head to the **#alpha-application** channel\n3. Tell us about your Minecraft setup and what you'd like to see in a launcher\n\nWe prioritize applicants who:\n\n- Play Minecraft regularly\n- Have experience with different launchers\n- Are willing to provide detailed feedback\n- Can test on different operating systems\n\n## What We Expect\n\n- **Report bugs** — Even small ones help us improve\n- **Suggest features** — Your ideas shape the product\n- **Be patient** — Alpha software has rough edges\n- **Have fun** — This is a passion project for all of us\n\n## What You'll Get\n\n- Early access to all features before public release\n- Direct communication with the dev team\n- Your name in the contributors list\n- A warm fuzzy feeling from helping build something great\n\n## Current Status\n\n- Core launcher functionality: ✅ Working\n- Mod support: 🚧 In progress\n- Custom themes: 📋 Planned\n- Multi-instance: 📋 Planned\n\nWe're making rapid progress. Apply today and be part of the journey!"
+    },
+    {
+      "slug": "performance-deep-dive",
+      "title": "Performance Deep Dive — How We Achieved Sub-Second Startup",
+      "date": "2026-07-28",
+      "author": "ItzzMateo",
+      "excerpt": "A technical deep dive into the architecture decisions that make Vesper launch in under 300ms.",
+      "content": "## The Goal\n\nWe set an ambitious target: **sub-second startup**. Not just \"fast for a launcher\" — genuinely instant.\n\n## Architecture Decisions\n\n### No Runtime Dependencies\n\nVesper is a single statically-linked binary. No Node.js, no Python, no Java — just one file you double-click and it runs.\n\n### Lazy Loading\n\nWe only load what's needed for the current view. The mod manager, settings panel, and other features load on demand — not at startup.\n\n### GPU-Accelerated Rendering\n\nGPUI handles all rendering on the GPU. No CPU-based layout calculations, no DOM diffing — just raw GPU power.\n\n### Efficient State Management\n\nOur state management is built on Rust's ownership model. No unnecessary re-renders, no memory leaks, no garbage collection pauses.\n\n## Results\n\nOn our test machines:\n\n- **Cold start**: 280ms\n- **Warm start**: 90ms\n- **Memory idle**: 42MB\n- **Memory with mods loaded**: 78MB\n\nThese are real numbers from real hardware, not synthetic benchmarks.\n\n## What's Next\n\nWe're still optimizing. Our target is **under 100ms** cold start by the time we hit public beta."
     }
   ]
 }

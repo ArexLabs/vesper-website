@@ -1,7 +1,7 @@
 export { Hero } from "./hero";
 export { feature_cards } from "./feature_cards";
 export { performance_comparison } from "./performance_comparison";
-export { beta_waitlist } from "./beta_waitlist";
+export { BetaWaitlist } from "./beta_waitlist";
 export { social_proof } from "./social_proof";
 export { for_developers } from "./for_developers";
 export { system_requirements } from "./system_requirements";
