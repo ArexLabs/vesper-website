@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (!pathname.startsWith("/admin")) {
@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const headers = new Headers(request.headers);
-  headers.set("x-forwarded-for", request.headers.get("x-forwarded-for") || request.ip || "127.0.0.1");
+  headers.set("x-forwarded-for", request.headers.get("x-forwarded-for") || "127.0.0.1");
 
   const session = await auth.api.getSession({ headers });
 
