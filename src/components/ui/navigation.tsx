@@ -273,6 +273,7 @@ export function Navigation() {
                 <div
                   key={dropdown.name}
                   className="relative"
+                  onMouseEnter={() => setOpenDropdown(dropdown.name)}
                 >
                   <button
                     onClick={() => setOpenDropdown(openDropdown === dropdown.name ? null : dropdown.name)}
