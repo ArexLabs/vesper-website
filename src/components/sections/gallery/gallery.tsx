@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import { IconX, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { Camera } from "lucide-react";
+import { EmptyState } from "@/components/ui/empty-state";
 
 const galleryImages = [
   { id: 1, title: "Vesper Dashboard", category: "Interface", src: "/gallery/og-image.png", description: "Main dashboard view showcasing the clean interface" },
@@ -105,6 +107,18 @@ export function GallerySection() {
   const closeLightbox = () => setSelectedImage(null);
   const goPrev = () => setSelectedImage((prev) => (prev === null ? null : (prev - 1 + galleryImages.length) % galleryImages.length));
   const goNext = () => setSelectedImage((prev) => (prev === null ? null : (prev + 1) % galleryImages.length));
+
+  if (galleryImages.length === 0) {
+    return (
+      <section className="py-24 px-6 relative overflow-hidden">
+        <EmptyState
+          icon={<Camera className="w-7 h-7 text-muted-foreground" />}
+          title="Nothing here yet"
+          description="No gallery images available at the moment. Check back later for a look at Vesper's interface."
+        />
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 px-6 relative overflow-hidden">

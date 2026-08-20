@@ -5,6 +5,8 @@ import { posts as postsTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { BlogPost } from "@/components/sections/blog/blog-post";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -24,11 +26,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.excerpt,
     keywords: ["Vesper Blog", post.title],
   };
-}
-
-export async function generateStaticParams() {
-  const allPosts = await db.select({ slug: postsTable.slug }).from(postsTable);
-  return allPosts.map((post) => ({ slug: post.slug }));
 }
 
 export default async function BlogPostPage({ params }: Props) {

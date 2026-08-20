@@ -2,7 +2,8 @@
 
 import { motion, type Variants } from "framer-motion";
 import { CalendarIcon, ClockIcon } from "@heroicons/react/24/outline";
-import { AlertCircle, ArrowUpRight } from "lucide-react";
+import { AlertCircle, ArrowUpRight, Clock } from "lucide-react";
+import { EmptyState } from "@/components/ui/empty-state";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -245,6 +246,18 @@ function ChangelogEntry({ entry }: { entry: (typeof changelog)[number] }) {
 // ── Section export ────────────────────────────────────────────────────────────
 
 export function ChangelogSection() {
+  if (changelog.length === 0) {
+    return (
+      <section className="py-24 px-6">
+        <EmptyState
+          icon={<Clock className="w-7 h-7 text-muted-foreground" />}
+          title="Nothing here yet"
+          description="No changelog entries available yet. Check back soon for updates on Vesper's evolution."
+        />
+      </section>
+    );
+  }
+
   return (
     <section className="py-24 px-6">
       <div className="max-w-3xl mx-auto">

@@ -4,6 +4,8 @@ import { posts } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { BlogList } from "@/components/sections/blog";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "News and updates from the Vesper team. Learn about new features, announcements, and more.",

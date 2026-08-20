@@ -1,10 +1,25 @@
 "use client";
 
+import { type ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { IconCalendar, IconUser, IconArrowLeft } from "@tabler/icons-react";
 import ReactMarkdown from "react-markdown";
 import type { Post } from "@/db/schema";
+
+function SlideIn({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.4 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 interface BlogPostProps {
   post: Post;
@@ -52,22 +67,32 @@ export function BlogPost({ post }: BlogPostProps) {
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mt-12 mb-4 tracking-tight">{children}</h2>
+                  <SlideIn>
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mt-12 mb-4 tracking-tight">{children}</h2>
+                  </SlideIn>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-xl md:text-2xl font-semibold text-foreground mt-8 mb-3">{children}</h3>
+                  <SlideIn>
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mt-8 mb-3">{children}</h3>
+                  </SlideIn>
                 ),
                 p: ({ children }) => (
-                  <p className="text-muted-foreground leading-relaxed mb-6">{children}</p>
+                  <SlideIn>
+                    <p className="text-muted-foreground leading-relaxed mb-6">{children}</p>
+                  </SlideIn>
                 ),
                 strong: ({ children }) => (
                   <strong className="text-foreground font-semibold">{children}</strong>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside text-muted-foreground mb-6 space-y-2">{children}</ul>
+                  <SlideIn>
+                    <ul className="list-disc list-inside text-muted-foreground mb-6 space-y-2">{children}</ul>
+                  </SlideIn>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside text-muted-foreground mb-6 space-y-2">{children}</ol>
+                  <SlideIn>
+                    <ol className="list-decimal list-inside text-muted-foreground mb-6 space-y-2">{children}</ol>
+                  </SlideIn>
                 ),
                 li: ({ children }) => (
                   <li className="text-muted-foreground leading-relaxed">{children}</li>
@@ -105,11 +130,35 @@ export function BlogPost({ post }: BlogPostProps) {
                   </code>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-brand-accent/50 pl-6 my-8 italic text-muted-foreground/90">
-                    {children}
-                  </blockquote>
+                  <SlideIn>
+                    <blockquote className="border-l-4 border-brand-accent/50 pl-6 my-8 italic text-muted-foreground/90">
+                      {children}
+                    </blockquote>
+                  </SlideIn>
                 ),
                 hr: () => <hr className="border-border my-12" />,
+                table: ({ children }) => (
+                  <SlideIn>
+                    <div className="overflow-x-auto my-8">
+                      <table className="w-full text-sm text-left">{children}</table>
+                    </div>
+                  </SlideIn>
+                ),
+                thead: ({ children }) => (
+                  <thead className="border-b border-border">{children}</thead>
+                ),
+                tbody: ({ children }) => (
+                  <tbody className="divide-y divide-border">{children}</tbody>
+                ),
+                tr: ({ children }) => (
+                  <tr className="hover:bg-muted/30 transition-colors">{children}</tr>
+                ),
+                th: ({ children }) => (
+                  <th className="px-4 py-3 font-semibold text-foreground">{children}</th>
+                ),
+                td: ({ children }) => (
+                  <td className="px-4 py-3 text-muted-foreground">{children}</td>
+                ),
               }}
             >
               {post.content}

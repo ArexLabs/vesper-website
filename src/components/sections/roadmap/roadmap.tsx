@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { MapIcon, RocketLaunchIcon, BeakerIcon, LightBulbIcon } from "@heroicons/react/24/outline";
+import { Map } from "lucide-react";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface RoadmapItem {
     title: string;
@@ -45,6 +47,20 @@ const roadmapData: RoadmapItem[] = [
 ];
 
 export function RoadmapSection() {
+    const allEmpty = roadmapData.every((column) => column.items.length === 0);
+
+    if (allEmpty) {
+        return (
+            <section className="py-24 px-6 relative overflow-hidden">
+                <EmptyState
+                    icon={<Map className="w-7 h-7 text-muted-foreground" />}
+                    title="Nothing here yet"
+                    description="Our roadmap is being finalized. Check back soon to see what we're planning for Vesper."
+                />
+            </section>
+        );
+    }
+
     return (
         <section className="py-24 px-6 relative overflow-hidden">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-64 bg-brand-accent/10 rounded-full blur-[120px] -z-10 pointer-events-none" />

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { IconCalendar, IconUser, IconArrowRight } from "@tabler/icons-react";
+import { EmptyState } from "@/components/ui/empty-state";
+import { FileText } from "lucide-react";
 import type { Post } from "@/db/schema";
 
 interface BlogListProps {
@@ -10,8 +12,33 @@ interface BlogListProps {
 }
 
 export function BlogList({ posts }: BlogListProps) {
+  if (posts.length === 0) {
+    return (
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+            Blog
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            News and updates from the Vesper team.
+          </p>
+        </motion.div>
+        <EmptyState
+          icon={<FileText className="w-7 h-7 text-muted-foreground" />}
+          title="No posts yet"
+          description="Check back soon for news and updates."
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-2xl mx-auto px-6">
+    <div className="max-w-5xl mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -26,7 +53,7 @@ export function BlogList({ posts }: BlogListProps) {
         </p>
       </motion.div>
 
-      <div className="space-y-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {posts.map((post, index) => (
           <motion.article
             key={post.slug}

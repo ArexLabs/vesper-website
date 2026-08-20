@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { faqs } from "@/data/faqs";
+import { HelpCircle } from "lucide-react";
+import { EmptyState } from "@/components/ui/empty-state";
 
 const HOMEPAGE_FAQ_COUNT = 6;
 
@@ -57,6 +59,18 @@ function AccordionFAQ({ limit = faqs.length }: { limit?: number }) {
 
 export default function FAQ() {
   const visibleCount = HOMEPAGE_FAQ_COUNT;
+
+  if (faqs.length === 0) {
+    return (
+      <section id="faq" className="max-w-6xl mx-auto px-6 py-24 border-t border-border/50 relative">
+        <EmptyState
+          icon={<HelpCircle className="w-7 h-7 text-muted-foreground" />}
+          title="Nothing here yet"
+          description="No frequently asked questions available yet. Check back soon for answers about Vesper."
+        />
+      </section>
+    );
+  }
 
   return (
     <section id="faq" className="max-w-6xl mx-auto px-6 py-24 border-t border-border/50 relative">
