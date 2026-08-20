@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import * as Sentry from "@sentry/nextjs";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { XCircleIcon } from "@heroicons/react/24/outline";
@@ -14,7 +13,7 @@ export default function ErrorPage({
     reset: () => void;
 }) {
     useEffect(() => {
-        Sentry.captureException(error);
+        console.error(error);
     }, [error]);
 
     return (

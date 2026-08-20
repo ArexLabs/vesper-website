@@ -1,11 +1,11 @@
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import { posts } from "./schema";
 import blogData from "@/data/blog.json";
 
 async function seed() {
-  const sql = neon(process.env.DATABASE_URL!);
-  const db = drizzle(sql);
+  const client = postgres(process.env.DATABASE_URL!);
+  const db = drizzle(client);
 
   for (const post of blogData.posts) {
     await db

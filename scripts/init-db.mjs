@@ -1,6 +1,6 @@
-import { neon } from "@neondatabase/serverless";
+import postgres from "postgres";
 
-const sql = neon(process.env.DATABASE_URL);
+const sql = postgres(process.env.DATABASE_URL);
 
 async function main() {
   await sql`
@@ -89,6 +89,7 @@ async function main() {
   `;
 
   console.log("Database initialized — posts and auth tables created, blog seeded.");
+  await sql.end();
 }
 
 main().catch((err) => {

@@ -1,4 +1,4 @@
-import { neon } from "@neondatabase/serverless";
+import postgres from "postgres";
 
 const email = process.argv[2];
 const password = process.argv[3];
@@ -11,7 +11,7 @@ if (!email || !password) {
 
 const { randomUUID } = await import("node:crypto");
 
-const sql = neon(process.env.DATABASE_URL!);
+const sql = postgres(process.env.DATABASE_URL!);
 
 async function main() {
   const existing = await sql`SELECT id FROM "user" WHERE email = ${email}`;
@@ -19,6 +19,7 @@ async function main() {
     console.error(`User ${email} already exists. Update their role instead.`);
     await sql`UPDATE "user" SET role = 'admin' WHERE email = ${email}`;
     console.log(`Updated ${email} to admin role.`);
+    await sql.end();
     process.exit(0);
   }
 
@@ -36,6 +37,7 @@ async function main() {
   `;
 
   console.log(`Admin user created: ${email}`);
+  await sql.end();
 }
 
 main().catch((err) => {
