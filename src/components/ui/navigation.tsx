@@ -198,7 +198,7 @@ export function Navigation() {
     return () => window.removeEventListener("vesper:open-github", handleOpenGitHub);
   }, []);
 
-  /* ---- close dropdown on outside click ---- */
+  /* ---- close dropdown on outside click or Escape ---- */
   useEffect(() => {
     if (!openDropdown) return;
     const handleClick = (e: MouseEvent) => {
@@ -206,8 +206,15 @@ export function Navigation() {
         setOpenDropdown(null);
       }
     };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenDropdown(null);
+    };
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
   }, [openDropdown]);
 
   return (
@@ -266,10 +273,9 @@ export function Navigation() {
                 <div
                   key={dropdown.name}
                   className="relative"
-                  onMouseEnter={() => setOpenDropdown(dropdown.name)}
-                  onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <button
+                    onClick={() => setOpenDropdown(openDropdown === dropdown.name ? null : dropdown.name)}
                     className={cn(
                       "flex items-center gap-1 px-3 py-1.5 text-[13px] font-medium transition-all duration-200 rounded-lg whitespace-nowrap",
                       openDropdown === dropdown.name
@@ -304,6 +310,7 @@ export function Navigation() {
                               href={item.href}
                               target={isExternal ? "_blank" : undefined}
                               rel={isExternal ? "noopener noreferrer" : undefined}
+                              onClick={() => setOpenDropdown(null)}
                               className="flex items-start gap-3 px-3.5 py-2.5 mx-1 rounded-lg text-sm hover:bg-muted/70 transition-colors group/item"
                             >
                               <Icon className="size-4 text-brand-accent shrink-0 mt-0.5 transition-transform duration-150 group-hover/item:scale-110" />

@@ -43,4 +43,6 @@ next-env.d.ts
 # Other
 COMMIT.md
 .tmp
-.opencode/
+.opencode/context/
+.opencode/skills/
+.opencode/agents/

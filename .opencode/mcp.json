@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "better-auth": {
+      "command": "npx",
+      "args": ["-y", "@better-auth/mcp"],
+      "type": "stdio"
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "shadcn-mcp"],
+      "type": "stdio"
+    },
+    "beui": {
+      "command": "npx",
+      "args": ["-y", "beui-mcp"],
+      "type": "stdio"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "type": "stdio"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/itzzmateo/Projects/vesper-website"],
+      "type": "stdio"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "type": "stdio"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "type": "stdio"
+    }
+  }
+}
