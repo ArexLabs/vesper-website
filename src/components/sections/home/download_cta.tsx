@@ -12,6 +12,7 @@ import {
   LockClosedIcon,
   CodeBracketIcon,
   CommandLineIcon,
+  InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export function download_cta() {
@@ -56,6 +57,17 @@ export function download_cta() {
             Download Vesper for free. Available on Windows, macOS, and Linux. No
             account required.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-red-200/20 border border-red-400/30"
+          >
+            <InformationCircleIcon className="w-4 h-4 text-red-500" />
+            <span className="text-sm font-medium text-red-600">UI migration in progress — not for production use</span>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
             <motion.div

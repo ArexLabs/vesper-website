@@ -54,8 +54,11 @@ export function system_requirements() {
       </div>
 
       <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="mt-8 text-center">
-        <span className="inline-block font-mono text-xs text-muted-foreground/80 px-4 py-2 rounded bg-muted/40">
-          Linux and macOS support coming soon!
+        <span className="group relative inline-block font-mono text-xs text-muted-foreground/80 px-4 py-2 rounded bg-muted/40 cursor-default">
+          Windows and MacOS support coming soon!
+          <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 px-3 py-2 text-[11px] leading-relaxed text-foreground bg-card border border-border rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
+            It might work, if you compile it yourself, but it is not officially supported
+          </span>
         </span>
       </motion.div>
     </section>

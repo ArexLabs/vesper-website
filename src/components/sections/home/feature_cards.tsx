@@ -4,9 +4,9 @@ import { BoltIcon, CodeBracketIcon, CubeTransparentIcon, ShieldCheckIcon, ArrowP
 const features = [
   { title: "Instant Launch", description: "Launch Minecraft in a flash! No waiting around, just hop in and play.", icon: BoltIcon },
   { title: "Effortless Modding", description: "Install and manage mods with a click via Modrinth & CurseForge integration.", icon: CodeBracketIcon },
-  { title: "Modern Design", description: "A focused, elegant interface crafted for clarity, speed, and ease of use.", icon: CubeTransparentIcon },
-  { title: "Account Security", description: "Microsoft OAuth login with robust privacy—never tracks, always secure.", icon: ShieldCheckIcon },
-  { title: "Automatic Updates", description: "Stay current effortlessly—updates arrive seamlessly and keep you safe.", icon: ArrowPathIcon },
+  { title: "Modern Design", description: "A focused, elegant interface crafted for clarity, speed, and ease of use — built with GPUI for GPU-accelerated rendering.", icon: CubeTransparentIcon },
+  { title: "Microsoft OAuth", description: "Sign in with your Microsoft account via secure browser-based OAuth2 flow.", icon: ShieldCheckIcon },
+  { title: "Active Development", description: "Currently migrating the full UI to GPUI. Login page complete, more pages coming soon.", icon: ArrowPathIcon },
 ];
 
 export function feature_cards() {

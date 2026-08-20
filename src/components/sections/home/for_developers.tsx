@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { WrenchScrewdriverIcon, CodeBracketIcon, PuzzlePieceIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 
 const developer_features = [
-  { title: "Plugin API", description: "Build custom plugins using our comprehensive TypeScript/JavaScript API", icon: CodeBracketIcon },
-  { title: "Mod Loader Support", description: "Full compatibility with Forge, Fabric, and Quilt mod loaders", icon: PuzzlePieceIcon },
-  { title: "Documentation", description: "Detailed guides, API references, and example projects", icon: BookOpenIcon },
+  { title: "Pure Rust", description: "No web views, no JavaScript bridges — everything is native Rust compiled to machine code", icon: CodeBracketIcon },
+  { title: "Mod Loader Support", description: "Full compatibility with Fabric, NeoForge, and Vanilla Minecraft", icon: PuzzlePieceIcon },
+  { title: "Open Source", description: "All code is public on GitHub. Audit it, contribute, or fork it for your own projects", icon: BookOpenIcon },
 ];
 
 export function for_developers() {

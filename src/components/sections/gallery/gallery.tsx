@@ -24,6 +24,8 @@ function GalleryCard({ image, index, onClick }: { image: typeof galleryImages[0]
         src={image.src}
         alt={image.title}
         fill
+        priority
+        loading="eager"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
@@ -137,7 +139,7 @@ export function GallerySection() {
             Gall<span className="text-brand-accent italic">ery</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            A visual journey through Vesper&apos;s design system and interfaces.
+            A look at Vesper&apos;s original interface. A completely redesigned experience is on the way.
           </p>
         </motion.div>
 
@@ -147,7 +149,11 @@ export function GallerySection() {
           ))}
         </div>
 
-        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="text-center text-sm text-muted-foreground mt-12">
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center text-xs text-muted-foreground/60 mt-4 italic">
+          This is a screenshot of the original Vesper UI. A completely redesigned interface is in the works.
+        </motion.p>
+
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="text-center text-sm text-muted-foreground mt-8">
           More screenshots coming soon.
         </motion.p>
       </motion.div>

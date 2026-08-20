@@ -18,6 +18,7 @@ const comparisons = [
     icon: BoltIcon,
     vesperPercent: 90,
     description: "Native Rust binary vs Electron/Java overhead",
+    isPerformanceMetric: true,
   },
   {
     metric: "Memory Usage",
@@ -32,6 +33,7 @@ const comparisons = [
     icon: CpuChipIcon,
     vesperPercent: 85,
     description: "Lightweight native UI vs heavy frameworks",
+    isPerformanceMetric: true,
   },
   {
     metric: "Mod Support",
@@ -81,6 +83,18 @@ export function performance_comparison() {
         </p>
       </motion.div>
 
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mb-8 rounded-xl border border-amber-500/30 bg-amber-500/5 px-5 py-3 text-center"
+      >
+        <p className="text-sm text-amber-400/90">
+          ⚠️ Performance targets based on Rust/GPUI architecture analysis — not yet benchmarked in production.
+        </p>
+      </motion.div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {comparisons.map((item, i) => (
           <motion.div
@@ -89,7 +103,7 @@ export function performance_comparison() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="rounded-xl bg-card/60 border border-border p-6 hover:border-brand-accent/40 transition-colors"
+            className={`rounded-xl bg-card/60 border border-border p-6 hover:border-brand-accent/40 transition-colors${item.isPerformanceMetric ? " opacity-50 saturate-[0.45]" : ""}`}
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center rounded-lg bg-brand-accent/10 w-10 h-10">
@@ -150,7 +164,7 @@ export function performance_comparison() {
         transition={{ duration: 0.5, delay: 0.5 }}
         className="text-center text-xs text-muted-foreground mt-6"
       >
-        *Metrics based on typical benchmarks. Actual performance may vary.
+        *Performance metrics are projected targets based on architecture analysis, not production benchmarks.
       </motion.p>
     </section>
   );

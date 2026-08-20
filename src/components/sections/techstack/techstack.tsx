@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/outline";
 import { IconBrandRust, IconBrandNextjs, IconBrandReact, IconBrandTypescript, IconBrandTailwind, IconBrandGit, IconBrandGithub, IconBrandDocker, IconBrandMinecraft, IconCode, IconApi, IconClock, IconArchive, IconSparkles } from "@tabler/icons-react";
-import { IconTauri } from "@/components/icons/tauri-icon";
 import { IconVercel } from "@/components/icons/vercel-icon";
 
 interface TechItem {
@@ -21,12 +20,11 @@ interface TechCategory {
 
 const launcher_stack: TechItem[] = [
   { name: "Rust", description: "Core launcher application - performance & safety", icon: IconBrandRust },
-  { name: "Tauri", description: "Tiny, secure framework for native desktop apps", icon: IconTauri },
-  { name: "TypeScript", description: "Plugin API and UI scripting", icon: IconBrandTypescript },
-  { name: "Minecraft Protocol", description: "Protocol implementation", icon: IconBrandMinecraft },
+  { name: "GPUI", description: "GPU-accelerated native UI framework from Zed editor", icon: IconCode },
+  { name: "Tokio", description: "Async runtime for concurrent background tasks", icon: IconClock },
   { name: "reqwest", description: "HTTP client for API requests", icon: IconApi },
-  { name: "tokio", description: "Async runtime for concurrent tasks", icon: IconClock },
   { name: "serde", description: "Serialization/deserialization", icon: IconArchive },
+  { name: "mc-launcher-core", description: "Minecraft install, asset resolution, launch", icon: IconBrandMinecraft },
 ];
 
 const website_stack: TechItem[] = [
@@ -48,7 +46,7 @@ const tools_stack: TechItem[] = [
 const techstackData: TechCategory[] = [
   {
     title: "Launcher",
-    description: "I was learning Rust when I got the idea to train myself by making a Minecraft launcher, and this is what came out! Rust was the perfect choice — blazing fast, memory-safe, and lets me squeeze every drop of performance out of the system. Combined with Tauri, we get tiny binary sizes, secure native windows, and the ability to use web technologies for parts of the UI when needed. Waaaayyyyyyyy more efficient than Electron or Java-based launchers!",
+    description: "Originally built with Tauri, the UI was prototyped in Slint before migrating to GPUI (Zed's GPU-accelerated UI framework) for a pure-Rust, native experience. No web views, no Electron — just compiled Rust rendering directly to the screen via wgpu. All UI pages have now been migrated from Slint to GPUI.",
     accent: "text-orange-400",
     items: launcher_stack,
   },

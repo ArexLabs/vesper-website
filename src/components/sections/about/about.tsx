@@ -30,7 +30,7 @@ const milestones = [
     year: "2026",
     title: "The Beginning",
     description:
-      "Vesper started as a simple idea: make Minecraft launching fast again. No bloat, no ads, just pure performance.",
+      "Vesper started as a simple idea: make Minecraft launching fast again. No bloat, no ads, just pure performance. Built with Rust and now migrating the UI to GPUI for a truly native experience.",
   },
 ];
 
@@ -119,9 +119,9 @@ export function AboutSection() {
             </h1>
 
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Most launchers are bloated, slow, and full of ads. We built Veper
+              Most launchers are bloated, slow, and full of ads. We built Vesper
               to be the opposite: fast, private, and made for players who just
-              want to play.
+              want to play. Built with Rust and GPUI for a truly native experience.
             </p>
           </motion.div>
         </motion.div>

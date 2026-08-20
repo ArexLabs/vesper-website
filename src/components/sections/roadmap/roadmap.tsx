@@ -16,9 +16,9 @@ const roadmapData: RoadmapItem[] = [
         icon: MapIcon,
         accent: "text-amber-400",
         items: [
-            "Performance optimizations",
             "Launcher auto-updater",
             "Documentation & help resources",
+            "Plugin/extension system",
         ],
     },
     {
@@ -26,10 +26,10 @@ const roadmapData: RoadmapItem[] = [
         icon: RocketLaunchIcon,
         accent: "text-brand-accent",
         items: [
-            "Windows, Linux & macOS clients",
-            "Configurable keyboard shortcuts",
-            "Rich Discord presence",
-            "Built-in mod installer",
+            "GPUI migration (Slint -> GPUI)",
+            "Instances, Mods, Settings pages",
+            "Full command/update bridge",
+            "Cross-platform polish (Linux, macOS, Windows)",
         ],
     },
     {
@@ -37,9 +37,9 @@ const roadmapData: RoadmapItem[] = [
         icon: LightBulbIcon,
         accent: "text-purple-400",
         items: [
-            "Plugin/extension system",
+            "Rich Discord presence",
+            "Configurable keyboard shortcuts",
             "Mobile companion app",
-            "Custom OAuth2 integrations",
         ],
     },
 ];
