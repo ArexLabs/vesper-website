@@ -9,7 +9,8 @@ import { FooterLogo } from "@/components/ui/footer-logo";
 import { Toaster } from "sonner";
 import { CommandPalette } from "@/components/ui/command-palette";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
-import { ThemeShortcut } from "@/components/ui/theme-shortcut";
+import { SiteHotkeys } from "@/components/ui/site-hotkeys";
+import { HotkeysProvider } from "@/components/providers/hotkeys-provider";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "@/components/providers/session_provider";
 
@@ -70,12 +71,14 @@ export default function RootLayout({
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SessionProvider>
-            <ThemeShortcut />
-            <Navigation />
-            <CommandPalette />
-            <main>{children}</main>
-            <Toaster richColors />
-            <ScrollToTop />
+            <HotkeysProvider>
+              <SiteHotkeys />
+              <Navigation />
+              <CommandPalette />
+              <main>{children}</main>
+              <Toaster richColors />
+              <ScrollToTop />
+            </HotkeysProvider>
           </SessionProvider>
           <FooterLogo
             aRR

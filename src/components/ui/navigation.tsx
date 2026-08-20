@@ -1,17 +1,45 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Search, Image as ImageIcon, History, Map, Home, Code, Command as CommandIcon, Info, ChevronDown, ExternalLink, MessageCircle, FileText, Scale, ShieldCheck, Gavel, HelpCircle, Headphones, BookOpen } from "lucide-react";
+import {
+  Search,
+  Image as ImageIcon,
+  History,
+  Map,
+  Home,
+  Code,
+  Command as CommandIcon,
+  Info,
+  ChevronDown,
+  ExternalLink,
+  FileText,
+  Scale,
+  ShieldCheck,
+  Gavel,
+  HelpCircle,
+  Headphones,
+  BookOpen,
+} from "lucide-react";
 import Link from "next/link";
 import DownloadModal from "./download-modal";
 import GitHubModal from "./github-modal";
 import { ThemeToggle } from "./theme-toggle";
 import { IconVesper } from "../icons/vesper-icon";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerClose,
+} from "@/components/ui/drawer";
 
-// Custom GitHub "star" icon
+/* ------------------------------------------------------------------ */
+/*  Inline icon helpers                                                */
+/* ------------------------------------------------------------------ */
+
 function StarIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg
@@ -55,6 +83,10 @@ function GitHubIcon({ className = "w-6 h-6" }: { className?: string }) {
     </svg>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Data                                                               */
+/* ------------------------------------------------------------------ */
 
 interface NavLink {
   name: string;
@@ -110,19 +142,9 @@ const dropdowns: Dropdown[] = [
   },
 ];
 
-const menuVariants: Variants = {
-  closed: { opacity: 0, y: -20, transition: { staggerChildren: 0.05, staggerDirection: -1 } },
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 300, damping: 30, staggerChildren: 0.1, delayChildren: 0.1 }
-  }
-};
-
-const itemVariants: Variants = {
-  closed: { opacity: 0, y: -20 },
-  open: { opacity: 1, y: 0 }
-};
+/* ------------------------------------------------------------------ */
+/*  Navigation component                                               */
+/* ------------------------------------------------------------------ */
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -134,15 +156,15 @@ export function Navigation() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
+  /* ---- scroll detection ---- */
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 8);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 8);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ---- width-based compact mode ---- */
   useEffect(() => {
     const checkWidth = () => {
       if (navRef.current) {
@@ -154,12 +176,12 @@ export function Navigation() {
         }
       }
     };
-
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
+  /* ---- action handlers ---- */
   const handleOpenDownloadModal = () => {
     setDownloadModalOpen(true);
     setMobileMenuOpen(false);
@@ -171,38 +193,55 @@ export function Navigation() {
   };
 
   useEffect(() => {
-    const handleOpenGitHub = () => {
-      setGithubModalOpen(true);
-    };
+    const handleOpenGitHub = () => setGithubModalOpen(true);
     window.addEventListener("vesper:open-github", handleOpenGitHub);
     return () => window.removeEventListener("vesper:open-github", handleOpenGitHub);
   }, []);
 
+  /* ---- close dropdown on outside click ---- */
+  useEffect(() => {
+    if (!openDropdown) return;
+    const handleClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [openDropdown]);
+
   return (
     <>
+      {/* ===== HEADER ===== */}
       <motion.header
         ref={navRef}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 130, damping: 25 }}
+        transition={{ type: "spring", stiffness: 120, damping: 20 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-background/96 backdrop-blur-2xl border-b border-white/5 shadow-sm"
+            ? "bg-background/80 backdrop-blur-xl border-b border-border/60 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
             : "bg-transparent"
         )}
         id="navbar"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16 sm:h-20">
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <IconVesper className="w-9 h-9 sm:w-10 sm:h-10 mr-0" />
-              <span className="font-mono font-bold tracking-tight text-foreground text-base sm:text-lg italic">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            {/* ---- Logo ---- */}
+            <Link
+              href="/"
+              className="flex items-center gap-2 group shrink-0 transition-opacity hover:opacity-80"
+            >
+              <IconVesper className="w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-200 group-hover:scale-105" />
+              <span className="font-mono font-bold tracking-tight text-foreground text-sm sm:text-base italic">
                 Vesper Client.
               </span>
             </Link>
 
-            <nav className="nav-desktop hidden lg:flex items-center gap-1">
+            {/* ---- Desktop navigation ---- */}
+            <nav className="nav-desktop hidden lg:flex items-center gap-0.5">
+              {/* Direct nav links */}
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -211,16 +250,18 @@ export function Navigation() {
                     href={link.href}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
-                      "px-3 py-2 text-sm font-medium transition-all duration-200 rounded-full whitespace-nowrap",
+                      "px-3 py-1.5 text-[13px] font-medium transition-all duration-200 rounded-lg whitespace-nowrap",
                       isActive
                         ? "text-brand-accent bg-brand-accent/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     )}
                   >
                     {link.name}
                   </Link>
                 );
               })}
+
+              {/* Dropdown triggers */}
               {dropdowns.map((dropdown) => (
                 <div
                   key={dropdown.name}
@@ -230,36 +271,54 @@ export function Navigation() {
                 >
                   <button
                     className={cn(
-                      "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-all duration-200 rounded-full whitespace-nowrap",
+                      "flex items-center gap-1 px-3 py-1.5 text-[13px] font-medium transition-all duration-200 rounded-lg whitespace-nowrap",
                       openDropdown === dropdown.name
                         ? "text-brand-accent bg-brand-accent/10"
-                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     )}
                   >
                     {dropdown.name}
-                    <ChevronDown className={cn("size-4 transition-transform duration-200", openDropdown === dropdown.name && "rotate-180")} />
+                    <ChevronDown
+                      className={cn(
+                        "size-3.5 transition-transform duration-200",
+                        openDropdown === dropdown.name && "rotate-180"
+                      )}
+                    />
                   </button>
+
                   <AnimatePresence>
                     {openDropdown === dropdown.name && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 mt-2 w-56 py-2 bg-card border border-border rounded-xl shadow-xl z-50"
+                        initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                        transition={{ duration: 0.16, ease: [0.23, 1, 0.32, 1] }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-60 py-1.5 bg-popover/95 backdrop-blur-xl border border-border/70 rounded-xl shadow-xl shadow-black/[0.04] z-50"
                       >
                         {dropdown.items.map((item) => {
                           const Icon = item.icon;
                           const isExternal = item.href.startsWith("http");
                           return (
-                            <a key={item.name} href={item.href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} className="flex items-start gap-3 px-4 py-3 text-sm hover:bg-white/5 transition-colors">
-                              <Icon className="size-5 text-brand-accent shrink-0 mt-0.5" />
-                              <div>
-                                <div className="font-medium text-foreground">
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              target={isExternal ? "_blank" : undefined}
+                              rel={isExternal ? "noopener noreferrer" : undefined}
+                              className="flex items-start gap-3 px-3.5 py-2.5 mx-1 rounded-lg text-sm hover:bg-muted/70 transition-colors group/item"
+                            >
+                              <Icon className="size-4 text-brand-accent shrink-0 mt-0.5 transition-transform duration-150 group-hover/item:scale-110" />
+                              <div className="min-w-0">
+                                <div className="font-medium text-foreground flex items-center gap-1">
                                   {item.name}
-                                  {isExternal && <ExternalLink className="inline-block size-3 ml-1 opacity-50" />}
+                                  {isExternal && (
+                                    <ExternalLink className="size-3 opacity-40 shrink-0" />
+                                  )}
                                 </div>
-                                {item.description && <div className="text-xs text-muted-foreground">{item.description}</div>}
+                                {item.description && (
+                                  <div className="text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                                    {item.description}
+                                  </div>
+                                )}
                               </div>
                             </a>
                           );
@@ -271,165 +330,202 @@ export function Navigation() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            {/* ---- Right-side actions ---- */}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Search */}
               <button
                 onClick={handleOpenSearch}
                 className={cn(
-                  "hidden sm:flex items-center justify-between gap-3 px-3 py-2 text-sm text-muted-foreground hover:text-foreground bg-card/50 border border-border hover:border-brand-accent/30 rounded-xl transition-all duration-200 min-w-[200px]",
+                  "hidden sm:flex items-center justify-between gap-2 px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground bg-muted/40 hover:bg-muted/70 border border-border/50 hover:border-border rounded-lg transition-all duration-200 min-w-[160px]",
                   isCompact && "hidden lg:hidden"
                 )}
               >
-                <div className="flex items-center gap-2">
-                  <Search className="size-4" />
+                <div className="flex items-center gap-1.5">
+                  <Search className="size-3.5" />
                   <span className="hidden md:inline">Search...</span>
                 </div>
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground">
-                  <span className="text-[8px] opacity-60">⌘</span>
+                <div className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-background/60 border border-border/40 text-[10px] font-medium text-muted-foreground">
+                  <span className="text-[9px] opacity-50">⌘</span>
                   <span>K</span>
                 </div>
               </button>
 
+              {/* Download */}
               <button
                 onClick={handleOpenDownloadModal}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-brand-accent hover:bg-brand-accent/90 text-background rounded-full transition-all duration-200"
+                className="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] font-semibold bg-brand-accent hover:bg-brand-accent/90 text-background rounded-lg transition-all duration-200 active:scale-[0.97]"
               >
                 Download
               </button>
-              
+
+              {/* GitHub */}
               <button
                 onClick={() => setGithubModalOpen(true)}
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-200"
                 aria-label="Open GitHub repository"
               >
-                <GitHubIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                <GitHubIcon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
               </button>
 
-              <ThemeToggle />
+              {/* Theme toggle */}
+              <ThemeToggle
+                variant="circle"
+                start="bottom-up"
+                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-200"
+                iconClassName="h-5 w-5"
+              />
 
+              {/* Mobile hamburger */}
               <button
-                className="lg:hidden p-2 rounded-xl bg-white/5 active:scale-90 transition-transform"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg hover:bg-muted/60 active:scale-95 transition-all duration-150"
+                onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open menu"
               >
-                {mobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+                <Bars3Icon className="w-5 h-5" />
               </button>
             </div>
           </div>
         </div>
-
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setMobileMenuOpen(false)}
-                className="fixed inset-0 bg-background/80 backdrop-blur-xl z-40 lg:hidden"
-              />
-              <motion.div
-                variants={menuVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="fixed top-20 left-4 right-4 p-0 bg-card/95 backdrop-blur-xl rounded-2xl z-50 lg:hidden shadow-2xl max-h-[80vh] overflow-y-auto"
-              >
-                <div className="space-y-1 p-2">
-                  <button
-                    onClick={handleOpenSearch}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-muted-foreground hover:bg-accent transition-colors text-left"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Search className="size-4" />
-                      <span className="text-sm font-medium">Search</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-muted text-[10px] font-medium text-muted-foreground">
-                      <CommandIcon className="size-3" />
-                    </div>
-                  </button>
-
-                  <div className="pt-2 pb-1">
-                    {navLinks.map((link) => {
-                      const isActive = pathname === link.href;
-                      const Icon = link.icon;
-                      return (
-                        <motion.div key={link.name} variants={itemVariants}>
-                          <Link
-                            href={link.href}
-                            aria-current={isActive ? "page" : undefined}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={cn(
-                              "flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors",
-                              isActive
-                                ? "bg-brand-accent/10 text-brand-accent"
-                                : "text-foreground hover:bg-accent"
-                            )}
-                          >
-                            <Icon className="size-4" />
-                            <span className="text-sm font-medium">{link.name}</span>
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-
-                  {dropdowns.map((dropdown) => (
-                    <motion.div key={dropdown.name} variants={itemVariants} className="space-y-0.5">
-                      <div className="px-4 py-2 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">{dropdown.name}</div>
-                      {dropdown.items.map((item) => {
-                        const Icon = item.icon;
-                        const isExternal = item.href.startsWith("http");
-                        return (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            target={isExternal ? "_blank" : undefined}
-                            rel={isExternal ? "noopener noreferrer" : undefined}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-foreground hover:bg-accent transition-colors"
-                          >
-                            <Icon className="size-4 text-brand-accent" />
-                            <div className="flex-1">
-                              <div className="text-sm font-medium">
-                                {item.name}
-                              </div>
-                            </div>
-                            {isExternal && <ExternalLink className="size-3.5 text-muted-foreground" />}
-                          </a>
-                        );
-                      })}
-                    </motion.div>
-                  ))}
-
-                  <motion.div variants={itemVariants} className="space-y-1 pt-3 pb-1">
-                    <button
-                      onClick={handleOpenDownloadModal}
-                      className="w-full px-4 py-2.5 bg-brand-accent text-background rounded-xl text-sm font-semibold shadow-sm active:scale-[0.98] transition-all"
-                    >
-                      Download Vesper
-                    </button>
-                    <button
-                      onClick={() => { setGithubModalOpen(true); setMobileMenuOpen(false); }}
-                      className="w-full px-4 py-2.5 rounded-xl text-muted-foreground flex items-center justify-center gap-2 text-sm font-medium hover:bg-accent transition-colors"
-                    >
-                      <GitHubIcon className="size-4" />
-                      View on GitHub
-                    </button>
-                    <div className="flex items-center justify-between px-4 py-2 rounded-xl hover:bg-accent transition-colors">
-                      <span className="text-sm text-muted-foreground font-medium">Theme</span>
-                      <ThemeToggle />
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </motion.header>
-      <DownloadModal open={downloadModalOpen} onClose={() => setDownloadModalOpen(false)} />
-      <GitHubModal open={githubModalOpen} onClose={() => setGithubModalOpen(false)} />
+
+      {/* ===== MOBILE DRAWER ===== */}
+      <Drawer
+        open={mobileMenuOpen}
+        onOpenChange={setMobileMenuOpen}
+        swipeDirection="right"
+      >
+        <DrawerContent>
+          <DrawerHeader className="flex flex-row items-center justify-between">
+            <DrawerTitle>Menu</DrawerTitle>
+            <DrawerClose
+              className="p-1.5 rounded-lg hover:bg-muted/60 transition-colors"
+              aria-label="Close menu"
+            >
+              <XMarkIcon className="w-5 h-5" />
+            </DrawerClose>
+          </DrawerHeader>
+
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4 pt-2 space-y-1">
+            {/* Search in mobile */}
+            <button
+              onClick={handleOpenSearch}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-muted-foreground hover:bg-muted/60 transition-colors text-left"
+            >
+              <div className="flex items-center gap-2.5">
+                <Search className="size-4" />
+                <span className="text-sm font-medium">Search</span>
+              </div>
+              <div className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-background/60 border border-border/40 text-[10px] font-medium text-muted-foreground">
+                <CommandIcon className="size-3" />
+              </div>
+            </button>
+
+            {/* Nav links */}
+            <div className="pt-1 pb-0.5">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-colors",
+                      isActive
+                        ? "bg-brand-accent/10 text-brand-accent"
+                        : "text-foreground hover:bg-muted/60"
+                    )}
+                  >
+                    <Icon className="size-4" />
+                    <span className="text-sm font-medium">{link.name}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Dropdown sections */}
+            {dropdowns.map((dropdown) => (
+              <div key={dropdown.name} className="space-y-0.5">
+                <div className="px-3.5 pt-3 pb-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+                  {dropdown.name}
+                </div>
+                {dropdown.items.map((item) => {
+                  const Icon = item.icon;
+                  const isExternal = item.href.startsWith("http");
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-foreground hover:bg-muted/60 transition-colors"
+                    >
+                      <Icon className="size-4 text-brand-accent shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-medium">{item.name}</div>
+                      </div>
+                      {isExternal && (
+                        <ExternalLink className="size-3.5 text-muted-foreground shrink-0" />
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+            ))}
+
+            {/* Bottom actions */}
+            <div className="space-y-1 pt-2 pb-1">
+              <button
+                onClick={handleOpenDownloadModal}
+                className="w-full px-4 py-2.5 bg-brand-accent text-background rounded-xl text-sm font-semibold active:scale-[0.98] transition-all duration-150"
+              >
+                Download Vesper
+              </button>
+              <button
+                onClick={() => {
+                  setGithubModalOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full px-4 py-2.5 rounded-xl text-muted-foreground flex items-center justify-center gap-2 text-sm font-medium hover:bg-muted/60 transition-colors"
+              >
+                <GitHubIcon className="size-4" />
+                View on GitHub
+              </button>
+              <div className="flex items-center justify-between px-3.5 py-2 rounded-xl hover:bg-muted/60 transition-colors">
+                <span className="text-sm text-muted-foreground font-medium">
+                  Theme
+                </span>
+                <ThemeToggle
+                  variant="circle"
+                  start="bottom-up"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-200"
+                  iconClassName="h-5 w-5"
+                />
+              </div>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+
+      {/* ===== MODALS ===== */}
+      <DownloadModal
+        open={downloadModalOpen}
+        onClose={() => setDownloadModalOpen(false)}
+      />
+      <GitHubModal
+        open={githubModalOpen}
+        onClose={() => setGithubModalOpen(false)}
+      />
     </>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Utility                                                            */
+/* ------------------------------------------------------------------ */
 
 function cn(...classes: (string | boolean | undefined | null)[]) {
   return classes.filter(Boolean).join(" ");
