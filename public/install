@@ -1,0 +1,214 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Vesper Client Installer / Updater
+# Usage: curl -sSfL https://vesper.devflare.de/install | sh
+# GitHub: https://github.com/ArexLabs/vesper-client
+
+REPO="ArexLabs/vesper-client"
+INSTALL_DIR="${VESPER_INSTALL_DIR:-$HOME/.local/bin}"
+BINARY_NAME="vesper"
+
+# ── Colors ────────────────────────────────────────────────────────────
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+info()  { printf "${CYAN}▸${RESET} %s\n" "$*"; }
+ok()    { printf "${GREEN}✓${RESET} %s\n" "$*"; }
+warn()  { printf "${YELLOW}⚠${RESET} %s\n" "$*"; }
+err()   { printf "${RED}✗${RESET} %s\n" "$*" >&2; exit 1; }
+
+# ── Dependency checks ─────────────────────────────────────────────────
+for cmd in curl jq; do
+  command -v "$cmd" &>/dev/null || err "Missing required command: $cmd"
+done
+
+# ── Detect OS & Arch ──────────────────────────────────────────────────
+detect_platform() {
+  local os arch
+
+  case "$(uname -s)" in
+    Linux*)   os="linux" ;;
+    Darwin*)  os="darwin" ;;
+    MINGW*|MSYS*|CYGWIN*)
+      err "Windows detected. Please use the PowerShell installer:\n  irm https://vesper.devflare.de/install | iex"
+      ;;
+    *) err "Unsupported OS: $(uname -s)" ;;
+  esac
+
+  case "$(uname -m)" in
+    x86_64|amd64)   arch="x86_64" ;;
+    aarch64|arm64)  arch="aarch64" ;;
+    *) err "Unsupported architecture: $(uname -m)" ;;
+  esac
+
+  echo "${os}_${arch}"
+}
+
+# ── Find asset for platform ───────────────────────────────────────────
+find_asset() {
+  local platform="$1"
+  local release_json="$2"
+  local os="${platform%_*}"
+
+  # Match priority: .tar.gz > AppImage > .deb > .rpm
+  local patterns=()
+  if [ "$os" = "linux" ]; then
+    patterns=(
+      "*${platform}*.tar.gz"
+      "*linux*${platform#linux_}*tar.gz"
+      "*linux*.tar.gz"
+      "*AppImage*"
+    )
+  elif [ "$os" = "darwin" ]; then
+    patterns=(
+      "*${platform}*.tar.gz"
+      "*macos*.tar.gz"
+      "*darwin*.tar.gz"
+      "*.dmg"
+    )
+  fi
+
+  for pattern in "${patterns[@]}"; do
+    local url
+    url=$(echo "$release_json" | jq -r --arg p "$pattern" '
+      .assets[] | select(.name | test($p; "i")) | .browser_download_url' | head -1)
+    if [ -n "$url" ] && [ "$url" != "null" ]; then
+      echo "$url"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+# ── Get installed version ─────────────────────────────────────────────
+get_installed_version() {
+  local bin="$INSTALL_DIR/$BINARY_NAME"
+  if [ -x "$bin" ]; then
+    "$bin" --version 2>/dev/null | head -1 || echo ""
+  else
+    echo ""
+  fi
+}
+
+# ── Main ──────────────────────────────────────────────────────────────
+main() {
+  printf "\n${BOLD}  Vesper Client Installer${RESET}\n\n"
+
+  # Detect platform
+  local platform
+  platform=$(detect_platform)
+  info "Platform: $platform"
+
+  # Fetch latest release
+  info "Fetching latest release from GitHub..."
+  local release_json
+  release_json=$(curl -sL "https://api.github.com/repos/${REPO}/releases/latest") || \
+    err "Failed to fetch release info from GitHub"
+
+  local tag
+  tag=$(echo "$release_json" | jq -r '.tag_name // empty')
+  [ -n "$tag" ] || err "Could not determine latest version"
+
+  local version="${tag#v}"
+  info "Latest version: ${BOLD}${version}${RESET}"
+
+  # Check if already installed
+  local installed_version
+  installed_version=$(get_installed_version)
+
+  if [ -n "$installed_version" ]; then
+    info "Installed version: ${BOLD}${installed_version}${RESET}"
+
+    if [ "$installed_version" = "$version" ]; then
+      ok "Vesper is already up to date (${version}). Nothing to do."
+      exit 0
+    fi
+
+    warn "Updating Vesper: ${installed_version} → ${version}"
+  else
+    info "Vesper not found. Installing ${version}..."
+  fi
+
+  # Find download URL
+  local download_url
+  download_url=$(find_asset "$platform" "$release_json") || \
+    err "No compatible download found for platform: $platform\n  Visit https://github.com/${REPO}/releases/latest"
+
+  info "Downloading: $(basename "$download_url")"
+
+  # Download to temp dir
+  local tmp_dir
+  tmp_dir=$(mktemp -d)
+  trap 'rm -rf "$tmp_dir"' EXIT
+
+  local archive="$tmp_dir/vesper-download"
+  curl -sL -o "$archive" "$download_url" || err "Download failed"
+
+  # Extract
+  info "Extracting..."
+  mkdir -p "$tmp_dir/extract"
+
+  case "$download_url" in
+    *.tar.gz|*.tgz)
+      tar -xzf "$archive" -C "$tmp_dir/extract" || err "Failed to extract archive"
+      ;;
+    *.AppImage)
+      cp "$archive" "$tmp_dir/extract/$BINARY_NAME"
+      chmod +x "$tmp_dir/extract/$BINARY_NAME"
+      ;;
+    *)
+      cp "$archive" "$tmp_dir/extract/$BINARY_NAME"
+      chmod +x "$tmp_dir/extract/$BINARY_NAME"
+      ;;
+  esac
+
+  # Find the binary in extracted files
+  local binary_path
+  binary_path=$(find "$tmp_dir/extract" -type f -name "$BINARY_NAME" -o -name "${BINARY_NAME}*" | head -1)
+
+  if [ -z "$binary_path" ] || [ ! -f "$binary_path" ]; then
+    # Try finding any executable
+    binary_path=$(find "$tmp_dir/extract" -type f -executable | head -1)
+  fi
+
+  [ -n "$binary_path" ] && [ -f "$binary_path" ] || \
+    err "Could not find Vesper binary in downloaded archive"
+
+  # Install
+  mkdir -p "$INSTALL_DIR"
+  cp "$binary_path" "$INSTALL_DIR/$BINARY_NAME"
+  chmod +x "$INSTALL_DIR/$BINARY_NAME"
+
+  # Verify
+  if [ -x "$INSTALL_DIR/$BINARY_NAME" ]; then
+    local new_version
+    new_version=$(get_installed_version)
+    ok "Vesper ${BOLD}${new_version:-$version}${RESET} installed to: $INSTALL_DIR/$BINARY_NAME"
+  else
+    err "Installation failed — binary not executable"
+  fi
+
+  # Check PATH
+  case ":$PATH:" in
+    *":$INSTALL_DIR:"*) ;;
+    *)
+      warn "$INSTALL_DIR is not in your PATH."
+      echo "  Add this to your shell profile (~/.bashrc, ~/.zshrc, etc.):"
+      echo ""
+      printf "    ${CYAN}export PATH=\"%s:\$PATH\"${RESET}\n" "$INSTALL_DIR"
+      echo ""
+      ;;
+  esac
+
+  echo ""
+  ok "Run ${BOLD}vesper${RESET} to get started!"
+  echo ""
+}
+
+main "$@"

@@ -9,7 +9,7 @@ import Link from "next/link";
 type OSType = "windows" | "mac" | "linux" | "unknown";
 
 const installScripts: Record<OSType, string> = {
-  windows: "irm https://vesper.devflare.de/install | iex",
+  windows: "irm https://vesper.devflare.de/install.ps1 | iex",
   mac: "curl -sSfL https://vesper.devflare.de/install | sh",
   linux: "curl -sSfL https://vesper.devflare.de/install | sh",
   unknown: "curl -sSfL https://vesper.devflare.de/install | sh",
