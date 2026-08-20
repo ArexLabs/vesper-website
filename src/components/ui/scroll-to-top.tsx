@@ -12,10 +12,8 @@ export function ScrollToTop() {
   const handle_scroll = useCallback(() => {
     const current_y = window.scrollY;
     const threshold = window.innerHeight * 0.5;
-    const scrolling_up = current_y < last_scroll_y.current;
-
     last_scroll_y.current = current_y;
-    set_is_visible(scrolling_up && current_y > threshold);
+    set_is_visible(current_y > threshold);
   }, []);
 
   useEffect(() => {
